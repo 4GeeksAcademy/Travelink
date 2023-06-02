@@ -8,4 +8,14 @@
 
 .footer{
     background-color: #4dd7fa;
+    height: 50vh;
+}
+
+.navbar{
+    height: 18vh;
+    border-bottom: solid rgb(228, 227, 227);
+}
+
+.navbar-brand{
+
 }
