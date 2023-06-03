@@ -14,8 +14,19 @@
 .navbar{
     height: 18vh;
     border-bottom: solid rgb(228, 227, 227);
+    color: #4dd7fa;
+}
+
+.btn-travelink{
+    background-color: #4dd7fa;
+    color: white;
+}
+
+.link-navbar-brand{
+    text-decoration:none;
+    color: #4dd7fa;
 }
 
 .navbar-brand{
-
+    color: #4dd7fa;
 }
