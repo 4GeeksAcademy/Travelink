@@ -11,8 +11,8 @@ export const Navbar = () => {
 					<span className="navbar-brand mb-0 fs-4 ">TraveLink</span>
 				</Link>
 				<div className="">
-					<Link to="/demo">
-						<button className="btn btn-travelink rounded-pill">Check the Context in action</button>
+					<Link to="/login">
+						<button className="btn btn-travelink rounded-pill">Log in</button>
 					</Link>
 					<FontAwesomeIcon className="ms-4" icon={faMagnifyingGlass} style={{color: "#4dd7fa",}} />
 				</div>
