@@ -6,27 +6,34 @@
     on that page only (the ones not reused in other pages).
 */
 
-.footer{
+.footer {
     background-color: #4dd7fa;
     height: 30vh;
 }
 
-.navbar{
+.navbar {
     height: 18vh;
     border-bottom: solid rgb(228, 227, 227);
     color: #4dd7fa;
 }
 
-.btn-travelink{
+.logoNavbar {
+    /* display: block;
+    margin-left: auto;
+    margin-right: auto; */
+    width: 30vh;
+}
+
+.btn-travelink {
     background-color: #4dd7fa;
     color: white;
 }
 
-.link-navbar-brand{
-    text-decoration:none;
+.link-navbar-brand {
+    text-decoration: none;
     color: #4dd7fa;
 }
 
-.navbar-brand{
+.navbar-brand {
     color: #4dd7fa;
 }
