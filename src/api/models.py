@@ -25,27 +25,27 @@ class User(db.Model):
         }
 
 class Agencia(db.Model):
-     __tablename__ = 'Agencia'
+    __tablename__ = 'Agencia'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=True, nullable=False)
     rif = db.Column(db.String(120), unique=True, nullable=False)
-    phone = db.Column(db.Interger, unique=True, nullable=False)
+    phone = db.Column(db.Integer, unique=True, nullable=False)
     # creation_date = db.Column(db.datetime(), unique=False, nullable=False)
-    id_user  = db.Column(Integer, ForeignKey("user.id"))
+    id_user  = db.Column(db.Integer, ForeignKey("user.id"))
     viaje = db.relationship('Viaje', back_populates="agencia", single_parent=True)
 
 
 class Viajero(db.Model):
-     __tablename__ = 'Viajero'
+    __tablename__ = 'Viajero'
     id = db.Column(db.Integer, primary_key=True)
     type_person = db.Column(db.String(120), unique=True, nullable=False)
-    cedula = db.Column(db.Interger, unique=True, nullable=False)
+    cedula = db.Column(db.Integer, unique=True, nullable=False)
     name = db.Column(db.String(120), unique=True, nullable=False)
     lastname = db.Column(db.String(120), unique=True, nullable=False)
     dates_of_birth = db.Column(db.Integer, unique=True, nullable=False)
-    phone = db.Column(db.Interger, unique=True, nullable=False)
+    phone = db.Column(db.Integer, unique=True, nullable=False)
     # creation_date = db.Column(db.datetime(80), unique=False, nullable=False)
-    id_user  = db.Column(Integer, ForeignKey("user.id"))
+    id_user  = db.Column(db.Integer, ForeignKey("user.id"))
     viaje_reserva = db.relationship('Viaje_Reserva', back_populates="viajero")
 
 
@@ -55,11 +55,11 @@ class Viaje(db.Model):
     title = db.Column(db.String(120), unique=True, nullable=False)
     location = db.Column(db.String(120), unique=True, nullable=False)
     description = db.Column(db.String(120), unique=True, nullable=False)
-    max_travellers = db.Column(db.Interger, unique=True, nullable=False)
-    price = db.Column(db.Interger, unique=True, nullable=False)
+    max_travellers = db.Column(db.Integer, unique=True, nullable=False)
+    price = db.Column(db.Integer, unique=True, nullable=False)
     type_of_transport = db.Column(db.String(120), unique=True, nullable=False)
-    id_status = db.Column(Integer, ForeignKey("estatus_viaje.id"))
-    id_agencia = db.Column(Integer, ForeignKey("agencia.id"))
+    id_status = db.Column(db.Integer, ForeignKey("estatus_viaje.id"))
+    id_agencia = db.Column(db.Integer, ForeignKey("agencia.id"))
     starting_location = db.Column(db.String(120), unique=True, nullable=False)
     destination = db.Column(db.String(120), unique=True, nullable=False)
     # departure_date = db.Column(db.datetime(80), unique=False, nullable=False)
@@ -78,9 +78,9 @@ class Estatus_Viaje(db.Model):
 class Viaje_Reserva(db.Model):
     __tablename__ = 'Viaje_Reserva'
     id = db.Column(db.Integer, primary_key=True)
-    id_viaje = db.Column(Integer, ForeignKey("viaje.id"))
-    id_viajero = db.Column(Integer, ForeignKey("viajero.id"))
-    id_status = db.Column(Integer, ForeignKey("estatus_reserva.id"))
+    id_viaje = db.Column(db.Integer, ForeignKey("viaje.id"))
+    id_viajero = db.Column(db.Integer, ForeignKey("viajero.id"))
+    id_status = db.Column(db.Integer, ForeignKey("estatus_reserva.id"))
     # creation_date = db.Column(db.datetime(80), unique=False, nullable=False)
 
 class Estatus_Reserva(db.Model):
@@ -94,7 +94,7 @@ class Estatus_Reserva(db.Model):
 class Agencia_Favorito(db.Model):
     __tablename__ = 'Agencia_Favorito'
     id = db.Column(db.Integer, primary_key=True)
-    id_agencia = db.Column(Integer, ForeignKey("agencia.id"))
-    id_viajero = db.Column(Integer, ForeignKey("viajero.id"))
+    id_agencia = db.Column(db.Integer, ForeignKey("agencia.id"))
+    id_viajero = db.Column(db.Integer, ForeignKey("viajero.id"))
     # creation_date = db.Column(db.datetime(80), unique=False, nullable=False)
 
