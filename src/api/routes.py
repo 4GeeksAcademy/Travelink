@@ -16,3 +16,22 @@ def handle_hello():
     }
 
     return jsonify(response_body), 200
+
+@api.route('/user', methods=['POST'])
+def new_user():
+
+    body = request.json #lo que viene del request como un dic de python 🦎
+
+    try:
+        nuevo_user = User(body['username'], body['email'], body['password'], body['rol'], body['is_active'])
+
+        print(nuevo_user) # Object of type Piso || an Instance of class Piso
+
+        db.session.add(nuevo_user) # Memoria RAM de SQLAlchemy
+
+        db.session.commit() # Inserta el nuevo_piso en la BD de psql ✅
+
+        return jsonify(nuevo_user.serialize()), 200 #Piso searilzado
+    
+    except Exception as err:
+        return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" }), 500
