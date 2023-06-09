@@ -23,7 +23,8 @@ def new_user():
     body = request.json #lo que viene del request como un dic de python 🦎
 
     try:
-        nuevo_user = User(body['username'], body['email'], body['password'], body['rol'], body['is_active'])
+        nuevo_user = User(body['username'], body['email'], body['password'], body['rol'])
+        # nuevo_user = User(body['username'], body['email'], body['password'], body['rol'], body['is_active'])
 
         print(nuevo_user) # Object of type Piso || an Instance of class Piso
 
@@ -34,5 +35,9 @@ def new_user():
         return jsonify(nuevo_user.serialize()), 200 #Piso searilzado
     
     except Exception as err:
+<<<<<<< HEAD
         return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" }), 500
 
+=======
+        return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
+>>>>>>> d9056af9ab2f1dbaed33eb5733d020aff65b221b
