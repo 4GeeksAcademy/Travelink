@@ -10,7 +10,7 @@ class User(db.Model):
     password = db.Column(db.String(80), unique=False, nullable=False)
     rol = db.Column(db.Integer, unique=False, nullable=False)
     # fecha_creado = db.Column(db.datetime(80), unique=False, nullable=False)
-    is_active = db.Column(db.Boolean, unique=False, nullable=True)
+    # is_active = db.Column(db.Boolean, unique=False, nullable=True)
     # agencia = db.relationship('Agencia', back_populates="user", single_parent=True)
     # viajero = db.relationship('Viajero', back_populates="user", single_parent=True)
 

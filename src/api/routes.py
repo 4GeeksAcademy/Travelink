@@ -35,9 +35,6 @@ def new_user():
         return jsonify(nuevo_user.serialize()), 200 #Piso searilzado
     
     except Exception as err:
-<<<<<<< HEAD
-        return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" }), 500
 
-=======
         return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
->>>>>>> d9056af9ab2f1dbaed33eb5733d020aff65b221b
+
