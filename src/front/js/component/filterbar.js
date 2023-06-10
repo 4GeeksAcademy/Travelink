@@ -28,7 +28,7 @@ export const Filterbar = () => {
                 </datalist>
                 <input className="col-lg-2 col-md-2 col-sm-4 col-xs-12 p-1 px-3 m-2" type="date" id="birthday" name="birthday" />
                 <input className="col-lg-2 col-md-2 col-sm-4 col-xs-12 p-1 px-3 m-2" type="date" id="birthday" name="birthday" />
-                <Link to="/demo">
+                <Link to="/newPackage">
                     <button className="btn btn-travelink btn btn-outline-info rounded-pill m-3 ms-2 px-3">Buscar</button>
                 </Link>
             </div>
