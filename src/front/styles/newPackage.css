@@ -1,0 +1,7 @@
+/* .cajaprincipal{
+    display: flex;
+    justify-content: center;
+} */
+.cajaformulario {
+    max-width: 200vh;
+}
