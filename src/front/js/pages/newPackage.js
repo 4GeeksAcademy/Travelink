@@ -7,8 +7,8 @@ export const NewPackage = () => {
     const { store, actions } = useContext(Context);
 
     return (
-        <div className="cajaprincipal m-5">
-            <div className="cajaformulario m-2">
+        <div className="cajaprincipal my-4 d-flex flex-column justify-content-center align-items-center">
+            <div className="cajaformulario m-2 w-50">
                 <h1 className="m-2 text-center">¡Crea tu aventura!</h1>
                 <h2 className="mb-3 mt-2 text-center">Agrega un paquete de viaje</h2>
 
