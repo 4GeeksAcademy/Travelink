@@ -153,7 +153,7 @@ export const NewPackage = () => {
                 <div className="row m-2">
                     <div className="col-md-12 col-sm-12 col-xs-6">
                         <div class="form-floating">
-                            <textarea type="text" class="form-control" id="FormControlTextarea1" rows="3"></textarea>
+                            <textarea type="text" className="Descripcion" className="form-control" id="FormControlTextarea1" rows="5"></textarea>
                             <label for="FormControlTextarea1">Descripción General</label>
                         </div>
                     </div>
