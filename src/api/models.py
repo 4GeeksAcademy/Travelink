@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from datetime import date
 
 db = SQLAlchemy()
 
@@ -30,6 +31,7 @@ class User(db.Model):
             "email": self.email,
             # do not serialize the password, its a security breach
         }
+    
 
 class Agencia(db.Model):
     __tablename__ = 'Agencia'
@@ -40,6 +42,15 @@ class Agencia(db.Model):
     creation_date = db.Column(db.DateTime, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("User.id"), nullable=False)
     paquetes_de_viajes = db.relationship('PaqueteDeViaje', backref="Agencia", lazy=True)
+
+    def __init__(self, name, rif, phone, user_id):
+        self.name = name
+        self.rif = rif
+        self.phone = phone
+        self.user_id = user_id
+        self.creation_date = date.today()
+
+        # self.is_active = True
 
 
 class Viajero(db.Model):

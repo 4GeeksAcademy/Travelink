@@ -46,6 +46,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+
+			newAgency: async (agency, user) => {
+				let data = "";
+				console.log(user);
+				const respUser = await fetch(process.env.BACKEND_URL + "api/user", {
+					method: "POST",
+					mode: "cors",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(user) // body data type must match "Content-Type" header
+				})
+				data = await respUser.json();
+				console.log(data);
+				
+				console.log(agency);
+				// const respAgency = await fetch(process.env.BACKEND_URL + "api/agency", {
+				// 	method: "POST",
+				// 	mode: "cors",
+				// 	headers: {
+				// 		"Content-Type": "application/json",
+				// 	},
+				// 	body: JSON.stringify(user) // body data type must match "Content-Type" header
+				// })
+				// data = await respAgency.json();
+				// console.log(data);
 			}
 		}
 	};
