@@ -1,16 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons'
 
 export const RegistroAgencia = () => {
     const { store, actions } = useContext(Context);
+    const navigate = useNavigate();
 
     const [itemAgencia, setItemAgencia] = useState({
-        nombre: "",
+        name: "",
         rif: "",
-        telefono: ""
+        phone: "",
+        user_id: ""
     });
 
     const [itemUser, setItemUser] = useState({
@@ -22,27 +24,40 @@ export const RegistroAgencia = () => {
     });
 
     const ValidarCamposUser = () => {
-        if (itemUser.username == "" || itemUser.username == null) false
-        if (itemUser.userconfirm == "" || itemUser.userconfirm == null) false
-        if (itemUser.username != itemUser.userconfirm) false
-        if (itemUser.password == "" || itemUser.password == null) false
-        if (itemUser.passconfirm == "" || itemUser.passconfirm == null) false
-        if (itemUser.password != itemUser.passconfirm) false
-        if (itemUser.correo == "" || itemUser.correo == null) false
+        if (itemUser.username == "" || itemUser.username == null) return false;
+        if (itemUser.userconfirm == "" || itemUser.userconfirm == null) return false;
+        if (itemUser.username != itemUser.userconfirm) return false;
+        if (itemUser.password == "" || itemUser.password == null) return false;
+        if (itemUser.passconfirm == "" || itemUser.passconfirm == null) return false;
+        if (itemUser.password != itemUser.passconfirm) return false;
+        if (itemUser.correo == "" || itemUser.correo == null) return false;
         return true;
     };
 
     const ValidarCamposAgency = () => {
-        if (itemAgencia.nombre == "" || itemAgencia.nombre == null) false
-        if (itemAgencia.rif == "" || itemAgencia.rif == null) false
-        if (itemAgencia.telefono == "" || itemAgencia.telefono == null) false
+        if (itemAgencia.name == "" || itemAgencia.name == null) return false;
+        if (itemAgencia.rif == "" || itemAgencia.rif == null) return false;
+        if (itemAgencia.phone == "" || itemAgencia.phone == null) return false;
         return true;
     };
 
-    const InsertNewAgency = () => {
+    const InsertNewAgency = async () => {
         console.log("Entre a InsertNewAgency");
-        if (ValidarCamposUser() && ValidarCamposAgency())
-            actions.newAgency(itemAgencia, itemUser);
+        if (ValidarCamposUser() && ValidarCamposAgency()){
+            let user = {
+                username: itemUser.username,
+                email: itemUser.correo,
+                password: itemUser.password,
+                rol: 1
+                // "is_active" : true
+            }
+            let resp = await actions.newAgency(itemAgencia, user);
+            if (!resp){ 
+                alert("Ocurrió un error al intentar registrar el usuario");
+                return;
+            }
+            navigate('/login');
+        }
         else
             alert("Uno de los campos está vacío o no cumple con las condiciones.");
     };
@@ -59,7 +74,7 @@ export const RegistroAgencia = () => {
                             <input type="text" className="form-control" id="floatingInputGrid" onChange={event => {
                                 setItemAgencia({
                                     ...itemAgencia,
-                                    nombre: event.target.value
+                                    name: event.target.value
                                 });
                             }} />
                             <label htmlFor ="floatingInputGrid">Nombre</label>
@@ -84,7 +99,7 @@ export const RegistroAgencia = () => {
                             <input type="text" className="form-control" id="floatingInputGrid" onChange={event => {
                                 setItemAgencia({
                                     ...itemAgencia,
-                                    telefono: event.target.value
+                                    phone: event.target.value
                                 });
                             }} />
                             <label htmlFor ="floatingSelectGrid">Telefono</label>
@@ -97,7 +112,7 @@ export const RegistroAgencia = () => {
                         <div className="form-floating">
                             <input type="text" className="form-control" id="floatingInputGrid" onChange={event => {
                                 setItemUser({
-                                    ...itemAgencia,
+                                    ...itemUser,
                                     correo: event.target.value
                                 });
                             }} />
@@ -110,7 +125,7 @@ export const RegistroAgencia = () => {
                         <div className="form-floating">
                             <input type="text" className="form-control" id="floatingInputGrid" onChange={event => {
                                 setItemUser({
-                                    ...itemAgencia,
+                                    ...itemUser,
                                     username: event.target.value
                                 });
                             }} />
@@ -121,7 +136,7 @@ export const RegistroAgencia = () => {
                         <div className="form-floating">
                             <input type="text" className="form-control" id="floatingInputGrid" onChange={event => {
                                 setItemUser({
-                                    ...itemAgencia,
+                                    ...itemUser,
                                     userconfirm: event.target.value
                                 });
                             }} />
@@ -134,7 +149,7 @@ export const RegistroAgencia = () => {
                         <div className="form-floating">
                             <input type="text" className="form-control" id="floatingInputGrid" onChange={event => {
                                 setItemUser({
-                                    ...itemAgencia,
+                                    ...itemUser,
                                     password: event.target.value
                                 });
                             }} />
@@ -145,7 +160,7 @@ export const RegistroAgencia = () => {
                         <div className="form-floating">
                             <input type="password" className="form-control" id="floatingInputGroup1" onChange={event => {
                                 setItemUser({
-                                    ...itemAgencia,
+                                    ...itemUser,
                                     passconfirm: event.target.value
                                 });
                             }} />

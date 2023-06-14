@@ -16,7 +16,7 @@ export const Navbar = () => {
 					<Link to="/login">
 						<button className="btn btn-travelink rounded-pill">Log in</button>
 					</Link>
-					<FontAwesomeIcon className="ms-4" icon={faMagnifyingGlass} style={{ color: "#4dd7fa", }} />
+					{/* <FontAwesomeIcon className="ms-4" icon={faMagnifyingGlass} style={{ color: "#4dd7fa", }} /> */}
 				</div>
 			</div>
 		</nav>

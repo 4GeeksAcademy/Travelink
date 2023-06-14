@@ -20,10 +20,11 @@ class User(db.Model):
         self.email = email
         self.password = password
         self.rol = rol
+        self.creation_date = date.today()
         # self.is_active = True
 
     def __repr__(self):
-        return f'<User {self.email}>'
+        return f'<User {self.username}>'
 
     def serialize(self):
         return {
@@ -36,12 +37,13 @@ class User(db.Model):
 class Agencia(db.Model):
     __tablename__ = 'Agencia'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), unique=True, nullable=False)
+    name = db.Column(db.String(200), unique=False, nullable=False)
     rif = db.Column(db.String(120), unique=True, nullable=False)
-    phone = db.Column(db.Integer, unique=True, nullable=False)
+    phone = db.Column(db.String(15), unique=True, nullable=False)
     creation_date = db.Column(db.DateTime, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("User.id"), nullable=False)
     paquetes_de_viajes = db.relationship('PaqueteDeViaje', backref="Agencia", lazy=True)
+
 
     def __init__(self, name, rif, phone, user_id):
         self.name = name
@@ -51,6 +53,16 @@ class Agencia(db.Model):
         self.creation_date = date.today()
 
         # self.is_active = True
+
+    def __repr__(self):
+        return f'<Agencia {self.name}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            # do not serialize the password, its a security breach
+        }
 
 
 class Viajero(db.Model):

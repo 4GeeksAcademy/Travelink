@@ -51,6 +51,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			newAgency: async (agency, user) => {
 				let data = "";
 				console.log(user);
+				console.log(agency);
 				const respUser = await fetch(process.env.BACKEND_URL + "api/user", {
 					method: "POST",
 					mode: "cors",
@@ -60,19 +61,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify(user) // body data type must match "Content-Type" header
 				})
 				data = await respUser.json();
-				console.log(data);
-				
+				console.log(respUser);
+				if(respUser.status != 200 ) return false;
+				agency.user_id = data.id;
+				// let agencyAux = {
+				// 	name: agency.name,
+				// 	rif: agency.rif,
+				// 	phone: agency.phone,
+				// 	user_id: agency.user_id
+				// }
 				console.log(agency);
-				// const respAgency = await fetch(process.env.BACKEND_URL + "api/agency", {
-				// 	method: "POST",
-				// 	mode: "cors",
-				// 	headers: {
-				// 		"Content-Type": "application/json",
-				// 	},
-				// 	body: JSON.stringify(user) // body data type must match "Content-Type" header
-				// })
-				// data = await respAgency.json();
-				// console.log(data);
+				const respAgency = await fetch(process.env.BACKEND_URL + "api/agency", {
+					method: "POST",
+					mode: "cors",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(agency) // body data type must match "Content-Type" header
+				})
+				data = await respAgency.json();
+				console.log(data);
+				if(respAgency.status != 200 ) return false;
+				alert("Registro realizado satisfactoriamente.");
+				return true;
 			}
 		}
 	};
