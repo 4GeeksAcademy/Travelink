@@ -21,10 +21,6 @@ export const Home = () => {
 					<CardHome />
 					<CardHome />
 					<CardHome />
-					<CardHome />
-					<CardHome />
-					<CardHome />
-					<CardHome />
 				</div>
 			</div>
 		</div>

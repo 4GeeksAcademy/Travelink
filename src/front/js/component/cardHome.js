@@ -17,7 +17,7 @@ export const CardHome = () => {
                 <h3>$400</h3>
                 <p>{trickText("This is a longer card with supporting text below as a natural lead-in to additional content. This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.")}</p>
                 <Link to="/packageDetails">
-                    <button type="button" class="btn btn-outline-info">SABER MAS</button>
+                    <button type="button" className="btn btn-travelink btn btn-outline-info rounded-pill">Saber más</button>
                 </Link>
             </div>
         </div>

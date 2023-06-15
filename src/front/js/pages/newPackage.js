@@ -153,7 +153,7 @@ export const NewPackage = () => {
                 <div className="row m-2">
                     <div className="col-md-12 col-sm-12 col-xs-6">
                         <div class="form-floating">
-                            <textarea type="text" className="Descripcion" className="form-control" id="FormControlTextarea1" rows="5"></textarea>
+                            <textarea type="text" className="form-control" id="FormControlTextarea1" rows="5"></textarea>
                             <label for="FormControlTextarea1">Descripción General</label>
                         </div>
                     </div>
@@ -175,8 +175,8 @@ export const NewPackage = () => {
                 </div>
 
                 <div className="row d-flex justify-content-center m-2">
-                    <button type="file" className="col-md-5 col-sm-5 col-xs-3 mx-1 btn btn-primary">Cargar Imagen</button>
-                    <button type="submit" className="col-md-5 col-sm-5 col-xs-3 mx-1 btn btn-primary">Agregar paquete</button>
+                    <button type="file" className="col-md-5 col-sm-5 col-xs-3 mx-1 btn btn-travelink btn btn-outline-info rounded-pill">Cargar Imagen</button>
+                    <button type="submit" className="col-md-5 col-sm-5 col-xs-3 mx-1 btn btn-travelink btn btn-outline-info rounded-pill">Agregar paquete</button>
                 </div>
             </div>
         </div >
