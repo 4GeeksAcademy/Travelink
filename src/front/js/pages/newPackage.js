@@ -106,7 +106,7 @@ export const NewPackage = () => {
                 <div className="row m-2">
                     <div className="col-md-6 col-sm-6 col-xs-3 mb-2">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="floatingInputGrid" />
+                            <input type="number" class="form-control" id="floatingInputGrid" />
                             <label for="floatingInputGrid">Max de Viajeros</label>
                         </div>
                     </div>
@@ -117,6 +117,9 @@ export const NewPackage = () => {
                                 <option value="1">Hospedaje</option>
                                 <option value="2">Comidas</option>
                                 <option value="3">Transporte</option>
+                                <option value="5">Bebidas alcoholicas</option>
+                                <option value="6">Bebidas no alcoholicas</option>
+                                <option value="7">Atencion personalizada</option>
                             </select>
                             <label for="floatingSelectGrid">¿Qué incluye tu paquete?</label>
                         </div>
@@ -141,9 +144,9 @@ export const NewPackage = () => {
                                 <option selected>No incluye</option>
                                 <option value="1">Hotel</option>
                                 <option value="2">Posada</option>
-                                <option value="3">Camping</option>
+                                <option value="3">Campings</option>
                             </select>
-                            <label for="floatingSelectGrid">Tipo de Hospedaje</label>
+                            <label for="floatingSelectGrid">Tipo de Alojamiento</label>
                         </div>
                     </div>
                 </div>

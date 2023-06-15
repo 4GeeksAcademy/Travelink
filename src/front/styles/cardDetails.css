@@ -1,0 +1,22 @@
+.container{
+    display: flex;
+    justify-content: center; 
+}
+.card-img-top{
+    max-height: 45vh;
+} 
+
+.imgdetails .member-img {
+    display: inline;
+}
+
+.imgdetails .member-img img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 5px solid rgb(140, 229, 252);
+}
+
+.imgdetails {
+    max-height: 60vh;
+}
