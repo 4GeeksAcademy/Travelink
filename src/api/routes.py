@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Agencia
+from api.models import db, User, Agencia, Viajero
 from api.utils import generate_sitemap, APIException
 import hashlib
 
@@ -66,6 +66,19 @@ def new_agency():
         db.session.add(nuevo_agency) # Memoria RAM de SQLAlchemy
         db.session.commit() # Inserta el nuevo_piso en la BD de psql ✅
         return jsonify(nuevo_agency.serialize()), 200 #Piso searilzado
+    except Exception as err:
+        return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
+    
+@api.route('/viajero', methods=['POST'])
+def new_viajero():
+    body = request.json #lo que viene del request como un dic de python 🦎
+    try:
+        nuevo_viajero = Viajero(body['type_person'], body['cedula'], body['name'], 
+                                body['lastname'], body['dates_of_birth'], body['phone'], body['user_id'])
+        print(nuevo_viajero)
+        db.session.add(nuevo_viajero) # Memoria RAM de SQLAlchemy
+        db.session.commit() # Inserta el nuevo_piso en la BD de psql ✅
+        return jsonify(nuevo_viajero.serialize()), 200 #Piso searilzado
     except Exception as err:
         return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
 

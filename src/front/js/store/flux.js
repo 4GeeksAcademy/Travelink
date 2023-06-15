@@ -2,7 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			user: null,
-			token: localStorage.getItem('token'),
+			token: sessionStorage.getItem('token'),
 			message: null,
 			demo: [
 				{
@@ -24,14 +24,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getMessage: async () => {
-				try{
+				try {
 					// fetching data from the backend
 					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
 					const data = await resp.json()
 					setStore({ message: data.message })
 					// don't forget to return something, that is how the async resolves
 					return data;
-				}catch(error){
+				} catch (error) {
 					console.log("Error loading message from backend", error)
 				}
 			},
@@ -48,6 +48,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			syncTokenFromSessionStore: () => {
+				const token = sessionStorage.getItem("token");
+				if (token && token != "" && token != undefined) {
+					setStore({ token: token });
+				}
 			},
 			login: async (credentials) => {
 				try {
@@ -70,24 +76,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					alert("Bienvenido ha ingresado con exito!")
 
-					localStorage.setItem('token', data.token)
+					sessionStorage.setItem('token', data.token)
 					setStore({ token: data.token })
 					// don't forget to return something, that is how the async resolves
 					return true;
 				} catch (error) {
 					console.log("Error loading message from backend", error);
-					localStorage.removeItem('token');
+					sessionStorage.removeItem('token');
 					setStore({ token: null });
 				}
 			},
 			logOut: () => {
-				setStore({ token: null })
-				localStorage.removeItem('token')
+				setStore({ token: null });
+				sessionStorage.removeItem('token');
 			},
 			newAgency: async (agency, user) => {
 				let data = "";
 				console.log(user);
-				console.log(agency);
 				const respUser = await fetch(process.env.BACKEND_URL + "api/user", {
 					method: "POST",
 					mode: "cors",
@@ -98,14 +103,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				data = await respUser.json();
 				console.log(respUser);
-				if(respUser.status != 200 ) return false;
+				if (respUser.status != 200) return false;
 				agency.user_id = data.id;
-				// let agencyAux = {
-				// 	name: agency.name,
-				// 	rif: agency.rif,
-				// 	phone: agency.phone,
-				// 	user_id: agency.user_id
-				// }
 				console.log(agency);
 				const respAgency = await fetch(process.env.BACKEND_URL + "api/agency", {
 					method: "POST",
@@ -117,7 +116,37 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				data = await respAgency.json();
 				console.log(data);
-				if(respAgency.status != 200 ) return false;
+				if (respAgency.status != 200) return false;
+				alert("Registro realizado satisfactoriamente.");
+				return true;
+			},
+			newViajero: async (viajero, user) => {
+				let data = "";
+				console.log(user);
+				const respUser = await fetch(process.env.BACKEND_URL + "api/user", {
+					method: "POST",
+					mode: "cors",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(user) // body data type must match "Content-Type" header
+				})
+				data = await respUser.json();
+				console.log(respUser);
+				if (respUser.status != 200) return false;
+				viajero.user_id = data.id;
+				console.log(viajero);
+				const respViajero = await fetch(process.env.BACKEND_URL + "api/viajero", {
+					method: "POST",
+					mode: "cors",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(viajero) // body data type must match "Content-Type" header
+				})
+				data = await respViajero.json();
+				console.log(data);
+				if (respViajero.status != 200) return false;
 				alert("Registro realizado satisfactoriamente.");
 				return true;
 			}

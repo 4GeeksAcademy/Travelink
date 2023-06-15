@@ -42,8 +42,7 @@ export const RegistroAgencia = () => {
     };
 
     const InsertNewAgency = async () => {
-        console.log("Entre a InsertNewAgency");
-        if (ValidarCamposUser() && ValidarCamposAgency()){
+        if (ValidarCamposUser() && ValidarCamposAgency()) {
             let user = {
                 username: itemUser.username,
                 email: itemUser.correo,
@@ -52,7 +51,7 @@ export const RegistroAgencia = () => {
                 // "is_active" : true
             }
             let resp = await actions.newAgency(itemAgencia, user);
-            if (!resp){ 
+            if (!resp) {
                 alert("Ocurrió un error al intentar registrar el usuario");
                 return;
             }
@@ -77,7 +76,7 @@ export const RegistroAgencia = () => {
                                     name: event.target.value
                                 });
                             }} />
-                            <label htmlFor ="floatingInputGrid">Nombre</label>
+                            <label htmlFor="floatingInputGrid">Nombre</label>
                         </div>
                     </div>
                 </div>
@@ -91,7 +90,7 @@ export const RegistroAgencia = () => {
                                     rif: event.target.value
                                 });
                             }} />
-                            <label htmlFor ="floatingSelectGrid">RIF</label>
+                            <label htmlFor="floatingSelectGrid">RIF</label>
                         </div>
                     </div>
                     <div className="col-md-6 col-sm-6 col-xs-3">
@@ -102,7 +101,7 @@ export const RegistroAgencia = () => {
                                     phone: event.target.value
                                 });
                             }} />
-                            <label htmlFor ="floatingSelectGrid">Telefono</label>
+                            <label htmlFor="floatingSelectGrid">Telefono</label>
                         </div>
                     </div>
                 </div>
@@ -116,7 +115,7 @@ export const RegistroAgencia = () => {
                                     correo: event.target.value
                                 });
                             }} />
-                            <label htmlFor ="floatingInputGrid">Correo Electronico</label>
+                            <label htmlFor="floatingInputGrid">Correo Electronico</label>
                         </div>
                     </div>
                 </div>
@@ -129,7 +128,7 @@ export const RegistroAgencia = () => {
                                     username: event.target.value
                                 });
                             }} />
-                            <label htmlFor ="floatingSelectGrid">Nombre de Usuario</label>
+                            <label htmlFor="floatingSelectGrid">Nombre de Usuario</label>
                         </div>
                     </div>
                     <div className="col-md-6 col-sm-6 col-xs-3">
@@ -140,7 +139,7 @@ export const RegistroAgencia = () => {
                                     userconfirm: event.target.value
                                 });
                             }} />
-                            <label htmlFor ="floatingSelectGrid">Confirmar Usuario</label>
+                            <label htmlFor="floatingSelectGrid">Confirmar Usuario</label>
                         </div>
                     </div>
                 </div>
@@ -153,7 +152,7 @@ export const RegistroAgencia = () => {
                                     password: event.target.value
                                 });
                             }} />
-                            <label htmlFor ="floatingSelectGrid">Contraseña <FontAwesomeIcon icon={faEye} /></label>
+                            <label htmlFor="floatingSelectGrid">Contraseña <FontAwesomeIcon icon={faEye} /></label>
                         </div>
                     </div>
                     <div className="col-md-6 col-sm-6 col-xs-3">

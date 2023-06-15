@@ -73,10 +73,31 @@ class Viajero(db.Model):
     name = db.Column(db.String(120), nullable=False)
     lastname = db.Column(db.String(120), nullable=False)
     dates_of_birth = db.Column(db.DateTime,  nullable=False)
-    phone = db.Column(db.Integer, unique=True, nullable=False)
+    phone = db.Column(db.String(15), unique=True, nullable=False)
     creation_date = db.Column(db.DateTime, nullable=False)
     user_id  = db.Column(db.Integer, db.ForeignKey("User.id"), nullable=False)
     viajes_reservados = db.relationship('ViajeReservado', backref="Viajero", lazy=True)
+
+    def __init__(self, type_person, cedula, name, lastname, dates_of_birth, phone, user_id):
+        self.type_person = type_person
+        self.cedula = cedula
+        self.name = name
+        self.lastname = lastname
+        self.dates_of_birth = dates_of_birth
+        self.phone = phone
+        self.user_id = user_id
+        self.creation_date = date.today()
+
+    def __repr__(self):
+        return f'<Viajero {self.cedula}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "type_person": self.type_person,
+            "cedula": self.cedula
+            # do not serialize the password, its a security breach
+        }
 
 class AgenciaFavorito(db.Model):
     __tablename__ = 'AgenciaFavorito'
