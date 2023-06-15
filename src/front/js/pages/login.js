@@ -1,12 +1,24 @@
-import React, { useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/login.css";
 import travelinkLogo from "../../img/Travelink.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 export const Login = () => {
   const { store, actions } = useContext(Context);
+
+  const [credentials, setCredentials] = useState({
+    username : "",
+    password : ""
+  })
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (store.token)
+        navigate('/newPackage')
+  }, [store.token])
 
   return (
     <div className="text-center">
@@ -28,15 +40,27 @@ export const Login = () => {
 
                         <div className="form-outline mb-4">
                           <input type="email" id="form2Example11" className="form-control"
-                            placeholder="Username" />
+                            placeholder="Username" onChange={event => {
+                              setCredentials({
+                                  ...credentials,
+                                  username: event.target.value
+                              });
+                          }} />
                         </div>
 
                         <div className="form-outline mb-4">
-                          <input type="password" id="form2Example22" className="form-control" placeholder="Password" />
+                          <input type="password" id="form2Example22" className="form-control" placeholder="Password" 
+                            onChange={event => {
+                            setCredentials({
+                                ...credentials,
+                                password: event.target.value
+                            });
+                          }}/>
                         </div>
 
                         <div className="text-center pt-1 mb-3 pb-1 d-flex flex-column">
-                          <button className="btn btn-primary gradient-custom-2 mb-3" type="button">
+                          <button className="btn btn-primary gradient-custom-2 mb-3" type="button" 
+                            onClick={() => actions.login(credentials)}>
                             Log in
                           </button>
                           <a className="text-muted" href="#!">Forgot password?</a>

@@ -4,6 +4,11 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, Agencia
 from api.utils import generate_sitemap, APIException
+import hashlib
+
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
 
 api = Blueprint('api', __name__)
 
@@ -14,6 +19,27 @@ def handle_hello():
         "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
     }
     return jsonify(response_body), 200
+
+
+@api.route('/login', methods=['POST'])
+def login():
+    username = request.json.get("username", None)
+    password = request.json.get("password", None)
+    #verifys payload body
+    if username == None or password == None:
+        return jsonify({"msg": "Bad username or password ⛔️"}), 401
+    #search user existance into the DB
+    search_user = User.query.filter_by(username=username).one_or_none()
+    if search_user == None:
+            return jsonify({ "message" : "user not found "}), 404
+    #verify thats the password is correct
+    #password saved as hash // with the password arriving hashed
+    # if search_user.password == hashlib.md5(password.encode('utf-8') ).hexdigest():
+    #     return jsonify({ "token" : create_access_token(identity=search_user.email) }), 200
+    if search_user.password == password:
+        return jsonify({ "token" : create_access_token(identity=search_user.username) }), 200
+    #handling errors
+    return jsonify({ "message" : "password doesnt match, be carefull 🔓️ "}), 401
 
 
 @api.route('/user', methods=['POST'])

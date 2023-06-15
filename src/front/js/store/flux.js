@@ -1,6 +1,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			user: null,
+			token: localStorage.getItem('token'),
 			message: null,
 			demo: [
 				{
@@ -47,7 +49,41 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//reset the global store
 				setStore({ demo: demo });
 			},
+			login: async (credentials) => {
+				try {
+					console.log(credentials);
+					const resp = await fetch(process.env.BACKEND_URL + "/api/login",
+						{
+							method: "POST", // *GET, POST, PUT, DELETE, etc.
+							mode: "cors", // no-cors, *cors, same-origin
+							//cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+							//credentials: "same-origin", // include, *same-origin, omit
+							headers: {
+								"Content-Type": "application/json",
+								// 'Content-Type': 'application/x-www-form-urlencoded',
+							},
+							//redirect: "follow", // manual, *follow, error
+							//referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+							body: JSON.stringify(credentials) // body data type must match "Content-Type" header
+						})
+					const data = await resp.json()
 
+					alert("Bienvenido ha ingresado con exito!")
+
+					localStorage.setItem('token', data.token)
+					setStore({ token: data.token })
+					// don't forget to return something, that is how the async resolves
+					return true;
+				} catch (error) {
+					console.log("Error loading message from backend", error);
+					localStorage.removeItem('token');
+					setStore({ token: null });
+				}
+			},
+			logOut: () => {
+				setStore({ token: null })
+				localStorage.removeItem('token')
+			},
 			newAgency: async (agency, user) => {
 				let data = "";
 				console.log(user);
