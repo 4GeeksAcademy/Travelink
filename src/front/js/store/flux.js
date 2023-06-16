@@ -1,8 +1,10 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			user: null,
+			user: sessionStorage.getItem('user'),
+			rol: sessionStorage.getItem('rol'),
 			token: sessionStorage.getItem('token'),
+
 			message: null,
 			paquetes: []
 			// demo: [
@@ -52,8 +54,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			syncTokenFromSessionStore: () => {
 				const token = sessionStorage.getItem("token");
+				const user = sessionStorage.getItem("user");
+				const rol = sessionStorage.getItem("rol");
 				if (token && token != "" && token != undefined) {
-					setStore({ token: token });
+					setStore({ token: token, user: user, rol: rol })
 				}
 			},
 			login: async (credentials) => {
@@ -72,13 +76,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 							//redirect: "follow", // manual, *follow, error
 							//referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
 							body: JSON.stringify(credentials) // body data type must match "Content-Type" header
-						})
-					const data = await resp.json()
+						});
+					const data = await resp.json();
 
-					alert("Bienvenido ha ingresado con exito!")
-
-					sessionStorage.setItem('token', data.token)
-					setStore({ token: data.token })
+					alert("Bienvenido ha ingresado con exito!");
+					console.log(data);
+					sessionStorage.setItem('token', data.token);
+					sessionStorage.setItem('user', data.user);
+					sessionStorage.setItem('rol', data.rol);
+					setStore({ token: data.token, user: data.user, rol: data.rol });
 					// don't forget to return something, that is how the async resolves
 					return true;
 				} catch (error) {
@@ -88,8 +94,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			logOut: () => {
-				setStore({ token: null });
+				setStore({ token: null, user: null, rol: null });
 				sessionStorage.removeItem('token');
+				sessionStorage.removeItem('user');
+				sessionStorage.removeItem('rol');
 			},
 			newAgency: async (agency, user) => {
 				let data = "";

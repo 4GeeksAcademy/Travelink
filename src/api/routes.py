@@ -37,7 +37,11 @@ def login():
     # if search_user.password == hashlib.md5(password.encode('utf-8') ).hexdigest():
     #     return jsonify({ "token" : create_access_token(identity=search_user.email) }), 200
     if search_user.password == password:
-        return jsonify({ "token" : create_access_token(identity=search_user.username) }), 200
+        return jsonify({ 
+            "token" : create_access_token(identity=search_user.username),
+            "user" : search_user.username,
+            "rol" : search_user.rol
+            }), 200
     #handling errors
     return jsonify({ "message" : "password doesnt match, be carefull 🔓️ "}), 401
 

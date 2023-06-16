@@ -11,9 +11,10 @@
     height: 30vh;
 }
 
-.navbar {
+.navbarMain {
     height: 18vh;
     border-bottom: solid rgb(228, 227, 227);
+    border-color: #4dd7fa;
     color: #4dd7fa;
 }
 

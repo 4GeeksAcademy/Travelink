@@ -51,7 +51,7 @@ export const RegistroViajero = () => {
                 username: itemUser.username,
                 email: itemUser.correo,
                 password: itemUser.password,
-                rol: 1
+                rol: 2
                 // "is_active" : true
             }
             let resp = await actions.newViajero(itemViajero, user);
