@@ -117,7 +117,7 @@ class PaqueteDeViaje(db.Model):
     __tablename__ = 'PaqueteDeViaje'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120), nullable=False)
-    location = db.Column(db.String(120), nullable=False)
+    # location = db.Column(db.String(120), nullable=False)
     destination = db.Column(db.String(120), nullable=False)
     starting_location = db.Column(db.String(120),  nullable=False)
     start_date = db.Column(db.DateTime, nullable=False)
@@ -133,6 +133,33 @@ class PaqueteDeViaje(db.Model):
     agencia_id = db.Column(db.Integer, db.ForeignKey("Agencia.id"), nullable=False)
     creation_date = db.Column(db.DateTime, nullable=False)
     viaje_reservados = db.relationship('ViajeReservado', backref="PaqueteDeViaje", lazy=True)
+
+    def __init__(self, title, destination, starting_location, start_date, finish_date, includes, type_of_transport, type_of_accommodation, description, max_travellers, reservation_cost, total_cost, agencia_id):
+        self.title = title
+        self.destination = destination
+        self.starting_location = starting_location
+        self.start_date = start_date
+        self.finish_date = finish_date
+        self.includes = includes
+        self.type_of_transport = type_of_transport
+        self.type_of_accommodation = type_of_accommodation
+        self.description = description
+        self.max_travellers = max_travellers
+        self.reservation_cost = reservation_cost
+        self.total_cost = total_cost
+        self.agencia_id = agencia_id
+        # self.creation_date = date.today()
+
+    def __repr__(self):
+        return f'<PaqueteDeViaje {self.title}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "destination": self.destination
+        }
 
 class ViajeReservado(db.Model):
     __tablename__ = 'ViajeReserva'

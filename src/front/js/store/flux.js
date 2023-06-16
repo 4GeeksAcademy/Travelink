@@ -4,18 +4,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 			user: null,
 			token: sessionStorage.getItem('token'),
 			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			paquetes: []
+			// demo: [
+			// 	{
+			// 		title: "FIRST",
+			// 		background: "white",
+			// 		initial: "white"
+			// 	},
+			// 	{
+			// 		title: "SECOND",
+			// 		background: "white",
+			// 		initial: "white"
+			// 	}
+			// ]
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -149,7 +150,41 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (respViajero.status != 200) return false;
 				alert("Registro realizado satisfactoriamente.");
 				return true;
-			}
+			},
+
+			newPackage: async (nuevoPaquete) => {
+				const paquete = {
+					title: nuevoPaquete.title,
+					destination: nuevoPaquete.destination,
+					starting_location: nuevoPaquete.startingLocation,
+					start_date: nuevoPaquete.startDate,
+					finish_date: nuevoPaquete.finishDate,
+					includes: nuevoPaquete.includes,
+					type_of_transport: nuevoPaquete.typeOfTransport,
+					type_of_accommodation: nuevoPaquete.typeOfAccommodation,
+					description: nuevoPaquete.description,
+					max_travellers: nuevoPaquete.maxTravellers,
+					reservation_cost: nuevoPaquete.reservationCost,
+					total_cost: nuevoPaquete.totalCost,
+				}
+				console.log(nuevoPaquete)
+				try {
+					let resp = await fetch(process.env.BACKEND_URL + "/api/new-package", {
+						method: "POST",
+						mode: "cors",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: "Bearer " + getStore().token
+						},
+						body: JSON.stringify()
+					});
+					let data = await resp.json(nuevoPaquete);
+					console.log(data)
+					alert("Nuevo paquete agregado!");
+				} catch (err) {
+					console.log(err);
+				}
+			},
 		}
 	};
 };

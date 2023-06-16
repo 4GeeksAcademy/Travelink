@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Agencia, Viajero
+from api.models import db, User, Agencia, Viajero, PaqueteDeViaje
 from api.utils import generate_sitemap, APIException
 import hashlib
 
@@ -79,6 +79,21 @@ def new_viajero():
         db.session.add(nuevo_viajero) # Memoria RAM de SQLAlchemy
         db.session.commit() # Inserta el nuevo_piso en la BD de psql ✅
         return jsonify(nuevo_viajero.serialize()), 200 #Piso searilzado
+    except Exception as err:
+        return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
+
+@api.route('/new-package', methods=['POST'])
+def new_package():
+    body = request.json #lo que viene del request como un dic de python 🦎
+    try:
+        new_package = Agencia(body['title'], body['destination'], body['starting_location'], 
+        body['start_date'], body['finish_date'], body['includes'], body['type_of_transport'], 
+        body['type_of_accommodation'], body['description'], body['max_travellers'], 
+        body['reservation_cost'], body['total_cost'], body['agencia_id'] )
+        print(new_package)
+        db.session.add(new_package) # Memoria RAM de SQLAlchemy
+        db.session.commit() # Inserta el nuevo_piso en la BD de psql ✅
+        return jsonify(new_package.serialize()), 200 #Piso searilzado
     except Exception as err:
         return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
 
