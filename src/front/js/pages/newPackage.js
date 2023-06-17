@@ -30,19 +30,19 @@ export const NewPackage = () => {
 
                 <div className="row m-2">
                     <div className="col-md-12 col-sm-12 col-xs-6">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="floatingInputGrid"
+                        <div className="form-floating">
+                            <input type="text" className="form-control" id="floatingInputGrid"
                                 onChange={event => setPaquete({ ...paquete, title: event.target.value })}
                                 value={paquete.title || ""} />
-                            <label for="floatingInputGrid">Titulo</label>
+                            <label htmlFor="floatingInputGrid">Titulo</label>
                         </div>
                     </div>
                 </div>
 
                 <div className="row m-2">
                     <div className="col-md-6 col-sm-6 col-xs-3 mb-2">
-                        <div class="form-floating">
-                            <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example"
+                        <div className="form-floating">
+                            <select className="form-select" id="floatingSelectGrid" aria-label="Floating label select example"
                                 onChange={event => setPaquete({ ...paquete, startingLocation: event.target.value })}
                                 value={paquete.startingLocation || ""} >
                                 <option selected>Selecciona un estado</option>
@@ -71,12 +71,12 @@ export const NewPackage = () => {
                                 <option value="Yaracuy">Yaracuy</option>
                                 <option value="Zulia">Zulia</option>
                             </select>
-                            <label for="floatingSelectGrid">Lugar de Salida</label>
+                            <label htmlFor="floatingSelectGrid">Lugar de Salida</label>
                         </div>
                     </div>
                     <div className="col-md-6 col-sm-6 col-xs-3">
-                        <div class="form-floating">
-                            <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example"
+                        <div className="form-floating">
+                            <select className="form-select" id="floatingSelectGrid" aria-label="Floating label select example"
                                 onChange={event => setPaquete({ ...paquete, destination: event.target.value })}
                                 value={paquete.destination || ""} >
                                 <option selected>Selecciona un estado</option>
@@ -105,42 +105,42 @@ export const NewPackage = () => {
                                 <option value="Yaracuy">Yaracuy</option>
                                 <option value="Zulia">Zulia</option>
                             </select>
-                            <label for="floatingSelectGrid">Destino</label>
+                            <label htmlFor="floatingSelectGrid">Destino</label>
                         </div>
                     </div>
                 </div>
 
                 <div className="row m-2">
                     <div className="col-md-6 col-sm-6 col-xs-3 mb-2">
-                        <div class="form-floating">
-                            <input type="date" class="form-control" id="floatingInputGrid"
+                        <div className="form-floating">
+                            <input type="date" className="form-control" id="floatingInputGrid"
                                 onChange={event => setPaquete({ ...paquete, startDate: event.target.value })}
                                 value={paquete.startDate || ""} />
-                            <label for="floatingInputGrid">Fecha de Inicio</label>
+                            <label htmlFor="floatingInputGrid">Fecha de Inicio</label>
                         </div>
                     </div>
                     <div className="col-md-6 col-sm-6 col-xs-3">
-                        <div class="form-floating">
-                            <input type="date" class="form-control" id="floatingInputGrid"
+                        <div className="form-floating">
+                            <input type="date" className="form-control" id="floatingInputGrid"
                                 onChange={event => setPaquete({ ...paquete, finishDate: event.target.value })}
                                 value={paquete.finishDate || ""} />
-                            <label for="floatingInputGrid">Fecha de Fin</label>
+                            <label htmlFor="floatingInputGrid">Fecha de Fin</label>
                         </div>
                     </div>
                 </div>
 
                 <div className="row m-2">
                     <div className="col-md-6 col-sm-6 col-xs-3 mb-2">
-                        <div class="form-floating">
-                            <input type="number" class="form-control" id="floatingInputGrid"
+                        <div className="form-floating">
+                            <input type="number" className="form-control" id="floatingInputGrid"
                                 onChange={event => setPaquete({ ...paquete, maxTravellers: event.target.value })}
                                 value={paquete.maxTravellers || ""} />
-                            <label for="floatingInputGrid">Max de Viajeros</label>
+                            <label htmlFor="floatingInputGrid">Max de Viajeros</label>
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-6 col-xs-3">
-                        <div class="form-floating">
-                            <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example"
+                    <div className="col-md-6 col-sm-6 col-xs-3">
+                        <div className="form-floating">
+                            <select className="form-select" id="floatingSelectGrid" aria-label="Floating label select example"
                                 onChange={event => setPaquete({ ...paquete, includes: event.target.value })}
                                 value={paquete.includes || ""} >
                                 <option selected></option>
@@ -151,15 +151,15 @@ export const NewPackage = () => {
                                 <option value="6">Bebidas no alcoholicas</option>
                                 <option value="7">Atencion personalizada</option>
                             </select>
-                            <label for="floatingSelectGrid">¿Qué incluye tu paquete?</label>
+                            <label htmlFor="floatingSelectGrid">¿Qué incluye tu paquete?</label>
                         </div>
                     </div>
                 </div>
 
                 <div className="row m-2">
-                    <div class="col-md-6 col-sm-6 col-xs-3">
-                        <div class="form-floating mb-2">
-                            <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example"
+                    <div className="col-md-6 col-sm-6 col-xs-3">
+                        <div className="form-floating mb-2">
+                            <select className="form-select" id="floatingSelectGrid" aria-label="Floating label select example"
                                 onChange={event => setPaquete({ ...paquete, typeOfTransport: event.target.value })}
                                 value={paquete.typeOfTransport || ""} >
                                 <option selected>No incluye</option>
@@ -167,12 +167,12 @@ export const NewPackage = () => {
                                 <option value="2">Maritimo</option>
                                 <option value="3">Aereo</option>
                             </select>
-                            <label for="floatingSelectGrid">Tipo de Transporte</label>
+                            <label htmlFor="floatingSelectGrid">Tipo de Transporte</label>
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-6 col-xs-3">
-                        <div class="form-floating">
-                            <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example"
+                    <div className="col-md-6 col-sm-6 col-xs-3">
+                        <div className="form-floating">
+                            <select className="form-select" id="floatingSelectGrid" aria-label="Floating label select example"
                                 onChange={event => setPaquete({ ...paquete, typeOfAccommodation: event.target.value })}
                                 value={paquete.typeOfAccommodation || ""} >
                                 <option selected>No incluye</option>
@@ -180,7 +180,7 @@ export const NewPackage = () => {
                                 <option value="2">Posada</option>
                                 <option value="3">Campings</option>
                             </select>
-                            <label for="floatingSelectGrid">Tipo de Alojamiento</label>
+                            <label htmlFor="floatingSelectGrid">Tipo de Alojamiento</label>
                         </div>
                     </div>
                 </div>
@@ -189,30 +189,30 @@ export const NewPackage = () => {
 
                 <div className="row m-2">
                     <div className="col-md-12 col-sm-12 col-xs-6">
-                        <div class="form-floating">
+                        <div className="form-floating">
                             <textarea type="text" className="form-control" id="FormControlTextarea1"
                                 onChange={event => setPaquete({ ...paquete, description: event.target.value })}
                                 value={paquete.description || ""} ></textarea>
-                            <label for="FormControlTextarea1">Descripción General</label>
+                            <label htmlFor="FormControlTextarea1">Descripción General</label>
                         </div>
                     </div>
                 </div>
 
                 <div className="row m-2">
                     <div className="col-md-6 col-sm-6 col-xs-3 mb-2">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="floatingInputGrid"
+                        <div className="form-floating">
+                            <input type="text" className="form-control" id="floatingInputGrid"
                                 onChange={event => setPaquete({ ...paquete, reservationCost: event.target.value })}
                                 value={paquete.reservationCost || ""} />
-                            <label for="floatingInputGrid">Costo de Reserva</label>
+                            <label htmlFor="floatingInputGrid">Costo de Reserva</label>
                         </div>
                     </div>
                     <div className="col-md-6 col-sm-6 col-xs-3">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="floatingInputGrid"
+                        <div className="form-floating">
+                            <input type="text" className="form-control" id="floatingInputGrid"
                                 onChange={event => setPaquete({ ...paquete, totalCost: event.target.value })}
                                 value={paquete.totalCost || ""} />
-                            <label for="floatingInputGrid">Costo Total</label>
+                            <label htmlFor="floatingInputGrid">Costo Total</label>
                         </div>
                     </div>
                 </div>

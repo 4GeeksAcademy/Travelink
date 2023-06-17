@@ -11,8 +11,8 @@ export const Filterbar = () => {
             <div className="col-lg-11 col-md-10 col-sm-10 col-xs-6 cajaprincipal my-3 row d-flex justify-content-center">
                 <div className="row d-flex justify-content-center">
                     <div className="col-lg-3 col-md-3 col-sm-6 col-xs-3 mb-2">
-                        <div class="form-floating">
-                            <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+                        <div className="form-floating">
+                            <select className="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
                                 <option selected>Selecciona un estado</option>
                                 <option value="Amazonas">Amazonas</option>
                                 <option value="Anzoátegui">Anzoátegui</option>
@@ -39,12 +39,12 @@ export const Filterbar = () => {
                                 <option value="Yaracuy">Yaracuy</option>
                                 <option value="Zulia">Zulia</option>
                             </select>
-                            <label for="floatingSelectGrid">Lugar de Salida</label>
+                            <label htmlFor="floatingSelectGrid">Lugar de Salida</label>
                         </div>
                     </div>
                     <div className="col-lg-3 col-md-3 col-sm-6 col-xs-3 mb-2">
-                        <div class="form-floating">
-                            <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+                        <div className="form-floating">
+                            <select className="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
                                 <option selected>Selecciona un estado</option>
                                 <option value="Amazonas">Amazonas</option>
                                 <option value="Anzoátegui">Anzoátegui</option>
@@ -71,19 +71,19 @@ export const Filterbar = () => {
                                 <option value="Yaracuy">Yaracuy</option>
                                 <option value="Zulia">Zulia</option>
                             </select>
-                            <label for="floatingSelectGrid">Destino</label>
+                            <label htmlFor="floatingSelectGrid">Destino</label>
                         </div>
                     </div>
                     <div className="col-lg-2 col-md-3 col-sm-6 col-xs-3 mb-2">
-                        <div class="form-floating">
-                            <input type="date" class="form-control" id="floatingInputGrid" />
-                            <label for="floatingInputGrid">Fecha de Inicio</label>
+                        <div className="form-floating">
+                            <input type="date" className="form-control" id="floatingInputGrid" />
+                            <label htmlFor="floatingInputGrid">Fecha de Inicio</label>
                         </div>
                     </div>
                     <div className="col-lg-2 col-md-3 col-sm-6 col-xs-3 mb-2">
-                        <div class="form-floating">
-                            <input type="date" class="form-control" id="floatingInputGrid" />
-                            <label for="floatingInputGrid">Fecha de Fin</label>
+                        <div className="form-floating">
+                            <input type="date" className="form-control" id="floatingInputGrid" />
+                            <label htmlFor="floatingInputGrid">Fecha de Fin</label>
                         </div>
                     </div>
                     <div className="col-lg-2 col-md-8 col-sm-10 col-xs-10 mb-2">

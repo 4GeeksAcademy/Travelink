@@ -100,7 +100,7 @@ def new_viajero():
 
 
 @api.route('/new-package', methods=['POST'])
-@jwt_required
+@jwt_required()
 def new_package():
     body = request.json #lo que viene del request como un dic de python 🦎
     try:
@@ -115,6 +115,14 @@ def new_package():
         return jsonify(new_package.serialize()), 200 #Piso searilzado
     except Exception as err:
         return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
+
+@api.route('/package', methods=['GET'])
+# @jwt_required()
+def get_packages():
+
+    all_packages = PaqueteDeViaje.query.all() # lista de Objetos Piso guardados en la base de datos
+    print(all_packages)
+    return jsonify([ package.serialize() for package in all_packages]), 200
     
 
 @api.route('/user-info', methods=['PUT'])
