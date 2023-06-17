@@ -6,6 +6,11 @@
     on that page only (the ones not reused in other pages).
 */
 
+.body-styles {
+    margin: 0;
+    background-color: whitesmoke;
+}
+
 .footer {
     background-color: #4dd7fa;
     height: 30vh;
@@ -13,6 +18,7 @@
 
 .navbarMain {
     height: 18vh;
+    background-color: white;
     border-bottom: solid rgb(228, 227, 227);
     border-color: #4dd7fa;
     color: #4dd7fa;

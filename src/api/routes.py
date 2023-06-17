@@ -50,6 +50,7 @@ def login():
             "token" : create_access_token(identity=search_user.username),
             "user" : search_user.username,
             "rol" : search_user.rol,
+            "idUser" : search_user.id,
             "idAgencia" : agencia.id if (agencia != None and agencia.id != "" ) else "",
             "idViajero" : viajero.id if (viajero != None and viajero.id != "" ) else "",
         }), 200
@@ -112,6 +113,27 @@ def new_package():
         db.session.add(new_package) # Memoria RAM de SQLAlchemy
         db.session.commit() # Inserta el nuevo_piso en la BD de psql ✅
         return jsonify(new_package.serialize()), 200 #Piso searilzado
+    except Exception as err:
+        return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
+    
+
+@api.route('/user-info', methods=['PUT'])
+def get_infoUser():
+    body = request.json #lo que viene del request como un dic de python 🦎
+    try:
+        infoUser = User.query.filter_by(id = body['idUser']).one_or_none()
+
+        return jsonify(infoUser.serialize()), 200
+    except Exception as err:
+        return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
+
+@api.route('/agency-info', methods=['PUT'])
+def get_infoAgency():
+    body = request.json #lo que viene del request como un dic de python 🦎
+    try:
+        infoAgency = Agencia.query.filter_by(id = body['idAgencia']).one_or_none()
+
+        return jsonify(infoAgency.serialize()), 200
     except Exception as err:
         return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
 

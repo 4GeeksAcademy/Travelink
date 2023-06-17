@@ -4,8 +4,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			user: sessionStorage.getItem('user'),
 			rol: sessionStorage.getItem('rol'),
 			token: sessionStorage.getItem('token'),
+			idUser: sessionStorage.getItem('idUser'),
 			idAgencia: sessionStorage.getItem('idAgencia'),
 			idViajero: sessionStorage.getItem('idViajero'),
+			infoUser: [],
+			infoAgency: [],
+			infoViajero: [],
 			message: null,
 			paquetes: []
 			// demo: [
@@ -53,14 +57,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//reset the global store
 				setStore({ demo: demo });
 			},
+
 			syncTokenFromSessionStore: () => {
 				const token = sessionStorage.getItem("token");
 				const user = sessionStorage.getItem("user");
 				const rol = sessionStorage.getItem("rol");
+				const idAgencia = sessionStorage.getItem("idAgencia");
+				const idViajero = sessionStorage.getItem("idViajero");
+				const idUser = sessionStorage.getItem("idUser");
 				if (token && token != "" && token != undefined) {
-					setStore({ token: token, user: user, rol: rol })
+					setStore({ token: token, user: user, rol: rol, idAgencia: idAgencia, idViajero: idViajero, idUser: idUser })
 				}
 			},
+
 			login: async (credentials) => {
 				try {
 					console.log(credentials);
@@ -79,29 +88,40 @@ const getState = ({ getStore, getActions, setStore }) => {
 							body: JSON.stringify(credentials) // body data type must match "Content-Type" header
 						});
 					const data = await resp.json();
-
+					if (resp.status != 200) return false;
 					alert("Bienvenido ha ingresado con exito!");
 					console.log(data);
 					sessionStorage.setItem('token', data.token);
 					sessionStorage.setItem('user', data.user);
 					sessionStorage.setItem('rol', data.rol);
+					sessionStorage.setItem('idUser', data.idUser);
 					sessionStorage.setItem('idAgencia', data.idAgencia);
 					sessionStorage.setItem('idViajero', data.idViajero);
-					setStore({ token: data.token, user: data.user, rol: data.rol, idAgencia: data.idAgencia, idViajero: data.idViajero });
+					setStore({ token: data.token, user: data.user, rol: data.rol, idAgencia: data.idAgencia, idViajero: data.idViajero, idUser: data.idUser });
 					// don't forget to return something, that is how the async resolves
 					return true;
 				} catch (error) {
 					console.log("Error loading message from backend", error);
+					setStore({ token: null, user: null, rol: null, idUser: null, idAgencia: null, idViajero: null });
 					sessionStorage.removeItem('token');
-					setStore({ token: null });
+					sessionStorage.removeItem('user');
+					sessionStorage.removeItem('rol');
+					sessionStorage.removeItem('idUser');
+					sessionStorage.removeItem('idAgencia');
+					sessionStorage.removeItem('idViajero');
 				}
 			},
+
 			logOut: () => {
-				setStore({ token: null, user: null, rol: null });
+				setStore({ token: null, user: null, rol: null, idUser: null, idAgencia: null, idViajero: null });
 				sessionStorage.removeItem('token');
 				sessionStorage.removeItem('user');
 				sessionStorage.removeItem('rol');
+				sessionStorage.removeItem('idUser');
+				sessionStorage.removeItem('idAgencia');
+				sessionStorage.removeItem('idViajero');
 			},
+
 			newAgency: async (agency, user) => {
 				let data = "";
 				console.log(user);
@@ -132,6 +152,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				alert("Registro realizado satisfactoriamente.");
 				return true;
 			},
+
 			newViajero: async (viajero, user) => {
 				let data = "";
 				console.log(user);
@@ -198,6 +219,55 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return true;
 				} catch (err) {
 					console.log(err);
+				}
+			},
+			getInfoUser: async () => {
+				try {
+					const store = getStore();
+					const vIdUser = {
+						idUser: store.idUser
+					}
+					console.log(vIdUser);
+					const resp = await fetch(process.env.BACKEND_URL + "/api/user-info", {
+						method: "PUT",
+						mode: "cors",
+						headers: {
+							"Content-Type": "application/json",
+							// Authorization: "Bearer " + store.token
+						},
+						body: JSON.stringify(vIdUser)
+					});
+					const data = await resp.json();
+					console.log(data);
+					setStore({ infoUser: data });
+					return data;
+				} catch (error) {
+					console.log("Error loading message from backend", error)
+				}
+			},
+			getInfoAgency: async () => {
+				try {
+					const store = getStore();
+					const vIdAgencia = {
+						idAgencia: store.idAgencia
+					}
+					console.log(vIdAgencia);
+					const resp = await fetch(process.env.BACKEND_URL + "/api/agency-info", {
+						method: "PUT",
+						mode: "cors",
+						headers: {
+							"Content-Type": "application/json",
+							// Authorization: "Bearer " + store.token
+						},
+						body: JSON.stringify(vIdAgencia)
+					});
+					const data = await resp.json();
+					console.log(data);
+					setStore({ infoAgency: data });
+					
+					return data;
+				} catch (error) {
+					console.log("Error loading message from backend", error)
 				}
 			},
 		}

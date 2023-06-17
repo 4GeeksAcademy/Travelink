@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import travelinkLogo from "../../img/Travelink.png";
-import "../utils/navTopScroll.js";
+// import "../utils/navTopScroll.js";
 
 export const NavMenuAgency = () => {
-	const { store, actions } = useContext(Context);
+    const { store, actions } = useContext(Context);
 
-	return (
+    return (
         // <nav className="navbar navbar-light navbarMenu navbar-expand-lg px-5">
         //     <div className="container">
         //         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,7 +26,7 @@ export const NavMenuAgency = () => {
         //         </div>
         //     </div>
         // </nav>
-        <nav id="navbar_top" className="navbar navbarMenu navbar-expand-lg navbar-light m-0">
+        <nav id="navbar_top_no" className="navbar navbarMenu navbar-expand-lg navbar-light m-0">
             <div className="container">
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
                     aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,27 +34,27 @@ export const NavMenuAgency = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarColor02">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li className="nav-item active">
-                        <Link to="/" className="nav-link">
-                            <span aria-current="page">Perfil</span>
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/newPackage" className="nav-link">
-                            <span aria-current="page">Crear Paquete</span>
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/packageList" className="nav-link">
-                            <span aria-current="page">Paquetes de Viajes</span>
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/" className="nav-link">
-                            <span aria-current="page">Reservas</span>
-                        </Link>
-                    </li>
-                    {/* <li className="nav-item dropdown">
+                        <li className="nav-item active">
+                            <Link to="/profileAgency" className="nav-link">
+                                <span aria-current="page">Perfil</span>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/newPackage" className="nav-link">
+                                <span aria-current="page">Crear Paquete</span>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/packageList" className="nav-link">
+                                <span aria-current="page">Paquetes de Viajes</span>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/" className="nav-link">
+                                <span aria-current="page">Reservas</span>
+                            </Link>
+                        </li>
+                        {/* <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                         data-mdb-toggle="dropdown" aria-expanded="false">
                         Dropdown link
@@ -75,5 +75,5 @@ export const NavMenuAgency = () => {
                 </div>
             </div>
         </nav>
-	);
+    );
 };

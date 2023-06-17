@@ -30,6 +30,9 @@ class User(db.Model):
         return {
             "id": self.id,
             "email": self.email,
+            "username" : self.username,
+            "rol" : self.rol,
+            "creation_date" : self.creation_date
             # do not serialize the password, its a security breach
         }
     
@@ -43,7 +46,6 @@ class Agencia(db.Model):
     creation_date = db.Column(db.DateTime, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("User.id"), nullable=False)
     paquetes_de_viajes = db.relationship('PaqueteDeViaje', backref="Agencia", lazy=True)
-
 
     def __init__(self, name, rif, phone, user_id):
         self.name = name
@@ -61,6 +63,9 @@ class Agencia(db.Model):
         return {
             "id": self.id,
             "name": self.name,
+            "rif": self.rif,
+            "phone": self.phone,
+            "creation_date": self.creation_date,            
             # do not serialize the password, its a security breach
         }
 
@@ -95,7 +100,12 @@ class Viajero(db.Model):
         return {
             "id": self.id,
             "type_person": self.type_person,
-            "cedula": self.cedula
+            "cedula": self.cedula,
+            "name": self.name,
+            "lastname": self.lastname,
+            "dates_of_birth": self.dates_of_birth,
+            "phone": self.phone,
+            "creation_date": self.creation_date
             # do not serialize the password, its a security breach
         }
 
