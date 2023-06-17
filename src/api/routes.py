@@ -99,12 +99,10 @@ def new_viajero():
 
 
 @api.route('/new-package', methods=['POST'])
+@jwt_required
 def new_package():
     body = request.json #lo que viene del request como un dic de python 🦎
     try:
-        # def __init__(self, title, destination, starting_location, start_date, 
-        # finish_date, includes, type_of_transport, type_of_accommodation, description, 
-        # max_travellers, reservation_cost, total_cost, agencia_id):
         new_package = PaqueteDeViaje(body['title'], body['destination'], body['starting_location'], 
                                      body['start_date'], body['finish_date'], body['includes'], 
                                      body['type_of_transport'], body['type_of_accommodation'], body['description'], 

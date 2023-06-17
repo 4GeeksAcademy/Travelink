@@ -187,7 +187,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						mode: "cors",
 						headers: {
 							"Content-Type": "application/json",
-							// Authorization: "Bearer " + store.token
+							Authorization: "Bearer " + store.token
 						},
 						body: JSON.stringify(paquete)
 					});
