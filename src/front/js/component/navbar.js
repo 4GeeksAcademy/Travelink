@@ -28,7 +28,10 @@ export const Navbar = () => {
 								<button className="btn btn-travelink rounded-pill">Log in</button>
 							</Link>
 							:
-							<button onClick={() => LogOut()} className="btn btn-outline-danger rounded-pill">Log Out</button>
+							<div>
+								<span>{store.user}</span>
+								<button onClick={() => LogOut()} className="btn btn-outline-danger rounded-pill">Log Out</button>
+							</div>
 					}
 					{/* <Link to="/login">
 						<button className="btn btn-travelink rounded-pill">Log in</button>

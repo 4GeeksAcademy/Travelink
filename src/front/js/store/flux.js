@@ -4,7 +4,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			user: sessionStorage.getItem('user'),
 			rol: sessionStorage.getItem('rol'),
 			token: sessionStorage.getItem('token'),
-
+			idAgencia: sessionStorage.getItem('idAgencia'),
+			idViajero: sessionStorage.getItem('idViajero'),
 			message: null,
 			paquetes: []
 			// demo: [
@@ -84,7 +85,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					sessionStorage.setItem('token', data.token);
 					sessionStorage.setItem('user', data.user);
 					sessionStorage.setItem('rol', data.rol);
-					setStore({ token: data.token, user: data.user, rol: data.rol });
+					sessionStorage.setItem('idAgencia', data.idAgencia);
+					sessionStorage.setItem('idViajero', data.idViajero);
+					setStore({ token: data.token, user: data.user, rol: data.rol, idAgencia: data.idAgencia, idViajero: data.idViajero });
 					// don't forget to return something, that is how the async resolves
 					return true;
 				} catch (error) {
@@ -102,7 +105,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			newAgency: async (agency, user) => {
 				let data = "";
 				console.log(user);
-				const respUser = await fetch(process.env.BACKEND_URL + "api/user", {
+				const respUser = await fetch(process.env.BACKEND_URL + "/api/user", {
 					method: "POST",
 					mode: "cors",
 					headers: {
@@ -115,7 +118,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (respUser.status != 200) return false;
 				agency.user_id = data.id;
 				console.log(agency);
-				const respAgency = await fetch(process.env.BACKEND_URL + "api/agency", {
+				const respAgency = await fetch(process.env.BACKEND_URL + "/api/agency", {
 					method: "POST",
 					mode: "cors",
 					headers: {
@@ -132,7 +135,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			newViajero: async (viajero, user) => {
 				let data = "";
 				console.log(user);
-				const respUser = await fetch(process.env.BACKEND_URL + "api/user", {
+				const respUser = await fetch(process.env.BACKEND_URL + "/api/user", {
 					method: "POST",
 					mode: "cors",
 					headers: {
@@ -145,7 +148,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (respUser.status != 200) return false;
 				viajero.user_id = data.id;
 				console.log(viajero);
-				const respViajero = await fetch(process.env.BACKEND_URL + "api/viajero", {
+				const respViajero = await fetch(process.env.BACKEND_URL + "/api/viajero", {
 					method: "POST",
 					mode: "cors",
 					headers: {
@@ -174,21 +177,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 					max_travellers: nuevoPaquete.maxTravellers,
 					reservation_cost: nuevoPaquete.reservationCost,
 					total_cost: nuevoPaquete.totalCost,
+					agencia_id: nuevoPaquete.agencia_id
 				}
-				console.log(nuevoPaquete)
+				console.log(paquete)
 				try {
+					const store = getStore();
 					let resp = await fetch(process.env.BACKEND_URL + "/api/new-package", {
 						method: "POST",
 						mode: "cors",
 						headers: {
 							"Content-Type": "application/json",
-							Authorization: "Bearer " + getStore().token
+							// Authorization: "Bearer " + store.token
 						},
-						body: JSON.stringify()
+						body: JSON.stringify(paquete)
 					});
-					let data = await resp.json(nuevoPaquete);
+					let data = await resp.json();
 					console.log(data)
+					if (resp.status != 200) return false;
 					alert("Nuevo paquete agregado!");
+					return true;
 				} catch (err) {
 					console.log(err);
 				}

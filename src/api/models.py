@@ -148,7 +148,7 @@ class PaqueteDeViaje(db.Model):
         self.reservation_cost = reservation_cost
         self.total_cost = total_cost
         self.agencia_id = agencia_id
-        # self.creation_date = date.today()
+        self.creation_date = date.today()
 
     def __repr__(self):
         return f'<PaqueteDeViaje {self.title}>'

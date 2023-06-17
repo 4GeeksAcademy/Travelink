@@ -36,12 +36,23 @@ def login():
     #password saved as hash // with the password arriving hashed
     # if search_user.password == hashlib.md5(password.encode('utf-8') ).hexdigest():
     #     return jsonify({ "token" : create_access_token(identity=search_user.email) }), 200
+
+    agencia = None
+    viajero = None
+
+    if search_user.rol == 1:
+        agencia = Agencia.query.filter_by(user_id = search_user.id).one_or_none()
+    else:
+        viajero = Viajero.query.filter_by(user_id = search_user.id).one_or_none()
+
     if search_user.password == password:
         return jsonify({ 
             "token" : create_access_token(identity=search_user.username),
             "user" : search_user.username,
-            "rol" : search_user.rol
-            }), 200
+            "rol" : search_user.rol,
+            "idAgencia" : agencia.id if (agencia != None and agencia.id != "" ) else "",
+            "idViajero" : viajero.id if (viajero != None and viajero.id != "" ) else "",
+        }), 200
     #handling errors
     return jsonify({ "message" : "password doesnt match, be carefull 🔓️ "}), 401
 
@@ -86,14 +97,19 @@ def new_viajero():
     except Exception as err:
         return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
 
+
 @api.route('/new-package', methods=['POST'])
 def new_package():
     body = request.json #lo que viene del request como un dic de python 🦎
     try:
-        new_package = Agencia(body['title'], body['destination'], body['starting_location'], 
-        body['start_date'], body['finish_date'], body['includes'], body['type_of_transport'], 
-        body['type_of_accommodation'], body['description'], body['max_travellers'], 
-        body['reservation_cost'], body['total_cost'], body['agencia_id'] )
+        # def __init__(self, title, destination, starting_location, start_date, 
+        # finish_date, includes, type_of_transport, type_of_accommodation, description, 
+        # max_travellers, reservation_cost, total_cost, agencia_id):
+        new_package = PaqueteDeViaje(body['title'], body['destination'], body['starting_location'], 
+                                     body['start_date'], body['finish_date'], body['includes'], 
+                                     body['type_of_transport'], body['type_of_accommodation'], body['description'], 
+                                     body['max_travellers'], body['reservation_cost'], body['total_cost'], 
+                                     body['agencia_id'] )
         print(new_package)
         db.session.add(new_package) # Memoria RAM de SQLAlchemy
         db.session.commit() # Inserta el nuevo_piso en la BD de psql ✅
