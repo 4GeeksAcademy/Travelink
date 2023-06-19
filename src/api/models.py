@@ -167,8 +167,18 @@ class PaqueteDeViaje(db.Model):
         return {
             "id": self.id,
             "title": self.title,
+            "starting_location": self.starting_location,
+            "destination": self.destination,
+            "start_date": self.start_date,
+            "finish_date": self.finish_date,
+            "type_of_transport": self.type_of_transport,
+            "type_of_accommodation": self.type_of_accommodation,
             "description": self.description,
-            "destination": self.destination
+            "max_travellers": self.max_travellers,
+            "reservation_cost": self.reservation_cost,
+            "total_cost": self.total_cost,
+            "agencia_id": self.agencia_id,
+            "creation_date": self.creation_date
         }
 
 class ViajeReservado(db.Model):

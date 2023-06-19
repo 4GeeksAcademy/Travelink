@@ -155,3 +155,13 @@ def get_infoViajero():
     except Exception as err:
         return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
 
+@api.route('/package-details', methods=['PUT'])
+def get_detallePaqueteViaje():
+    body = request.json #lo que viene del request como un dic de python 🦎
+    try:
+        infoPaquete = PaqueteDeViaje.query.filter_by(id = body['idPackage']).one_or_none()
+        paquete = infoPaquete.serialize()
+
+        return jsonify(paquete), 200
+    except Exception as err:
+        return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500

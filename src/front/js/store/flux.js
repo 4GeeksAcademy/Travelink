@@ -325,6 +325,56 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
+			getAgencyByDetails: async (idAgencia) => {
+				try {
+					const store = getStore();
+					const vIdAgencia = {
+						idAgencia: idAgencia
+					}
+					console.log(vIdAgencia);
+					const resp = await fetch(process.env.BACKEND_URL + "/api/agency-info", {
+						method: "PUT",
+						mode: "cors",
+						headers: {
+							"Content-Type": "application/json",
+							// Authorization: "Bearer " + store.token
+						},
+						body: JSON.stringify(vIdAgencia)
+					});
+					const data = await resp.json();
+					console.log(data);
+					return data;
+				} catch (error) {
+					console.log("Error loading message from backend", error)
+				}
+			},
+
+			findPackage: async (idPackage) => {
+				const store = getStore()
+
+				try {
+					const vIdPackage = {
+						idPackage: idPackage
+					}
+					console.log(vIdPackage);
+					const resp = await fetch(process.env.BACKEND_URL + "/api/package-details", {
+						method: "PUT",
+						mode: "cors",
+						headers: {
+							"Content-Type": "application/json",
+							// Authorization: "Bearer " + store.token
+						},
+						body: JSON.stringify(vIdPackage)
+					});
+					const data = await resp.json()
+					console.log(data)
+					setStore({ paquetes: data })
+					// don't forget to return something, that is how the async resolves
+					return data;
+				} catch (error) {
+					console.log("Error loading message from backend", error)
+				}
+			},
 		}
 	};
 };
