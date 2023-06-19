@@ -15,7 +15,7 @@ export const Home = () => {
 	return (
 		<div className="text-center mt-5">
 			<Filterbar />
-			<div className="container team-area">
+			<div className="row dflex justify-content-center col-lg-12 col-md-12 col-sm-12 col-xs-12 m-1">
 				{store.paquetes.map((item, index) => (
 					<CardHome item={item} key={index} />
 				))}

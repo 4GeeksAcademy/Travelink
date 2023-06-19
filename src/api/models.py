@@ -164,6 +164,7 @@ class PaqueteDeViaje(db.Model):
         return f'<PaqueteDeViaje {self.title}>'
 
     def serialize(self):
+        agencia = Agencia.query.get(self.agencia_id)
         return {
             "id": self.id,
             "title": self.title,
@@ -178,7 +179,8 @@ class PaqueteDeViaje(db.Model):
             "reservation_cost": self.reservation_cost,
             "total_cost": self.total_cost,
             "agencia_id": self.agencia_id,
-            "creation_date": self.creation_date
+            "creation_date": self.creation_date,
+            "agencia_name": agencia.name
         }
 
 class ViajeReservado(db.Model):

@@ -6,8 +6,13 @@
     max-height: 45vh;
 } 
 
+.info-agencia{
+    display: inline;
+
+}
 .imgdetails .member-img {
     display: inline;
+    
 }
 
 .imgdetails .member-img img {

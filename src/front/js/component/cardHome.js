@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 
 export const CardHome = (props) => {
     return (
-        <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12 m-2">
+        <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12 m-2">
             <div className="single-member text-center">
                 <img className="team-heading" src="https://www.dzoom.org.es/wp-content/uploads/2017/07/seebensee-2384369-810x540.jpg" alt="imagen superior" />
                 <div className="member-img">
