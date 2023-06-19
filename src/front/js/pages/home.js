@@ -16,9 +16,11 @@ export const Home = () => {
 		<div className="text-center mt-5">
 			<Filterbar />
 			<div className="container team-area">
-				{store.paquetes.map((item, index) => (
-					<CardHome item={item} key={index} />
-				))}
+				<div className="row">
+					{store.paquetes.map((item, index) => (
+						<CardHome item={item} key={index} />
+					))}
+				</div>
 			</div>
 			{/* <div className="container team-area">
 				<div className="row">

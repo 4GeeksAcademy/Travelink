@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Agencia, Viajero, PaqueteDeViaje
+from api.models import db, User, Agencia, Viajero, PaqueteDeViaje, AgenciaFavorito
 from api.utils import generate_sitemap, APIException
 import hashlib
 
@@ -125,43 +125,84 @@ def get_packages():
     return jsonify([ package.serialize() for package in all_packages]), 200
     
 
-@api.route('/user-info', methods=['PUT'])
-def get_infoUser():
-    body = request.json #lo que viene del request como un dic de python 🦎
+@api.route('/user-info/<userid>', methods=['GET'])
+def get_infoUser(userid):
+    # body = request.json #lo que viene del request como un dic de python 🦎
     try:
-        infoUser = User.query.filter_by(id = body['idUser']).one_or_none()
+
+        infoUser = User.query.filter_by(id = userid).one_or_none()
 
         return jsonify(infoUser.serialize()), 200
     except Exception as err:
         return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
 
-@api.route('/agency-info', methods=['PUT'])
-def get_infoAgency():
-    body = request.json #lo que viene del request como un dic de python 🦎
+@api.route('/agency-info/<idAgencia>', methods=['GET'])
+def get_infoAgency(idAgencia):
+    # body = request.json #lo que viene del request como un dic de python 🦎
     try:
-        infoAgency = Agencia.query.filter_by(id = body['idAgencia']).one_or_none()
+        infoAgency = Agencia.query.filter_by(id = idAgencia).one_or_none()
 
         return jsonify(infoAgency.serialize()), 200
     except Exception as err:
         return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
     
-@api.route('/viajero-info', methods=['PUT'])
-def get_infoViajero():
-    body = request.json #lo que viene del request como un dic de python 🦎
+@api.route('/viajero-info/<idViajero>', methods=['GET'])
+def get_infoViajero(idViajero):
+    # body = request.json #lo que viene del request como un dic de python 🦎
     try:
-        infoViajero = Viajero.query.filter_by(id = body['idViajero']).one_or_none()
+        infoViajero = Viajero.query.filter_by(id = idViajero).one_or_none()
 
         return jsonify(infoViajero.serialize()), 200
     except Exception as err:
         return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
 
-@api.route('/package-details', methods=['PUT'])
-def get_detallePaqueteViaje():
-    body = request.json #lo que viene del request como un dic de python 🦎
+@api.route('/package-details/<idPackage>', methods=['GET'])
+def get_detallePaqueteViaje(idPackage):
+    # body = request.json #lo que viene del request como un dic de python 🦎
     try:
-        infoPaquete = PaqueteDeViaje.query.filter_by(id = body['idPackage']).one_or_none()
+        infoPaquete = PaqueteDeViaje.query.filter_by(id = idPackage).one_or_none()
         paquete = infoPaquete.serialize()
 
         return jsonify(paquete), 200
+    except Exception as err:
+        return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
+
+
+@api.route('/favorite', methods=['POST'])
+@jwt_required()
+def setFavorite():
+    body = request.json #lo que viene del request como un dic de python 🦎
+    try:
+        new_favorite = AgenciaFavorito(body['idAgencia'], body['idViajero'])
+        print(new_favorite)
+        db.session.add(new_favorite) # Memoria RAM de SQLAlchemy
+        db.session.commit() # Inserta el nuevo_piso en la BD de psql ✅
+        return jsonify(new_favorite.serialize()), 200 #Piso searilzado
+    except Exception as err:
+        return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
+    
+@api.route('/favorite', methods=['DELETE'])
+@jwt_required()
+def deleteFavorite():
+    body = request.json #lo que viene del request como un dic de python 🦎
+    try:
+        aux_favorite = AgenciaFavorito.query.filter_by(agencia_id = body['idAgencia'], viajero_id = body['idViajero']).one_or_none()
+        print(aux_favorite)
+        db.session.delete(aux_favorite) # Memoria RAM de SQLAlchemy
+        db.session.commit() # Inserta el nuevo_piso en la BD de psql ✅
+        return jsonify(aux_favorite.serialize()), 200 #Piso searilzado
+    except Exception as err:
+        return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
+    
+@api.route('/favorite-agencies/<idViajero>', methods=['GET'])
+def get_AllFavoritesByViajero(idViajero):
+    # body = request.json #lo que viene del request como un dic de python 🦎
+    try:
+        listAgencias = []
+        listFavs = AgenciaFavorito.query.filter_by(viajero_id = idViajero).all()
+        for favorito in listFavs:
+            auxAgencia = Agencia.query.filter_by(id = favorito.agencia_id).one_or_none()
+            listAgencias.append(auxAgencia)
+        return jsonify([ agency.serialize() for agency in listAgencias]), 200
     except Exception as err:
         return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
