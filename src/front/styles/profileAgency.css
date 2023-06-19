@@ -20,3 +20,8 @@ body {
 .me-2 {
     margin-right: .5rem !important;
 }
+
+.bg-travelink {
+    background-color: #4dd7fa;
+    border-color: #4dd7fa;
+}

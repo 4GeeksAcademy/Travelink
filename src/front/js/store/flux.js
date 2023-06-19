@@ -242,6 +242,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						//body: JSON.stringify(credentials) // body data type must match "Content-Type" header
 					})
 					const data = await resp.json()
+					console.log(data)
 					setStore({ paquetes: data })
 					// don't forget to return something, that is how the async resolves
 					return data;
@@ -293,7 +294,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const data = await resp.json();
 					console.log(data);
 					setStore({ infoAgency: data });
-					
+
+					return data;
+				} catch (error) {
+					console.log("Error loading message from backend", error)
+				}
+			},
+			getInfoViajero: async () => {
+				try {
+					const store = getStore();
+					const vIdViajero = {
+						idViajero: store.idViajero
+					}
+					console.log(vIdViajero);
+					const resp = await fetch(process.env.BACKEND_URL + "/api/viajero-info", {
+						method: "PUT",
+						mode: "cors",
+						headers: {
+							"Content-Type": "application/json",
+							// Authorization: "Bearer " + store.token
+						},
+						body: JSON.stringify(vIdViajero)
+					});
+					const data = await resp.json();
+					console.log(data);
+					setStore({ infoViajero: data });
+
 					return data;
 				} catch (error) {
 					console.log("Error loading message from backend", error)

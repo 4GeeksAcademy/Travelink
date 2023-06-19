@@ -144,4 +144,14 @@ def get_infoAgency():
         return jsonify(infoAgency.serialize()), 200
     except Exception as err:
         return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
+    
+@api.route('/viajero-info', methods=['PUT'])
+def get_infoViajero():
+    body = request.json #lo que viene del request como un dic de python 🦎
+    try:
+        infoViajero = Viajero.query.filter_by(id = body['idViajero']).one_or_none()
+
+        return jsonify(infoViajero.serialize()), 200
+    except Exception as err:
+        return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
 

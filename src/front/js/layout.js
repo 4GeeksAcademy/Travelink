@@ -12,12 +12,14 @@ import { NewPackage } from "./pages/newPackage";
 import { PackageDetails } from "./pages/packageDetails";
 import { PackageList } from "./pages/packageList";
 import { ProfileAgency } from "./pages/profileAgency";
+import { ProfileViajero } from "./pages/profileViajero";
 import { RegistroViajero } from "./pages/registroViajero";
 import { RegistroAgencia } from "./pages/registroAgencia";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { NavMenuAgency } from "./component/navMenuAgency";
+import { NavMenuViajero } from "./component/navMenuViajero";
 import { Footer } from "./component/footer";
 
 
@@ -42,8 +44,8 @@ const Layout = () => {
                 <ScrollToTop>
                     <Navbar />
                     {
-                        (store.token && store.token != "" && store.token != undefined) && (store.rol == 1) ?
-                            <NavMenuAgency />
+                        (store.token && store.token != "" && store.token != undefined) ?
+                            (store.rol == 1) ? <NavMenuAgency /> : <NavMenuViajero />
                             :
                             <></>
                     }
@@ -58,6 +60,7 @@ const Layout = () => {
                         <Route element={<RegistroViajero />} path="/registroViajero" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<ProfileAgency />} path="/profileAgency" />
+                        <Route element={<ProfileViajero />} path="/profileViajero" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />

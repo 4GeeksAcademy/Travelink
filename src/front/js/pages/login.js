@@ -9,15 +9,18 @@ export const Login = () => {
   const { store, actions } = useContext(Context);
 
   const [credentials, setCredentials] = useState({
-    username : "",
-    password : ""
+    username: "",
+    password: ""
   })
 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (store.token)
-        navigate('/newPackage')
+      if (store.rol == 1)
+        navigate('/profileAgency')
+    if (store.rol == 2)
+      navigate('/profileViajero')
   }, [store.token])
 
   return (
@@ -42,24 +45,24 @@ export const Login = () => {
                           <input type="email" id="form2Example11" className="form-control"
                             placeholder="Username" onChange={event => {
                               setCredentials({
-                                  ...credentials,
-                                  username: event.target.value
+                                ...credentials,
+                                username: event.target.value
                               });
-                          }} />
+                            }} />
                         </div>
 
                         <div className="form-outline mb-4">
-                          <input type="password" id="form2Example22" className="form-control" placeholder="Password" 
+                          <input type="password" id="form2Example22" className="form-control" placeholder="Password"
                             onChange={event => {
-                            setCredentials({
+                              setCredentials({
                                 ...credentials,
                                 password: event.target.value
-                            });
-                          }}/>
+                              });
+                            }} />
                         </div>
 
                         <div className="text-center pt-1 mb-3 pb-1 d-flex flex-column">
-                          <button className="btn btn-primary gradient-custom-2 mb-3" type="button" 
+                          <button className="btn btn-primary gradient-custom-2 mb-3" type="button"
                             onClick={() => actions.login(credentials)}>
                             Log in
                           </button>
@@ -72,10 +75,10 @@ export const Login = () => {
                         <div className="d-flex align-items-center justify-content-center pb-2">
                           <Link to="/registroAgencia">
                             <button type="button" className="btn btn-outline-info">Nueva Agencia</button>
-					                </Link>
+                          </Link>
                           <Link to="/registroViajero">
                             <button type="button" className="btn btn-outline-info">Nuevo Viajero</button>
-					                </Link>
+                          </Link>
                         </div>
                       </form>
                     </div>
