@@ -148,7 +148,7 @@ class PaqueteDeViaje(db.Model):
     includes = db.Column(db.String(120), nullable=False)
     type_of_transport = db.Column(db.String(120), nullable=False)
     type_of_accommodation = db.Column(db.String(120), nullable=False)
-    description = db.Column(db.String(120), nullable=False)
+    description = db.Column(db.String(800), nullable=False)
     max_travellers = db.Column(db.Integer, nullable=False)
     reservation_cost= db.Column(db.Integer, nullable=False)
     total_cost = db.Column(db.Integer, nullable=False)

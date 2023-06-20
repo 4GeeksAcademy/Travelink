@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect} from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "../../styles/cardDetails.css"
 import { Context } from "../store/appContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -30,7 +30,7 @@ export const CardDetails = props => {
             <div className="col-lg-12 col-md-12 col-sm-12">
                 <div className="row mb-2">
 
-                    <div className="imgdetails col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <div className="imgdetails col-lg-6 col-md-6 col-sm-12 mb-4">
                         <div className="flex-column">
                             <img className="card-img-top col-md-12 col-sm-12" src="https://media.gq.com.mx/photos/620e915c43f71a078a35533f/master/pass/playa.jpg" alt="..." />
                             <div className="border bg-body col-12">
@@ -46,6 +46,14 @@ export const CardDetails = props => {
                                             <input type="checkbox" className="btn-check" id={"btncheck"} autoComplete="off" checked={isChecked} onChange={handleCheckboxChange} />
                                             <label className="btn btn-outline-info" htmlFor={"btncheck"}><FontAwesomeIcon icon={faHeart} /></label>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-12 my-2">
+                                <div className="card">
+                                    <div className="card-body">
+                                        <h5 className="card-title">¿Qué Incluye?</h5>
+                                        <p className="card-text">{props.paquete.includes}</p>
                                     </div>
                                 </div>
                             </div>
@@ -91,51 +99,51 @@ export const CardDetails = props => {
                                 </div>
 
                                 <div className="row m-0 p-0 col-md-12 col-sm-12 col-xs-12 mb-2">
-                                        <div className="col-md-6 col-sm-4 col-xs-4">
-                                            <div className="form-floating">
-                                                <div type="text" className="form-control" id="floatingInputGrid">
-                                                    <h6 className="text-end text-muted">{"$" + props.paquete.reservation_cost}</h6>
-                                                </div>
-                                                <label for="floatingInputGrid">Reserva c/u</label>
+                                    <div className="col-md-6 col-sm-4 col-xs-4">
+                                        <div className="form-floating">
+                                            <div type="text" className="form-control" id="floatingInputGrid">
+                                                <h6 className="text-end text-muted">{"$" + props.paquete.reservation_cost}</h6>
                                             </div>
-                                        </div>
-                                        <div className="col-md-6 col-sm-4 col-xs-4">
-                                            <div className="form-floating">
-                                                <div type="text" className="form-control" id="floatingInputGrid">
-                                                    <h6 className="text-end text-muted">{"$" + props.paquete.total_cost}</h6>
-                                                </div>
-                                                <label for="floatingInputGrid">Total</label>
-                                            </div>
+                                            <label for="floatingInputGrid">Reserva c/u</label>
                                         </div>
                                     </div>
+                                    <div className="col-md-6 col-sm-4 col-xs-4">
+                                        <div className="form-floating">
+                                            <div type="text" className="form-control" id="floatingInputGrid">
+                                                <h6 className="text-end text-muted">{"$" + props.paquete.total_cost}</h6>
+                                            </div>
+                                            <label for="floatingInputGrid">Total</label>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                    <div className="row m-0 p-0 col-md-12 col-sm-12 col-xs-12 mb-2">
-                                        <div className="col-md-6 col-sm-4 col-xs-4">
-                                            <div className="form-floating">
-                                                <div type="text" className="form-control" id="floatingInputGrid">
-                                                    <h6 className="text-end text-muted">{props.paquete.max_travellers}</h6>
-                                                </div>
-                                                <label for="floatingInputGrid">Asientos Disponibles</label>
+                                <div className="row m-0 p-0 col-md-12 col-sm-12 col-xs-12 mb-2">
+                                    <div className="col-md-6 col-sm-4 col-xs-4">
+                                        <div className="form-floating">
+                                            <div type="text" className="form-control" id="floatingInputGrid">
+                                                <h6 className="text-end text-muted">{props.paquete.max_travellers}</h6>
                                             </div>
-                                        </div>
-                                        <div className="col-md-6 col-sm-4 col-xs-4">
-                                            <div className="form-floating">
-                                                <div type="text" className="form-control" id="floatingInputGrid">
-                                                    <h6 className="text-end text-muted">{props.paquete.max_travellers}</h6>
-                                                </div>
-                                                <label for="floatingInputGrid">Max. de Viajeros</label>
-                                            </div>
+                                            <label for="floatingInputGrid">Asientos Disponibles</label>
                                         </div>
                                     </div>
-                                    <div className="row m-0 p-0 col-md-12 col-sm-12 col-xs-12 mb-2 d-flex justify-content-center">
-                                        <div className="col-md-6 col-sm-4 col-xs-4">
-                                            <div className="form-floating">
-                                                <input type="number" className="form-control" id="floatingInputGrid" />
-                                                <label for="floatingInputGrid">Viajeros a reservar</label>
+                                    <div className="col-md-6 col-sm-4 col-xs-4">
+                                        <div className="form-floating">
+                                            <div type="text" className="form-control" id="floatingInputGrid">
+                                                <h6 className="text-end text-muted">{props.paquete.max_travellers}</h6>
                                             </div>
+                                            <label for="floatingInputGrid">Max. de Viajeros</label>
                                         </div>
                                     </div>
-                                
+                                </div>
+                                <div className="row m-0 p-0 col-md-12 col-sm-12 col-xs-12 mb-2 d-flex justify-content-center">
+                                    <div className="col-md-12 col-sm-4 col-xs-4">
+                                        <div className="form-floating">
+                                            <input type="number" className="form-control" id="floatingInputGrid" />
+                                            <label for="floatingInputGrid">Viajeros a reservar</label>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <button type="submit" onClick={() => console.log(props.isCheckFav)} className="col-md-12 col-sm-5 col-xs-3 m-1 btn btn-travelink btn btn-outline-info rounded-pill">Solicitar Reserva</button>
                             </div>
                         </div>
@@ -145,19 +153,11 @@ export const CardDetails = props => {
                 <hr></hr>
 
                 <div className="row my-2">
-                    <div className="col-sm-6">
+                    <div className="col-sm-12">
                         <div className="card mb-2">
                             <div className="card-body">
                                 <h5 className="card-title">Descripcion general</h5>
                                 <p className="card-text">{props.paquete.description}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-sm-6">
-                        <div className="card">
-                            <div className="card-body">
-                                <h5 className="card-title">¿Qué Incluye?</h5>
-                                <p className="card-text">{props.paquete.includes}</p>
                             </div>
                         </div>
                     </div>

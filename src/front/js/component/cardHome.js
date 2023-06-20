@@ -16,9 +16,9 @@ export const CardHome = (props) => {
                 <div className="member-img">
                     <img src="https://images.pexels.com/photos/1619317/pexels-photo-1619317.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" className="card-img-top" alt="..." />
                 </div>
-                <div className="member-info">
+                <div className="member-info m-1">
                     <h2>{props.item.title}</h2>
-                    <h3>{props.item.totalCost}</h3>
+                    <h3>Total: {props.item.totalCost}</h3>
                     <p>{trickText(props.item.description)}</p>
                     <Link to={"/packageDetails/" + props.item.id}>
                         <button type="button" className="btn btn-travelink btn btn-outline-info rounded-pill">Saber más</button>

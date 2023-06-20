@@ -203,6 +203,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				console.log(paquete)
 				try {
+					const apiUrl = ``
+
+					const formMultimedia = new FormData()
+
+					formMultimedia.append("upload_preset", "sruvlfnt")
+					formMultimedia.append("file", piso.photo)
+
+					const respMediaBucket = await fetch(apiUrl, {
+						method: "POST", // *GET, POST, PUT, DELETE, etc.
+						body: formMultimedia // body data type must match "Content-Type" header
+					})
+
+					const dataCloudinary = await respMediaBucket.json()
+
+					console.log(dataCloudinary)
+
 					const store = getStore();
 					let resp = await fetch(process.env.BACKEND_URL + "/api/new-package", {
 						method: "POST",

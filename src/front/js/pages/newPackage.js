@@ -12,7 +12,7 @@ export const NewPackage = () => {
         startingLocation: " ",
         startDate: new Date(),
         finishDate: new Date(),
-        includes: " ",
+        includes: "Todos los servicios",
         typeOfTransport: "no incluye",
         typeOfAccommodation: "no incluye ",
         description: " ",
@@ -143,7 +143,7 @@ export const NewPackage = () => {
                             <select className="form-select" id="floatingSelectGrid" aria-label="Floating label select example"
                                 onChange={event => setPaquete({ ...paquete, includes: event.target.value })}
                                 value={paquete.includes || ""} >
-                                <option selected></option>
+                                <option selected>Todos los servicios</option>
                                 <option value="1">Hospedaje</option>
                                 <option value="2">Comidas</option>
                                 <option value="3">Transporte</option>
@@ -190,7 +190,7 @@ export const NewPackage = () => {
                 <div className="row m-2">
                     <div className="col-md-12 col-sm-12 col-xs-6">
                         <div className="form-floating">
-                            <textarea type="text" className="form-control" id="FormControlTextarea1"
+                            <textarea type="text" className="form-control" id="FormControlTextarea1" style={{height: "150px"}}
                                 onChange={event => setPaquete({ ...paquete, description: event.target.value })}
                                 value={paquete.description || ""} ></textarea>
                             <label htmlFor="FormControlTextarea1">Descripción General</label>
@@ -199,7 +199,15 @@ export const NewPackage = () => {
                 </div>
 
                 <div className="row m-2">
-                    <div className="col-md-6 col-sm-6 col-xs-3 mb-2">
+                    <div className="col-md-4 col-sm-6 col-xs-3 mb-2">
+                            <div className="form-floating">
+                                <input type="file"  accept="image/*" className="form-control" id="floatingInputGrid"
+                                    onChange={event => setPaquete({ ...paquete, imgPaquete: event.target.value })}
+                                    value={paquete.imgPaquete || ""} />
+                                <label htmlFor="floatingInputGrid">Cargar Imagen</label>
+                            </div>
+                    </div>
+                    <div className="col-md-4 col-sm-6 col-xs-3 mb-2">
                         <div className="form-floating">
                             <input type="text" className="form-control" id="floatingInputGrid"
                                 onChange={event => setPaquete({ ...paquete, reservationCost: event.target.value })}
@@ -207,7 +215,7 @@ export const NewPackage = () => {
                             <label htmlFor="floatingInputGrid">Costo de Reserva</label>
                         </div>
                     </div>
-                    <div className="col-md-6 col-sm-6 col-xs-3">
+                    <div className="col-md-4 col-sm-6 col-xs-3">
                         <div className="form-floating">
                             <input type="text" className="form-control" id="floatingInputGrid"
                                 onChange={event => setPaquete({ ...paquete, totalCost: event.target.value })}
@@ -218,8 +226,8 @@ export const NewPackage = () => {
                 </div>
 
                 <div className="row d-flex justify-content-center m-2">
-                    <button type="file" className="col-md-5 col-sm-5 col-xs-3 mx-1 btn btn-travelink btn btn-outline-info rounded-pill">Cargar Imagen</button>
-                    <button type="submit" className="col-md-5 col-sm-5 col-xs-3 mx-1 btn btn-travelink btn btn-outline-info rounded-pill" onClick={() => (paquete.title != " " ? actions.newPackage(paquete) : () => { })}>Agregar paquete</button>
+                    {/* <button type="file" className="col-md-5 col-sm-5 col-xs-3 mx-1 btn btn-travelink btn btn-outline-info rounded-pill">Cargar Imagen</button> */}
+                    <button type="submit" className="col-md-12 col-sm-12 col-xs-12 mx-1 btn btn-travelink btn btn-outline-info rounded-pill" onClick={() => (paquete.title != " " ? actions.newPackage(paquete) : () => { })}>Agregar paquete</button>
                 </div>
             </div>
         </div >
