@@ -11,7 +11,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			infoAgency: [],
 			infoViajero: [],
 			message: null,
-			paquetes: []
+			paquetes: [],
+			agencias_favoritas: []
 			// demo: [
 			// 	{
 			// 		title: "FIRST",
@@ -230,21 +231,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const resp = await fetch(process.env.BACKEND_URL + "/api/package", {
 						method: "GET", // *GET, POST, PUT, DELETE, etc.
 						mode: "cors", // no-cors, *cors, same-origin
-						//cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-						//credentials: "same-origin", // include, *same-origin, omit
-						headers: {
-							//"Content-Type": "application/json",
-							// "Authorization": "Bearer " + store.token
-							// 'Content-Type': 'application/x-www-form-urlencoded',
-						},
-						//redirect: "follow", // manual, *follow, error
-						//referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-						//body: JSON.stringify(credentials) // body data type must match "Content-Type" header
 					})
 					const data = await resp.json()
-					console.log(data)
 					setStore({ paquetes: data })
-					// don't forget to return something, that is how the async resolves
 					return data;
 				} catch (error) {
 					console.log("Error loading message from backend", error)
@@ -258,14 +247,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 						idUser: store.idUser
 					}
 					console.log(vIdUser);
-					const resp = await fetch(process.env.BACKEND_URL + "/api/user-info", {
-						method: "PUT",
+					const resp = await fetch(process.env.BACKEND_URL + "/api/user-info/" + store.idUser, {
+						method: "GET",
 						mode: "cors",
 						headers: {
 							"Content-Type": "application/json",
 							// Authorization: "Bearer " + store.token
-						},
-						body: JSON.stringify(vIdUser)
+						}
+						//body: JSON.stringify(vIdUser)
 					});
 					const data = await resp.json();
 					console.log(data);
@@ -282,14 +271,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 						idAgencia: store.idAgencia
 					}
 					console.log(vIdAgencia);
-					const resp = await fetch(process.env.BACKEND_URL + "/api/agency-info", {
-						method: "PUT",
+					const resp = await fetch(process.env.BACKEND_URL + "/api/agency-info/" + store.idAgencia, {
+						method: "GET",
 						mode: "cors",
 						headers: {
 							"Content-Type": "application/json",
 							// Authorization: "Bearer " + store.token
-						},
-						body: JSON.stringify(vIdAgencia)
+						}
+						// body: JSON.stringify(vIdAgencia)
 					});
 					const data = await resp.json();
 					console.log(data);
@@ -307,14 +296,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 						idViajero: store.idViajero
 					}
 					console.log(vIdViajero);
-					const resp = await fetch(process.env.BACKEND_URL + "/api/viajero-info", {
-						method: "PUT",
+					const resp = await fetch(process.env.BACKEND_URL + "/api/viajero-info/" + store.idViajero, {
+						method: "GET",
 						mode: "cors",
 						headers: {
 							"Content-Type": "application/json",
 							// Authorization: "Bearer " + store.token
-						},
-						body: JSON.stringify(vIdViajero)
+						}
+						// body: JSON.stringify(vIdViajero)
 					});
 					const data = await resp.json();
 					console.log(data);
@@ -325,56 +314,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
-			// getAgencyByDetails: async (idAgencia) => {
-			// 	try {
-			// 		const store = getStore();
-			// 		const vIdAgencia = {
-			// 			idAgencia: idAgencia
-			// 		}
-			// 		console.log(vIdAgencia);
-			// 		const resp = await fetch(process.env.BACKEND_URL + "/api/agency-info", {
-			// 			method: "PUT",
-			// 			mode: "cors",
-			// 			headers: {
-			// 				"Content-Type": "application/json",
-			// 				// Authorization: "Bearer " + store.token
-			// 			},
-			// 			body: JSON.stringify(vIdAgencia)
-			// 		});
-			// 		const data = await resp.json();
-			// 		console.log(data);
-			// 		return data;
-			// 	} catch (error) {
-			// 		console.log("Error loading message from backend", error)
-			// 	}
-			// },
-
-			// findPackage: async (idPackage) => {
-			// 	const store = getStore()
-
-			// 	try {
-			// 		const vIdPackage = {
-			// 			idPackage: idPackage
-			// 		}
-			// 		console.log(vIdPackage);
-			// 		const resp = await fetch(process.env.BACKEND_URL + "/api/package-details", {
-			// 			method: "PUT",
-			// 			mode: "cors",
-			// 			headers: {
-			// 				"Content-Type": "application/json",
-			// 				// Authorization: "Bearer " + store.token
-			// 			},
-			// 			body: JSON.stringify(vIdPackage)
-			// 		});
-			// 		const data = await resp.json()
-			// 		console.log(data)
-			// 		setStore({ paquetes: data })
-			// 		// don't forget to return something, that is how the async resolves
-			// 		return data;
-			// 	} catch (error) {
-			// 		console.log("Error loading message from backend", error)
-			// 	}
-			// },
+			getAgencyByDetails: async (idAgencia) => {
+				try {
+					const store = getStore();
+					const vIdAgencia = {
+						idAgencia: idAgencia
+					}
+					console.log(vIdAgencia);
+					const resp = await fetch(process.env.BACKEND_URL + "/api/agency-info/" + idAgencia, {
+						method: "GET",
+						mode: "cors",
+						headers: {
+							"Content-Type": "application/json",
+							// Authorization: "Bearer " + store.token
+						}
+						// body: JSON.stringify(vIdAgencia)
+					});
+					const data = await resp.json();
+					//console.log(data);
+					return data;
+				} catch (error) {
+					console.log("Error loading message from backend", error)
+				}
+			},
 
 			getPackageDetails: async (idPackage) => {
 				const store = getStore()
@@ -385,6 +347,92 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const data = await resp.json()
 					setStore({ paquete: data.paquete })
 					return data.paquete;
+				} catch (error) {
+					console.log("Error loading message from backend", error)
+				}
+			},
+			addFavorite: async (agencia, viajero) => {
+				const favorito = {
+					idAgencia: agencia,
+					idViajero: viajero
+				}
+				console.log(favorito)
+				try {
+					const store = getStore();
+					let resp = await fetch(process.env.BACKEND_URL + "/api/favorite", {
+						method: "POST",
+						mode: "cors",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: "Bearer " + store.token
+						},
+						body: JSON.stringify(favorito)
+					});
+					let data = await resp.json();
+					console.log(data)
+					if (resp.status != 200) {
+						alert("Ocurrio un error!");
+						return false;
+					}
+					//alert("Nuevo paquete agregado!");
+					return true;
+				} catch (err) {
+					console.log(err);
+				}
+			},
+			deleteFavorite: async (agencia, viajero) => {
+				const favorito = {
+					idAgencia: agencia,
+					idViajero: viajero
+				}
+				console.log(favorito)
+				try {
+					const store = getStore();
+					let resp = await fetch(process.env.BACKEND_URL + "/api/favorite", {
+						method: "DELETE",
+						mode: "cors",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: "Bearer " + store.token
+						},
+						body: JSON.stringify(favorito)
+					});
+					let data = await resp.json();
+					console.log(data)
+					if (resp.status != 200) {
+						alert("Ocurrio un error!");
+						return false;
+					}
+					//alert("Nuevo paquete agregado!");
+					return true;
+				} catch (err) {
+					console.log(err);
+				}
+			},
+			getFavoritesAgencies: async (idViajero) => {
+
+				const store = getStore()
+
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + "/api/favorite-agencies/" + idViajero, {
+						method: "GET", // *GET, POST, PUT, DELETE, etc.
+						mode: "cors", // no-cors, *cors, same-origin
+						//cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+						//credentials: "same-origin", // include, *same-origin, omit
+						headers: {
+							//"Content-Type": "application/json",
+							// "Authorization": "Bearer " + store.token
+							// 'Content-Type': 'application/x-www-form-urlencoded',
+						},
+						//redirect: "follow", // manual, *follow, error
+						//referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+						//body: JSON.stringify(credentials) // body data type must match "Content-Type" header
+					})
+					const data = await resp.json()
+					//console.log(data)
+					setStore({ agencias_favoritas: data })
+					// don't forget to return something, that is how the async resolves
+					return data;
 				} catch (error) {
 					console.log("Error loading message from backend", error)
 				}

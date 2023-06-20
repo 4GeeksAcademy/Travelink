@@ -116,6 +116,19 @@ class AgenciaFavorito(db.Model):
     viajero_id = db.Column(db.Integer, db.ForeignKey("Viajero.id"), nullable=False)
     creation_date = db.Column(db.DateTime, nullable=False)
 
+    def __init__(self, agencia_id, viajero_id):
+        self.agencia_id = agencia_id
+        self.viajero_id = viajero_id
+        self.creation_date = date.today()
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "agencia_id": self.agencia_id,
+            "viajero_id": self.viajero_id,
+            "creation_date": self.creation_date,
+        }
+
 # class EstatusViaje(db.Model):
 #     __tablename__ = 'EstatusViaje'
 #     id = db.Column(db.Integer, primary_key=True)
@@ -196,6 +209,7 @@ class EstatusReservado(db.Model):
     __tablename__ = 'EstatusReservado'
     id = db.Column(db.Integer, primary_key=True)
     status = db.Column(db.String(120), nullable=False)
+    cod_status = db.Column(db.Integer, nullable=False)
     creation_date = db.Column(db.DateTime, nullable=False)
     viaje_reservados = db.relationship('ViajeReservado', backref="EstatusReservado", lazy=True)
 
