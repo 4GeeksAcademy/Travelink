@@ -76,7 +76,7 @@ export const CardDetails = props => {
                                 <div className="col-md-6 col-sm-6 col-xs-3 mb-2">
                                     <div className="form-floating">
                                         <div type="text" className="form-control" id="floatingInputGrid">
-                                            <h6 className="text-end text-muted">{props.paquete.start_date}</h6>
+                                            <h6 className="text-end text-muted">{(new Date(props.paquete.start_date)).toLocaleDateString("es-VE")}</h6>
                                         </div>
                                         <label for="floatingInputGrid">Fecha de Salida</label>
                                     </div>
@@ -84,36 +84,57 @@ export const CardDetails = props => {
                                 <div className="col-md-6 col-sm-6 col-xs-3 mb-2">
                                     <div className="form-floating">
                                         <div type="text" className="form-control" id="floatingInputGrid">
-                                            <h6 className="text-end text-muted">{props.paquete.finish_date}</h6>
+                                            <h6 className="text-end text-muted">{(new Date(props.paquete.finish_date)).toLocaleDateString("es-VE")}</h6>
                                         </div>
                                         <label for="floatingInputGrid">Fecha de Regreso</label>
                                     </div>
                                 </div>
 
                                 <div className="row m-0 p-0 col-md-12 col-sm-12 col-xs-12 mb-2">
-                                    <div className="col-md-4 col-sm-4 col-xs-4">
-                                        <div className="form-floating">
-                                            <input type="number" className="form-control" id="floatingInputGrid" />
-                                            <label for="floatingInputGrid">Viajeros</label>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-4 col-sm-4 col-xs-4 mb-2">
-                                        <div className="form-floating">
-                                            <div type="text" className="form-control" id="floatingInputGrid">
-                                                <h6 className="text-end text-muted">{props.paquete.reservation_cost}</h6>
+                                        <div className="col-md-6 col-sm-4 col-xs-4">
+                                            <div className="form-floating">
+                                                <div type="text" className="form-control" id="floatingInputGrid">
+                                                    <h6 className="text-end text-muted">{"$" + props.paquete.reservation_cost}</h6>
+                                                </div>
+                                                <label for="floatingInputGrid">Reserva c/u</label>
                                             </div>
-                                            <label for="floatingInputGrid">Reserva</label>
                                         </div>
-                                    </div>
-                                    <div className="col-md-4 col-sm-4 col-xs-4 mb-2">
-                                        <div className="form-floating">
-                                            <div type="text" className="form-control" id="floatingInputGrid">
-                                                <h6 className="text-end text-muted">{props.paquete.total_cost}</h6>
+                                        <div className="col-md-6 col-sm-4 col-xs-4">
+                                            <div className="form-floating">
+                                                <div type="text" className="form-control" id="floatingInputGrid">
+                                                    <h6 className="text-end text-muted">{"$" + props.paquete.total_cost}</h6>
+                                                </div>
+                                                <label for="floatingInputGrid">Total</label>
                                             </div>
-                                            <label for="floatingInputGrid">Total</label>
                                         </div>
                                     </div>
-                                </div>
+
+                                    <div className="row m-0 p-0 col-md-12 col-sm-12 col-xs-12 mb-2">
+                                        <div className="col-md-6 col-sm-4 col-xs-4">
+                                            <div className="form-floating">
+                                                <div type="text" className="form-control" id="floatingInputGrid">
+                                                    <h6 className="text-end text-muted">{props.paquete.max_travellers}</h6>
+                                                </div>
+                                                <label for="floatingInputGrid">Asientos Disponibles</label>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-6 col-sm-4 col-xs-4">
+                                            <div className="form-floating">
+                                                <div type="text" className="form-control" id="floatingInputGrid">
+                                                    <h6 className="text-end text-muted">{props.paquete.max_travellers}</h6>
+                                                </div>
+                                                <label for="floatingInputGrid">Max. de Viajeros</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="row m-0 p-0 col-md-12 col-sm-12 col-xs-12 mb-2 d-flex justify-content-center">
+                                        <div className="col-md-6 col-sm-4 col-xs-4">
+                                            <div className="form-floating">
+                                                <input type="number" className="form-control" id="floatingInputGrid" />
+                                                <label for="floatingInputGrid">Viajeros a reservar</label>
+                                            </div>
+                                        </div>
+                                    </div>
                                 
                                 <button type="submit" onClick={() => console.log(props.isCheckFav)} className="col-md-12 col-sm-5 col-xs-3 m-1 btn btn-travelink btn btn-outline-info rounded-pill">Solicitar Reserva</button>
                             </div>
