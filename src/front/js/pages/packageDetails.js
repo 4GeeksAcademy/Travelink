@@ -37,7 +37,6 @@ export const PackageDetails = () => {
         <>
             <Filterbar />
             <CardDetails paquete = {paquete}/>
-            <button type="submit" onClick={() => console.log(paquete)} className="btn btn-primary flex-fill">Aceptar</button>
         </>
     )
 }

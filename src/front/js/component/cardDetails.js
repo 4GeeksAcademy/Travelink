@@ -19,7 +19,7 @@ export const CardDetails = ({paquete}) => {
                                         <img src="https://images.pexels.com/photos/1619317/pexels-photo-1619317.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" className="card-img-top" alt="..." />
                                     </div>
                                     <div className="angenciadetails col-8 card-body">
-                                        <p className="card-text">Informacion de la Agencia</p>
+                                        <p className="card-text">{paquete.agencia_name}</p>
                                     </div>
                                 </div>
                             </div>
