@@ -53,10 +53,10 @@ export const ProfileViajero = () => {
                                 <div className="col-sm-3">
                                     <h6 className="mb-0">Cedula</h6>
                                 </div>
-                                <div className="col-sm-1 text-secondary">
+                                <div className="col-sm-2 text-secondary">
                                     <input type="text" className="form-control" value={store.infoViajero.type_person} />
                                 </div>
-                                <div className="col-sm-8 text-secondary">
+                                <div className="col-sm-7 text-secondary">
                                     <input type="text" className="form-control" value={store.infoViajero.cedula} />
                                 </div>
                             </div>

@@ -264,6 +264,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
+			
 			getInfoAgency: async () => {
 				try {
 					const store = getStore();
@@ -289,6 +290,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
+
 			getInfoViajero: async () => {
 				try {
 					const store = getStore();
@@ -314,6 +316,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
+
 			getAgencyByDetails: async (idAgencia) => {
 				try {
 					const store = getStore();
@@ -351,6 +354,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
+
 			addFavorite: async (agencia, viajero) => {
 				const favorito = {
 					idAgencia: agencia,
