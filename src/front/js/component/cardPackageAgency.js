@@ -18,7 +18,7 @@ export const CardPackageAgency = (props) => {
                         <h5 className="card-title">{props.item.title}</h5>
                         <p className="card-text">{trickText(props.item.description)}</p>
                         <div className="container justify-content-end">
-                            <Link to="/home">
+                            <Link to="/newPackage">
                                 <button className="m-1 btn btn-travelink btn btn-outline-info rounded-pill">Editar</button>
                             </Link>
                             <button className="m-1 btn btn-outline-info rounded-pill">Eliminar</button>

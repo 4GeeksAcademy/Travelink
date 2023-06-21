@@ -529,6 +529,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
+
+			getPackagesByAgencia: async (idAgencia) => {
+				const store = getStore()
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + "/api/package-list" + idAgencia, {
+						method: "GET", // *GET, POST, PUT, DELETE, etc.
+						mode: "cors" // no-cors, *cors, same-origin
+					})
+					const data = await resp.json()
+					setStore({ reservas: data })
+					return data;
+				} catch (error) {
+					console.log("Error loading message from backend", error)
+				}
+			},
 		}
 	};
 };
