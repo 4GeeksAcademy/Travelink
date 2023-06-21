@@ -1,10 +1,20 @@
-import React from "react";
+import React, {useEffect, useState, useContext} from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import "../../styles/filterbar.css"
 
-
 export const Filterbar = () => {
+    const { store, actions } = useContext(Context);
+    const [filtrar, setFiltrar] = useState({
+        destination: " ",
+        startingLocation: " ",
+        startDate: new Date(),
+        finishDate: new Date(),
+    });
+
+    
+
     return (
         <div className="container-fluid ms-0 m-4">
             <h1 className="mb-2 fs-1 text-center">Viaja con tan solo un click.</h1>
@@ -12,8 +22,9 @@ export const Filterbar = () => {
                 <div className="row d-flex justify-content-center">
                     <div className="col-lg-3 col-md-3 col-sm-6 col-xs-3 mb-2">
                         <div className="form-floating">
-                            <select className="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
-                                <option selected>Selecciona un estado</option>
+                            <select onChange={event => setFiltrar({ ...filtrar, startingLocation: event.target.value })}
+                                value={filtrar.startingLocation || ""} className="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+                                <option>Selecciona un estado</option>
                                 <option value="Amazonas">Amazonas</option>
                                 <option value="Anzoátegui">Anzoátegui</option>
                                 <option value="Apure">Apure</option>
@@ -44,8 +55,9 @@ export const Filterbar = () => {
                     </div>
                     <div className="col-lg-3 col-md-3 col-sm-6 col-xs-3 mb-2">
                         <div className="form-floating">
-                            <select className="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
-                                <option selected>Selecciona un estado</option>
+                            <select onChange={event => setFiltrar({ ...filtrar, destination: event.target.value })}
+                                value={filtrar.destination || ""}className="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+                                <option>Selecciona un estado</option>
                                 <option value="Amazonas">Amazonas</option>
                                 <option value="Anzoátegui">Anzoátegui</option>
                                 <option value="Apure">Apure</option>
@@ -76,18 +88,20 @@ export const Filterbar = () => {
                     </div>
                     <div className="col-lg-2 col-md-3 col-sm-6 col-xs-3 mb-2">
                         <div className="form-floating">
-                            <input type="date" className="form-control" id="floatingInputGrid" />
+                            <input onChange={event => setFiltrar({ ...filtrar, startDate: event.target.value })}
+                                value={filtrar.startDate || ""} type="date" className="form-control" id="floatingInputGrid" />
                             <label htmlFor="floatingInputGrid">Fecha de Inicio</label>
                         </div>
                     </div>
                     <div className="col-lg-2 col-md-3 col-sm-6 col-xs-3 mb-2">
                         <div className="form-floating">
-                            <input type="date" className="form-control" id="floatingInputGrid" />
+                            <input onChange={event => setFiltrar({ ...filtrar, finishDate: event.target.value })}
+                                value={filtrar.finishDate || ""} type="date" className="form-control" id="floatingInputGrid" />
                             <label htmlFor="floatingInputGrid">Fecha de Fin</label>
                         </div>
                     </div>
                     <div className="col-lg-2 col-md-8 col-sm-10 col-xs-10 mb-2">
-                        <Link to="/newPackage">
+                        <Link to="/home">
                             <button className="col-md-10 col-sm-10 col-xs-10 m-2 py-2 btn btn-travelink btn btn-outline-info rounded-pill">Buscar</button>
                         </Link>
                     </div>

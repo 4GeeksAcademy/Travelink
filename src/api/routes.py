@@ -108,7 +108,7 @@ def new_package():
                                      body['start_date'], body['finish_date'], body['includes'], 
                                      body['type_of_transport'], body['type_of_accommodation'], body['description'], 
                                      body['max_travellers'], body['reservation_cost'], body['total_cost'], 
-                                     body['agencia_id'] )
+                                     body['img_paquete'], body['agencia_id'] )
         print(new_package)
         db.session.add(new_package) # Memoria RAM de SQLAlchemy
         db.session.commit() # Inserta el nuevo_piso en la BD de psql ✅

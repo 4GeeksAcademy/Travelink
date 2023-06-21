@@ -200,16 +200,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 					max_travellers: nuevoPaquete.maxTravellers,
 					reservation_cost: nuevoPaquete.reservationCost,
 					total_cost: nuevoPaquete.totalCost,
+					img_paquete: nuevoPaquete.imgPaquete,
 					agencia_id: nuevoPaquete.agencia_id
 				}
 				console.log(paquete)
 				try {
-					const apiUrl = ``
+					const apiUrl = `https://api.cloudinary.com/v1_1/dsipcdrih/image/upload`
 
 					const formMultimedia = new FormData()
 
-					formMultimedia.append("upload_preset", "sruvlfnt")
-					formMultimedia.append("file", piso.photo)
+					formMultimedia.append("upload_preset", "sfedcqhp")
+					formMultimedia.append("file", paquete.img_paquete)
 
 					const respMediaBucket = await fetch(apiUrl, {
 						method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -217,7 +218,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 
 					const dataCloudinary = await respMediaBucket.json()
-
 					console.log(dataCloudinary)
 
 					const store = getStore();
@@ -228,7 +228,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 							"Content-Type": "application/json",
 							Authorization: "Bearer " + store.token
 						},
-						body: JSON.stringify(paquete)
+						body: JSON.stringify({
+								"title": paquete.title,
+								"destination": paquete.destination,
+								"starting_location": paquete.starting_location,
+								"start_date": paquete.start_date,
+								"finish_date": paquete.finish_date,
+								"includes": paquete.includes,
+								"type_of_transport": paquete.type_of_transport,
+								"type_of_accommodation": paquete.type_of_accommodation,
+								"description": paquete.description,
+								"max_travellers": paquete.max_travellers,
+								"reservation_cost": paquete.reservation_cost,
+								"total_cost": paquete.total_cost,
+								"img_paquete": dataCloudinary.url,
+								"agencia_id": paquete.agencia_id
+							})
 					});
 					let data = await resp.json();
 					console.log(data)

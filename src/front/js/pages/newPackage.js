@@ -19,7 +19,8 @@ export const NewPackage = () => {
         maxTravellers: 1,
         reservationCost: 1,
         totalCost: 1,
-        agencia_id: store.idAgencia
+        agencia_id: store.idAgencia,
+        imgPaquete: ""
     });
 
     return (
@@ -45,7 +46,7 @@ export const NewPackage = () => {
                             <select className="form-select" id="floatingSelectGrid" aria-label="Floating label select example"
                                 onChange={event => setPaquete({ ...paquete, startingLocation: event.target.value })}
                                 value={paquete.startingLocation || ""} >
-                                <option selected>Selecciona un estado</option>
+                                <option>Selecciona un estado</option>
                                 <option value="Amazonas">Amazonas</option>
                                 <option value="Anzoátegui">Anzoátegui</option>
                                 <option value="Apure">Apure</option>
@@ -79,7 +80,7 @@ export const NewPackage = () => {
                             <select className="form-select" id="floatingSelectGrid" aria-label="Floating label select example"
                                 onChange={event => setPaquete({ ...paquete, destination: event.target.value })}
                                 value={paquete.destination || ""} >
-                                <option selected>Selecciona un estado</option>
+                                <option>Selecciona un estado</option>
                                 <option value="Amazonas">Amazonas</option>
                                 <option value="Anzoátegui">Anzoátegui</option>
                                 <option value="Apure">Apure</option>
@@ -143,7 +144,7 @@ export const NewPackage = () => {
                             <select className="form-select" id="floatingSelectGrid" aria-label="Floating label select example"
                                 onChange={event => setPaquete({ ...paquete, includes: event.target.value })}
                                 value={paquete.includes || ""} >
-                                <option selected>Todos los servicios</option>
+                                <option>Todos los servicios</option>
                                 <option value="1">Hospedaje</option>
                                 <option value="2">Comidas</option>
                                 <option value="3">Transporte</option>
@@ -162,7 +163,7 @@ export const NewPackage = () => {
                             <select className="form-select" id="floatingSelectGrid" aria-label="Floating label select example"
                                 onChange={event => setPaquete({ ...paquete, typeOfTransport: event.target.value })}
                                 value={paquete.typeOfTransport || ""} >
-                                <option selected>No incluye</option>
+                                <option>No incluye</option>
                                 <option value="1">Terrestre</option>
                                 <option value="2">Maritimo</option>
                                 <option value="3">Aereo</option>
@@ -175,7 +176,7 @@ export const NewPackage = () => {
                             <select className="form-select" id="floatingSelectGrid" aria-label="Floating label select example"
                                 onChange={event => setPaquete({ ...paquete, typeOfAccommodation: event.target.value })}
                                 value={paquete.typeOfAccommodation || ""} >
-                                <option selected>No incluye</option>
+                                <option>No incluye</option>
                                 <option value="1">Hotel</option>
                                 <option value="2">Posada</option>
                                 <option value="3">Campings</option>
@@ -202,8 +203,7 @@ export const NewPackage = () => {
                     <div className="col-md-4 col-sm-6 col-xs-3 mb-2">
                             <div className="form-floating">
                                 <input type="file"  accept="image/*" className="form-control" id="floatingInputGrid"
-                                    onChange={event => setPaquete({ ...paquete, imgPaquete: event.target.value })}
-                                    value={paquete.imgPaquete || ""} />
+                                    onChange={event => setPaquete({ ...paquete, imgPaquete: event.target.files[0] })} />
                                 <label htmlFor="floatingInputGrid">Cargar Imagen</label>
                             </div>
                     </div>

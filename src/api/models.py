@@ -152,12 +152,13 @@ class PaqueteDeViaje(db.Model):
     max_travellers = db.Column(db.Integer, nullable=False)
     reservation_cost= db.Column(db.Integer, nullable=False)
     total_cost = db.Column(db.Integer, nullable=False)
+    img_paquete = db.Column(db.String(450), nullable=True)
     # status_id = db.Column(db.Integer, db.ForeignKey("EstatusViaje.id"), nullable=False)
     agencia_id = db.Column(db.Integer, db.ForeignKey("Agencia.id"), nullable=False)
     creation_date = db.Column(db.DateTime, nullable=False)
     viaje_reservados = db.relationship('ViajeReservado', backref="PaqueteDeViaje", lazy=True)
 
-    def __init__(self, title, destination, starting_location, start_date, finish_date, includes, type_of_transport, type_of_accommodation, description, max_travellers, reservation_cost, total_cost, agencia_id):
+    def __init__(self, title, destination, starting_location, start_date, finish_date, includes, type_of_transport, type_of_accommodation, description, max_travellers, reservation_cost, total_cost, img_paquete, agencia_id):
         self.title = title
         self.destination = destination
         self.starting_location = starting_location
@@ -170,6 +171,7 @@ class PaqueteDeViaje(db.Model):
         self.max_travellers = max_travellers
         self.reservation_cost = reservation_cost
         self.total_cost = total_cost
+        self.img_paquete = img_paquete
         self.agencia_id = agencia_id
         self.creation_date = date.today()
 
@@ -191,6 +193,7 @@ class PaqueteDeViaje(db.Model):
             "max_travellers": self.max_travellers,
             "reservation_cost": self.reservation_cost,
             "total_cost": self.total_cost,
+            "img_paquete": self.img_paquete,
             "agencia_id": self.agencia_id,
             "creation_date": self.creation_date,
             "agencia_name": agencia.name
