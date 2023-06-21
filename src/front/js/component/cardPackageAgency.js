@@ -4,26 +4,29 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-import travelinkLogo from "../../img/Travelink.png";
-import "../utils/navTopScroll.js";
+import { trickText } from "../utils/trickText";
 
-export const CardPackageAgency = () => {
-	const { store, actions } = useContext(Context);
-
-	return (
-        <div className="card mb-3" >
+export const CardPackageAgency = (props) => {
+    return (
+        <div className="card col-6 my-5 m-2" >
             <div className="row g-0">
                 <div className="col-md-4">
-                    <img src="https://media.gq.com.mx/photos/620e915c43f71a078a35533f/master/pass/playa.jpg" className="img-fluid rounded-start" alt="..." />
+                    <img src={props.item.img_paquete} className="img-fluid rounded-start" style={{height: "100%"}} alt="..." />
                 </div>
                 <div className="col-md-8">
-                <div className="card-body">
-                    <h5 className="card-title">Card title</h5>
-                    <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                </div>
+                    <div className="card-body">
+                        <h5 className="card-title">{props.item.title}</h5>
+                        <p className="card-text">{trickText(props.item.description)}</p>
+                        <div className="container justify-content-end">
+                            <Link to="/home">
+                                <button className="m-1 btn btn-travelink btn btn-outline-info rounded-pill">Editar</button>
+                            </Link>
+                            <button className="m-1 btn btn-outline-info rounded-pill">Eliminar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        
-	);
+
+    );
 };
