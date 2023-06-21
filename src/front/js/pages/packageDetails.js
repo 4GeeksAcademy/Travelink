@@ -22,7 +22,7 @@ export const PackageDetails = () => {
         isAgenciaFav(idpaquete.agencia_id);
     }
 
-     const isAgenciaFav = async (agencia) => {
+    const isAgenciaFav = async (agencia) => {
         let result = await actions.getFavoritesAgencies(store.idViajero);
         console.log(result);
         let isThisAgencyFav = result.find(o => o.id == agencia);

@@ -25,7 +25,7 @@ export const NavMenuViajero = () => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/packageList" className="nav-link">
+                            <Link to="/agenciesFavList" className="nav-link">
                                 <span aria-current="page">Agencias favoritas</span>
                             </Link>
                         </li>
