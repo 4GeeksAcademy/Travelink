@@ -10,6 +10,8 @@ export const CardDetails = props => {
     const { store, actions } = useContext(Context);
 
     const [isChecked, setIsChecked] = useState(false);
+    const [viajerosReserva, setviajerosReserva] = useState(0);
+
 
     useEffect(() => {
         setIsChecked(props.isCheckFav);
@@ -24,6 +26,14 @@ export const CardDetails = props => {
         }
         // actions.setFav(!isChecked, props.id);
     };
+
+    const sendReserva = () => {
+        if (viajerosReserva > 0) {
+            actions.addReserva(props.paquete.id, store.idViajero, viajerosReserva);
+        }else{
+            alert("La cantidad de viajeros a reservar debe ser mayor a cero.");
+        }
+    }
 
     return (
         <div className="container">
@@ -138,13 +148,15 @@ export const CardDetails = props => {
                                 <div className="row m-0 p-0 col-md-12 col-sm-12 col-xs-12 mb-2 d-flex justify-content-center">
                                     <div className="col-md-12 col-sm-4 col-xs-4">
                                         <div className="form-floating">
-                                            <input type="number" className="form-control" id="floatingInputGrid" />
+                                            <input type="number" className="form-control" id="floatingInputGrid" value={viajerosReserva} onChange={event => {
+                                                setviajerosReserva(event.target.value);
+                                            }}/>
                                             <label for="floatingInputGrid">Viajeros a reservar</label>
                                         </div>
                                     </div>
                                 </div>
 
-                                <button type="submit" onClick={() => console.log(props.isCheckFav)} className="col-md-12 col-sm-5 col-xs-3 m-1 btn btn-travelink btn btn-outline-info rounded-pill">Solicitar Reserva</button>
+                                <button type="submit" onClick={() => sendReserva()} className="col-md-12 col-sm-5 col-xs-3 m-1 btn btn-travelink btn btn-outline-info rounded-pill">Solicitar Reserva</button>
                             </div>
                         </div>
                     </div>

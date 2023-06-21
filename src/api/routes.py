@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Agencia, Viajero, PaqueteDeViaje, AgenciaFavorito
+from api.models import db, User, Agencia, Viajero, PaqueteDeViaje, AgenciaFavorito, EstatusReservado, ViajeReservado
 from api.utils import generate_sitemap, APIException
 import hashlib
 
@@ -202,5 +202,36 @@ def get_AllFavoritesByViajero(idViajero):
             auxAgencia = Agencia.query.filter_by(id = favorito.agencia_id).one_or_none()
             listAgencias.append(auxAgencia)
         return jsonify([ agency.serialize() for agency in listAgencias]), 200
+    except Exception as err:
+        return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
+
+@api.route('/status/<codigo>', methods=['GET'])
+def get_statusviaje(codigo):
+    # body = request.json #lo que viene del request como un dic de python 🦎
+    try:
+        infoStatus = EstatusReservado.query.filter_by(cod_status = codigo).one_or_none()
+        return jsonify(infoStatus.serialize()), 200
+    except Exception as err:
+        return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
+
+@api.route('/reserva', methods=['POST'])
+@jwt_required()
+def reservarViaje():
+    body = request.json #lo que viene del request como un dic de python 🦎
+    try:
+        new_reserva = ViajeReservado(body['paquetedeviaje_id'], body['viajero_id'], body['status_id'], body['cant_viajeros_reserva'])
+        print(new_reserva)
+        db.session.add(new_reserva) # Memoria RAM de SQLAlchemy
+        db.session.commit() # Inserta el nuevo_piso en la BD de psql ✅
+        return jsonify(new_reserva.serialize()), 200 #Piso searilzado
+    except Exception as err:
+        return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
+
+@api.route('/reserva/<idViajero>', methods=['GET'])
+def get_AllReservasByViajero(idViajero):
+    # body = request.json #lo que viene del request como un dic de python 🦎
+    try:
+        listViajesReservados = ViajeReservado.query.filter_by(viajero_id = idViajero).all()
+        return jsonify([ reserva.serialize() for reserva in listViajesReservados]), 200
     except Exception as err:
         return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500

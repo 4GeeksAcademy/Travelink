@@ -72,7 +72,7 @@ export const Login = () => {
                         <div className="d-flex align-items-center justify-content-center pb-2">
                           <p className="mb-0 me-2">Don't have an account?</p>
                         </div>
-                        <div className="d-flex align-items-center justify-content-center pb-2">
+                        <div className="d-flex align-items-center justify-content-around pb-2">
                           <Link to="/registroAgencia">
                             <button type="button" className="btn btn-outline-info">Nueva Agencia</button>
                           </Link>

@@ -201,8 +201,30 @@ class ViajeReservado(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     paquetedeviaje_id = db.Column(db.Integer, db.ForeignKey("PaqueteDeViaje.id"), nullable=False)
     viajero_id = db.Column(db.Integer, db.ForeignKey("Viajero.id"), nullable=False)
+    cant_viajeros_reserva = db.Column(db.Integer, nullable=False)
     status_id = db.Column(db.Integer, db.ForeignKey("EstatusReservado.id"), nullable=False)
     creation_date = db.Column(db.DateTime, nullable=False)
+    
+    def __init__(self, paquetedeviaje_id, viajero_id, status_id, cant_viajeros_reserva):
+        self.paquetedeviaje_id = paquetedeviaje_id
+        self.viajero_id = viajero_id
+        self.status_id = status_id
+        self.cant_viajeros_reserva = cant_viajeros_reserva
+        self.creation_date = date.today()
+
+    def serialize(self):
+        paquete = PaqueteDeViaje.query.get(self.paquetedeviaje_id)
+        viajero = Viajero.query.get(self.viajero_id)
+        estatus = EstatusReservado.query.get(self.status_id)
+        return {
+            "id": self.id,
+            "paquetedeviaje_id": self.paquetedeviaje_id,
+            "title": paquete.title,
+            "viajero_id": self.viajero_id,
+            "status_id": self.status_id,
+            "status": estatus.status,
+            "creation_date": self.creation_date,
+        }
 
 
 class EstatusReservado(db.Model):
@@ -212,4 +234,13 @@ class EstatusReservado(db.Model):
     cod_status = db.Column(db.Integer, nullable=False)
     creation_date = db.Column(db.DateTime, nullable=False)
     viaje_reservados = db.relationship('ViajeReservado', backref="EstatusReservado", lazy=True)
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "status": self.status,
+            "cod_status": self.cod_status,
+            "viaje_reservados": self.viaje_reservados,
+            "creation_date": self.creation_date,
+        }
 

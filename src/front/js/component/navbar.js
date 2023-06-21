@@ -28,9 +28,9 @@ export const Navbar = () => {
 								<button className="btn btn-travelink rounded-pill">Log in</button>
 							</Link>
 							:
-							<div>
-								<span>{store.user}</span>
-								<button onClick={() => LogOut()} className="btn btn-outline-danger rounded-pill">Log Out</button>
+							<div className="d-flex justify-content-between align-items-center ">
+								<span className="me-2">{store.user}</span>
+								<button onClick={() => LogOut()} className="btn btn-outline-danger rounded-pill m-0">Log Out</button>
 							</div>
 					}
 					{/* <Link to="/login">

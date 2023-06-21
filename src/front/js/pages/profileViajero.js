@@ -31,7 +31,7 @@ export const ProfileViajero = () => {
                     <div className="card h-100">
                         <div className="card-body pt-5">
                             <div className="d-flex flex-column align-items-center text-center ">
-                                <img src="https://images.pexels.com/photos/1619317/pexels-photo-1619317.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Admin" className="rounded-circle p-1 bg-travelink" width="150" height={"150"} />
+                                <img src="https://img.freepik.com/free-psd/3d-icon-social-media-app_23-2150049569.jpg?w=740&t=st=1682895038~exp=1682895638~hmac=ca33bcd0e0441e977c6ee1aac60c6e86f44c146c68def83605e0c1102b4282d4" alt="Admin" className="rounded-circle p-1 bg-travelink" width="150" height={"150"} />
                                 <div className="mt-3">
                                     <h4>{store.infoViajero.name + " " + store.infoViajero.lastname}</h4>
                                     <p className="text-muted font-size-sm">Viajero</p>

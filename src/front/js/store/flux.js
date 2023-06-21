@@ -457,6 +457,47 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
+			addReserva: async (paquete, viajero, cantViajeros) => {
+				const reserva = {
+					paquetedeviaje_id: paquete,
+					viajero_id: viajero,
+					status_id: 0,
+					cant_viajeros_reserva: cantViajeros
+				}
+				try {
+					const store = getStore();
+					//Estatus: Pendiente(codigo: 1), Confirmado(codigo: 2), Eliminado(codigo: 3)
+					//Busco el id del status segun su codigo
+					let respStatus = await fetch(process.env.BACKEND_URL + "/api/status/1" , {
+						method: "GET",
+						mode: "cors",
+					});
+					let dataStatus = await respStatus.json();
+					console.log(dataStatus);
+					reserva.status_id = dataStatus.id; //asigno el id del estatus a la reserva
+
+					//Registro de la reserva
+					let resp = await fetch(process.env.BACKEND_URL + "/api/reserva", {
+						method: "POST",
+						mode: "cors",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: "Bearer " + store.token
+						},
+						body: JSON.stringify(reserva)
+					});
+					let data = await resp.json();
+					console.log(data)
+					if (resp.status != 200) {
+						alert("Ocurrio un error!");
+						return false;
+					}
+					//alert("Nuevo paquete agregado!");
+					return true;
+				} catch (err) {
+					console.log(err);
+				}
+			},
 		}
 	};
 };
