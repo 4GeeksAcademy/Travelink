@@ -45,7 +45,7 @@ export const NavMenuAgency = () => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/packageList" className="nav-link">
+                            <Link to={"/package-list/" + store.idAgencia} className="nav-link">
                                 <span aria-current="page">Paquetes de Viajes</span>
                             </Link>
                         </li>

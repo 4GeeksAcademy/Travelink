@@ -30,7 +30,7 @@ export const Navbar = () => {
 							:
 							<div className="d-flex justify-content-between align-items-center ">
 								<span className="me-2">{store.user}</span>
-								<button onClick={() => LogOut()} className="btn btn-outline-danger rounded-pill m-0">Log Out</button>
+								<button onClick={() => LogOut()} className="btn btn-outline-info rounded-pill m-0">Log Out</button>
 							</div>
 					}
 					{/* <Link to="/login">

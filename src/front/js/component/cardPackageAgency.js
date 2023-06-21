@@ -11,12 +11,12 @@ export const CardPackageAgency = (props) => {
         <div className="card col-6 my-5 m-2" >
             <div className="row g-0">
                 <div className="col-md-4">
-                    <img src={props.item.img_paquete} className="img-fluid rounded-start" style={{height: "100%"}} alt="..." />
+                    <img src={props.paquete.img_paquete} className="img-fluid rounded-start" style={{height: "100%"}} alt="..." />
                 </div>
                 <div className="col-md-8">
                     <div className="card-body">
-                        <h5 className="card-title">{props.item.title}</h5>
-                        <p className="card-text">{trickText(props.item.description)}</p>
+                        <h5 className="card-title">{props.paquete.title}</h5>
+                        <p className="card-text">{trickText(props.paquete.description)}</p>
                         <div className="container justify-content-end">
                             <Link to="/newPackage">
                                 <button className="m-1 btn btn-travelink btn btn-outline-info rounded-pill">Editar</button>

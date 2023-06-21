@@ -242,5 +242,6 @@ def get_AllPackageByAgencia(idAgencia):
     try:
         listPackages = PaqueteDeViaje.query.filter_by(agencia_id = idAgencia).all()
         return jsonify([ package.serialize() for package in listPackages]), 200
+  
     except Exception as err:
         return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500

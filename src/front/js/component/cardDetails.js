@@ -63,7 +63,7 @@ export const CardDetails = props => {
                                 <div className="card">
                                     <div className="card-body">
                                         <h5 className="card-title">¿Qué Incluye?</h5>
-                                        <p className="card-text">{props.paquete.includes}</p>
+                                        <p className="card-text">{props.paquete.includes}{props.paquete.type_of_transport}{props.paquete.type_of_accommodation}</p>
                                     </div>
                                 </div>
                             </div>
