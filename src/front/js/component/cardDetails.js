@@ -42,7 +42,7 @@ export const CardDetails = props => {
 
                     <div className="imgdetails col-lg-6 col-md-6 col-sm-12 mb-4">
                         <div className="flex-column">
-                            {/* <img className="card-img-top col-md-12 col-sm-12" src={props.item.img_paquete} alt="..." /> */}
+                            <img className="card-img-top col-md-12 col-sm-12" src={props.paquete.img_paquete} alt="..." />
                             <div className="border bg-body col-12">
                                 <div className="row">
                                     <div className="member-img m-2 col-2">
