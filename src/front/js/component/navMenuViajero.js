@@ -30,12 +30,12 @@ export const NavMenuViajero = () => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/packageList" className="nav-link">
-                                <span aria-current="page">Viajes realizados</span>
+                            <Link to="/ViajesRealizadosList" className="nav-link">
+                                <span aria-current="page">Historial de Viajes</span>
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/packageList" className="nav-link">
+                            <Link to="/reservaViajeroList" className="nav-link">
                                 <span aria-current="page">Viajes reservados</span>
                             </Link>
                         </li>

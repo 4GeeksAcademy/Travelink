@@ -220,8 +220,11 @@ class ViajeReservado(db.Model):
             "id": self.id,
             "paquetedeviaje_id": self.paquetedeviaje_id,
             "title": paquete.title,
+            "description": paquete.description,
+            "cant_viajeros_reserva": self.cant_viajeros_reserva,
+            "reservation_cost": paquete.reservation_cost,
             "viajero_id": self.viajero_id,
-            "status_id": self.status_id,
+            "cod_status": estatus.cod_status,
             "status": estatus.status,
             "creation_date": self.creation_date,
         }
@@ -240,7 +243,6 @@ class EstatusReservado(db.Model):
             "id": self.id,
             "status": self.status,
             "cod_status": self.cod_status,
-            "viaje_reservados": self.viaje_reservados,
             "creation_date": self.creation_date,
         }
 

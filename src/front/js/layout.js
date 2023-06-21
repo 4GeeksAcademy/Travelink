@@ -12,6 +12,8 @@ import { NewPackage } from "./pages/newPackage";
 import { PackageDetails } from "./pages/packageDetails";
 import { PackageList } from "./pages/packageList";
 import { AgenciesFavList } from "./pages/agenciesFavList";
+import { ReservaViajeroList } from "./pages/reservaViajeroList";
+import { ViajesRealizadosList } from "./pages/viajesRealizadosList";
 import { ProfileAgency } from "./pages/profileAgency";
 import { ProfileViajero } from "./pages/profileViajero";
 import { RegistroViajero } from "./pages/registroViajero";
@@ -57,6 +59,8 @@ const Layout = () => {
                         <Route element={<PackageDetails />} path="/packageDetails/:idPackage" />
                         <Route element={<PackageList />} path="/packageList" />
                         <Route element={<AgenciesFavList />} path="/agenciesFavList" />
+                        <Route element={<ReservaViajeroList />} path="/reservaViajeroList" />
+                        <Route element={<ViajesRealizadosList />} path="/viajesRealizadosList" />
                         <Route element={<NewPackage />} path="/newPackage" />
                         <Route element={<RegistroAgencia />} path="/registroAgencia" />
                         <Route element={<RegistroViajero />} path="/registroViajero" />

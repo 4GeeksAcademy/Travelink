@@ -12,7 +12,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			infoViajero: [],
 			message: null,
 			paquetes: [],
-			agencias_favoritas: []
+			agencias_favoritas: [],
+			reservas: []
 			// demo: [
 			// 	{
 			// 		title: "FIRST",
@@ -496,6 +497,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return true;
 				} catch (err) {
 					console.log(err);
+				}
+			},
+
+			getReservasByViajero: async (idViajero) => {
+				const store = getStore()
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + "/api/reserva/" + idViajero, {
+						method: "GET", // *GET, POST, PUT, DELETE, etc.
+						mode: "cors" // no-cors, *cors, same-origin
+					})
+					const data = await resp.json()
+					setStore({ reservas: data })
+					return data;
+				} catch (error) {
+					console.log("Error loading message from backend", error)
 				}
 			},
 		}
