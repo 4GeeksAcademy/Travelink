@@ -241,6 +241,11 @@ class EstatusReservado(db.Model):
     creation_date = db.Column(db.DateTime, nullable=False)
     viaje_reservados = db.relationship('ViajeReservado', backref="EstatusReservado", lazy=True)
 
+    def __init__(self, status, cod_status):
+        self.status = status
+        self.cod_status = cod_status
+        self.creation_date = date.today()
+
     def serialize(self):
         return {
             "id": self.id,

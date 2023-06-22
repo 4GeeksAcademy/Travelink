@@ -20,14 +20,14 @@ export const ViajesRealizadosList = () => {
         setViajes(filterlist);
     };
 
-    return(
+    return (
         <div className="container py-3 d-flex flex-column">
             {
-                (viajes === undefined || viajes == 0) ? 
+                (viajes === undefined || viajes.length == 0) ?
                     <div className="container">
                         <h1>No posee viajes realizados.</h1>
                     </div>
-                :
+                    :
                     <div className="row">
                         {/* arr.filter(item => item.arrayWithvalue.indexOf('4') !== -1) */}
                         {viajes.map((item, index) => (

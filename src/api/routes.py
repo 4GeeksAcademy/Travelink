@@ -80,8 +80,8 @@ def new_agency():
         # nuevo_user = User(body['username'], body['email'], body['password'], body['rol'], body['is_active'])
         print(nuevo_agency)
         db.session.add(nuevo_agency) # Memoria RAM de SQLAlchemy
-        db.session.commit() # Inserta el nuevo_piso en la BD de psql ✅
-        return jsonify(nuevo_agency.serialize()), 200 #Piso searilzado
+        db.session.commit()
+        return jsonify(nuevo_agency.serialize()), 200
     except Exception as err:
         return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
     
@@ -93,8 +93,8 @@ def new_viajero():
                                 body['lastname'], body['dates_of_birth'], body['phone'], body['user_id'])
         print(nuevo_viajero)
         db.session.add(nuevo_viajero) # Memoria RAM de SQLAlchemy
-        db.session.commit() # Inserta el nuevo_piso en la BD de psql ✅
-        return jsonify(nuevo_viajero.serialize()), 200 #Piso searilzado
+        db.session.commit()
+        return jsonify(nuevo_viajero.serialize()), 200
     except Exception as err:
         return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
 
@@ -111,8 +111,8 @@ def new_package():
                                      body['img_paquete'], body['agencia_id'] )
         print(new_package)
         db.session.add(new_package) # Memoria RAM de SQLAlchemy
-        db.session.commit() # Inserta el nuevo_piso en la BD de psql ✅
-        return jsonify(new_package.serialize()), 200 #Piso searilzado
+        db.session.commit()
+        return jsonify(new_package.serialize()), 200
     except Exception as err:
         return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
 
@@ -174,8 +174,8 @@ def setFavorite():
         new_favorite = AgenciaFavorito(body['idAgencia'], body['idViajero'])
         print(new_favorite)
         db.session.add(new_favorite) # Memoria RAM de SQLAlchemy
-        db.session.commit() # Inserta el nuevo_piso en la BD de psql ✅
-        return jsonify(new_favorite.serialize()), 200 #Piso searilzado
+        db.session.commit()
+        return jsonify(new_favorite.serialize()), 200
     except Exception as err:
         return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
     
@@ -187,8 +187,8 @@ def deleteFavorite():
         aux_favorite = AgenciaFavorito.query.filter_by(agencia_id = body['idAgencia'], viajero_id = body['idViajero']).one_or_none()
         print(aux_favorite)
         db.session.delete(aux_favorite) # Memoria RAM de SQLAlchemy
-        db.session.commit() # Inserta el nuevo_piso en la BD de psql ✅
-        return jsonify(aux_favorite.serialize()), 200 #Piso searilzado
+        db.session.commit()
+        return jsonify(aux_favorite.serialize()), 200
     except Exception as err:
         return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
     
@@ -222,8 +222,8 @@ def reservarViaje():
         new_reserva = ViajeReservado(body['paquetedeviaje_id'], body['viajero_id'], body['status_id'], body['cant_viajeros_reserva'])
         print(new_reserva)
         db.session.add(new_reserva) # Memoria RAM de SQLAlchemy
-        db.session.commit() # Inserta el nuevo_piso en la BD de psql ✅
-        return jsonify(new_reserva.serialize()), 200 #Piso searilzado
+        db.session.commit()
+        return jsonify(new_reserva.serialize()), 200
     except Exception as err:
         return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
 
@@ -243,5 +243,25 @@ def get_AllPackageByAgencia(idAgencia):
         listPackages = PaqueteDeViaje.query.filter_by(agencia_id = idAgencia).all()
         return jsonify([ package.serialize() for package in listPackages]), 200
   
+    except Exception as err:
+        return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
+
+@api.route('/status', methods=['GET'])
+def get_allstatus():
+    try:
+        infoStatus = EstatusReservado.query.all() 
+        return jsonify([ estatus.serialize() for estatus in infoStatus]), 200
+    except Exception as err:
+        return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
+
+@api.route('/status', methods=['POST'])
+def addStatus():
+    body = request.json #lo que viene del request como un dic de python 🦎
+    try:
+        new_status = EstatusReservado(body['status'], body['cod_status'])
+        print(new_status)
+        db.session.add(new_status) # Memoria RAM de SQLAlchemy
+        db.session.commit() 
+        return jsonify(new_status.serialize()), 200 
     except Exception as err:
         return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
