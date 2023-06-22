@@ -9,6 +9,7 @@ import { Login } from "./pages/login";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import { NewPackage } from "./pages/newPackage";
+import { EditPackage } from "./pages/editPackage.js";
 import { PackageDetails } from "./pages/packageDetails";
 import { PackageList } from "./pages/packageList";
 import { AgenciesFavList } from "./pages/agenciesFavList";
@@ -62,6 +63,7 @@ const Layout = () => {
                         <Route element={<ReservaViajeroList />} path="/reservaViajeroList" />
                         <Route element={<ViajesRealizadosList />} path="/viajesRealizadosList" />
                         <Route element={<NewPackage />} path="/newPackage" />
+                        <Route element={<EditPackage />} path="/edit-Package/:idPackage" />
                         <Route element={<RegistroAgencia />} path="/registroAgencia" />
                         <Route element={<RegistroViajero />} path="/registroViajero" />
                         <Route element={<Single />} path="/single/:theid" />

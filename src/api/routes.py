@@ -245,3 +245,67 @@ def get_AllPackageByAgencia(idAgencia):
   
     except Exception as err:
         return jsonify({ "message" : "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
+
+@api.route('/api/get-package/<idPackage>', methods=['GET'])
+def get_package(idPackage):
+    try:
+        editPackage = PaqueteDeViaje.query.filter_by(paquete_id = idPackage).all()
+        return jsonify([ package.serialize() for package in editPackage]), 200
+    except Exception as err:
+        return jsonify({'message': 'Paquete no encontrado' + str(err)}), 500
+    
+@api.route('/api/edit-package/<idPackage>', methods=['PUT'])
+def edit_package(idPackage):
+    try:
+        paquete = PaqueteDeViaje.query.get(idPackage)
+        if not paquete:
+            return jsonify({'message': 'Paquete no encontrado.'}), 404
+
+        if 'title' in request.json:
+            paquete.title = request.json['title']
+        if 'destination' in request.json:
+            paquete.destination = request.json['destination']
+        if 'starting_location' in request.json:
+            paquete.starting_location = request.json['starting_location']
+        if 'start_date' in request.json:
+            paquete.start_date = request.json['start_date']
+        if 'finish_date' in request.json:
+            paquete.finish_date = request.json['finish_date']
+        if 'includes' in request.json:
+            paquete.includes = request.json['includes']
+        if 'type_of_transport' in request.json:
+            paquete.type_of_transport = request.json['type_of_transport']
+        if 'type_of_accommodation' in request.json:
+            paquete.type_of_accommodation = request.json['type_of_accommodation']
+        if 'description' in request.json:    
+            paquete.description = request.json['description']
+        if 'max_travellers' in request.json:
+            paquete.max_travellers = request.json['max_travellers']
+        if 'reservation_cost' in request.json:
+            paquete.reservation_cost = request.json['reservation_cost']
+        if 'total_cost' in request.json:
+            paquete.total_cost = request.json['total_cost']
+        if 'img_paquete' in request.json:
+            paquete.img_paquete = request.json['img_paquete']
+        if 'agencia_id' in request.json:
+            paquete.agencia_id = request.json['agencia_id']
+
+        db.session.commit()
+        return jsonify(paquete.serialize()), 200
+
+    except Exception as err:
+        db.session.rollback()
+        return jsonify({'message': 'Error al actualizar el paquete: ' + str(err)}), 500
+
+@api.route('/api/remove-package/<idPackage>', methods=['DELETE'])
+def remove_package(idPackage):
+    try:
+        paquete = PaqueteDeViaje.query.get(idPackage)
+        if not paquete:
+            return jsonify({'message': f'No existe un paquete de viaje con ID {idPackage}'}), 404
+        db.session.delete(paquete)
+        db.session.commit()
+        return jsonify({'message': f'Paquete de viaje con ID {idPackage} eliminado exitosamente.'}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'message': f'No se pudo eliminar el paquete de viaje.'}), 500
