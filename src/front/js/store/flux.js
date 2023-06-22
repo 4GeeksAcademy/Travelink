@@ -256,10 +256,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
-
 			getEditPackage: async (idPackage) => {
 				const store = getStore()
-
 				try {
 					const resp = await fetch(process.env.BACKEND_URL + "/api/get-package" + idPackage, {
 						method: "GET", // *GET, POST, PUT, DELETE, etc.
