@@ -7,6 +7,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { trickText } from "../utils/trickText";
 
 export const CardPackageAgency = (props) => {
+    const { store, actions } = useContext(Context);
     return (
         <div className="card col-lg-5 col-md-5 col-sm-12 col-xs-12 my-2 m-2 p-0" >
             <div className="row g-0">
@@ -21,13 +22,14 @@ export const CardPackageAgency = (props) => {
                             <Link to={"/edit-Package/" + props.paquete.id}>
                                 <button className="m-1 btn btn-travelink btn btn-outline-info rounded-pill">Editar</button>
                             </Link>
-                        
-                            <button type="button" className="m-1 btn btn-outline-info rounded-pill" data-toggle="modal" data-target="#exampleModal">
+                            <button onClick={() => actions.removePackage(props.paquete.id)} className="m-1 btn btn-outline-info rounded-pill">Eliminar</button>
+
+                            {/* <button type="button" className="m-1 btn btn-outline-info rounded-pill" data-toggle="modal" data-target="#exampleModal">
                                 Eliminar
                             </button>
 
                             {/* <!-- Modal --> */}
-                            <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            {/* <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog" role="document">
                                     <div className="modal-content">
                                         <div className="modal-header">
@@ -45,7 +47,7 @@ export const CardPackageAgency = (props) => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */} 
                         </div>
                     </div>
                 </div>

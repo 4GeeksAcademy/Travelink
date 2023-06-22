@@ -259,12 +259,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getEditPackage: async (idPackage) => {
 				const store = getStore()
 				try {
-					const resp = await fetch(process.env.BACKEND_URL + "/api/get-package" + idPackage, {
+					const resp = await fetch(process.env.BACKEND_URL + "/api/get-package/" + idPackage, {
 						method: "GET", // *GET, POST, PUT, DELETE, etc.
 						mode: "cors", // no-cors, *cors, same-origin
 					})
 					const data = await resp.json()
-					setStore({ paqueteId: data })
+					setStore({ editpaquete: data })
 					console.log(data);
 					return data;
 				} catch (error) {
@@ -274,25 +274,85 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			editPackage: async (paqueteEditado, idPackage) => {
 				// const store = getStore();
+				const nuevoPaqueteEditado = {
+					title: paqueteEditado.title,
+					destination: paqueteEditado.destination,
+					starting_location: paqueteEditado.startingLocation,
+					start_date: paqueteEditado.startDate,
+					finish_date: paqueteEditado.finishDate,
+					includes: paqueteEditado.includes,
+					type_of_transport: paqueteEditado.typeOfTransport,
+					type_of_accommodation: paqueteEditado.typeOfAccommodation,
+					description: paqueteEditado.description,
+					max_travellers: paqueteEditado.maxTravellers,
+					reservation_cost: paqueteEditado.reservationCost,
+					total_cost: paqueteEditado.totalCost,
+					img_paquete: paqueteEditado.imgPaquete,
+					agencia_id: paqueteEditado.agencia_id,
+				}
 				try {
-					let resp = await fetch("process.env.BACKEND_URL + /api/edit-package/" + idPackage, {
+					const apiUrl = `https://api.cloudinary.com/v1_1/dsipcdrih/image/upload`
+
+					const formMultimedia = new FormData()
+
+					formMultimedia.append("upload_preset", "sfedcqhp")
+					formMultimedia.append("file", 	nuevoPaqueteEditado.img_paquete)
+
+					const respMediaBucket = await fetch(apiUrl, {
+						method: "POST", // *GET, POST, PUT, DELETE, etc.
+						body: formMultimedia // body data type must match "Content-Type" header
+					})
+
+					const dataCloudinary = await respMediaBucket.json()
+					console.log({
+						"title": nuevoPaqueteEditado.title,
+						"destination": nuevoPaqueteEditado.destination,
+						"starting_location": nuevoPaqueteEditado.starting_location,
+						"start_date": nuevoPaqueteEditado.start_date,
+						"finish_date": nuevoPaqueteEditado.finish_date,
+						"includes": nuevoPaqueteEditado.includes,
+						"type_of_transport": nuevoPaqueteEditado.type_of_transport,
+						"type_of_accommodation": nuevoPaqueteEditado.type_of_accommodation,
+						"description": nuevoPaqueteEditado.description,
+						"max_travellers": nuevoPaqueteEditado.max_travellers,
+						"reservation_cost": nuevoPaqueteEditado.reservation_cost,
+						"total_cost": nuevoPaqueteEditado.total_cost,
+						"img_paquete": dataCloudinary.url,
+						"agencia_id": nuevoPaqueteEditado.agencia_id,
+					})
+					let resp = await fetch(process.env.BACKEND_URL + "/api/edit-package/" + idPackage, {
 						method: "PUT",
 						headers: {
 							"Content-Type": "application/json"
 						},
-						body: JSON.stringify(paqueteEditado)
+						body: JSON.stringify({
+							"title": nuevoPaqueteEditado.title,
+							"destination": nuevoPaqueteEditado.destination,
+							"starting_location": nuevoPaqueteEditado.starting_location,
+							"start_date": nuevoPaqueteEditado.start_date,
+							"finish_date": nuevoPaqueteEditado.finish_date,
+							"includes": nuevoPaqueteEditado.includes,
+							"type_of_transport": nuevoPaqueteEditado.type_of_transport,
+							"type_of_accommodation": nuevoPaqueteEditado.type_of_accommodation,
+							"description": nuevoPaqueteEditado.description,
+							"max_travellers": nuevoPaqueteEditado.max_travellers,
+							"reservation_cost": nuevoPaqueteEditado.reservation_cost,
+							"total_cost": nuevoPaqueteEditado.total_cost,
+							"img_paquete": dataCloudinary.url,
+							"agencia_id": nuevoPaqueteEditado.agencia_id,
+						})
 					});
 					if (resp.status == 200) {
-						getActions().getNewPackage();
-					} else alert("No se ha podido editar el contacto!");
-				} catch (error) {
+						getActions().getPackages();
+					} else alert("No se ha podido editar el paquete!");
+				} catch (err) {
 					console.log(err);
 				}
 			},
 
 			removePackage: async (IdPackage) => {
 				try {
-					let resp = await fetch("process.env.BACKEND_URL + /api/remove-package/" + IdPackage, {
+					let resp = await fetch(process.env.BACKEND_URL + "/api/remove-package/" + IdPackage, {
 						method: "DELETE",
 						headers: {
 							"Content-Type": "application/json"
@@ -302,7 +362,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(err);
 				}
 
-				getActions().getContacts();
+				getActions().getPackages();
 			},
 			getInfoUser: async () => {
 				try {

@@ -294,8 +294,8 @@ def edit_package(idPackage):
             paquete.start_date = request.json['start_date']
         if 'finish_date' in request.json:
             paquete.finish_date = request.json['finish_date']
-        # if 'includes' in request.json:
-        #     paquete.includes = request.json['includes']
+        if 'includes' in request.json:
+            paquete.includes = request.json['includes']
         if 'type_of_transport' in request.json:
             paquete.type_of_transport = request.json['type_of_transport']
         if 'type_of_accommodation' in request.json:

@@ -11,8 +11,8 @@ export const EditPackage = () => {
         title: " ",
         destination: " ",
         startingLocation: " ",
-        startDate: new Date(),
-        finishDate: new Date(),
+        // startDate: new Date(),
+        // finishDate: new Date(),
         includes: "Todos los servicios",
         typeOfTransport: "no incluye",
         typeOfAccommodation: "no incluye ",
@@ -27,9 +27,24 @@ export const EditPackage = () => {
     const PaqueteEditado = async () => {
         try {
             console.log(params.idPackage);
-            const data = await actions.getEditPackages(params.idPackage);
+            const data = await actions.getEditPackage(params.idPackage);
             console.log(data);
-            setPaquete(data);
+            setPaquete({
+                title: data.title,
+                destination: data.destination,
+                startingLocation: data.starting_location,
+                startDate: data.start_date,
+                finishDate: data.finish_date,
+                includes: data.includes,
+                typeOfTransport: data.type_of_transport,
+                typeOfAccommodation: data.type_of_accommodation,
+                description: data.description,
+                maxTravellers: data.max_travellers,
+                reservationCost: data.reservation_cost,
+                totalCost: data.total_cost,
+                agencia_id: store.idAgencia,
+                imgPaquete: data.img_paquete
+            });
         } catch (error) {
             console.log("ha ocurrido un error" + error)
         }
@@ -37,13 +52,15 @@ export const EditPackage = () => {
 
     useEffect(() => {
         PaqueteEditado();
-    }, []);
+    }, []); 
+
+
 
     return (
         <div className="cajaprincipal my-4 d-flex flex-column justify-content-center align-items-center">
             <div className="cajaformulario m-2 w-50">
                 <h1 className="m-2 text-center">¡Hagamos mas emocionante esta aventura!</h1>
-                <h2 className="mb-3 mt-2 text-center">Modifica tu paquete de viajes</h2>
+                <h2 className="mb-3 mt-2 text-center">Edita tu paquete de viajes</h2>
 
                 <div className="row m-2">
                     <div className="col-md-12 col-sm-12 col-xs-6">
@@ -242,7 +259,7 @@ export const EditPackage = () => {
                 </div>
 
                 <div className="row d-flex justify-content-center m-2">
-                    <button type="submit" className="col-md-12 col-sm-12 col-xs-12 mx-1 btn btn-travelink btn btn-outline-info rounded-pill" onClick={() => (paquete.title != " " ? actions.EditPackage(paquete) : () => { })}>Agregar paquete</button>
+                    <button type="" className="col-md-12 col-sm-12 col-xs-12 mx-1 btn btn-travelink btn btn-outline-info rounded-pill" onClick={() => (actions.editPackage(paquete, params.idPackage))}>Editar paquete</button>
                 </div>
             </div>
         </div >
