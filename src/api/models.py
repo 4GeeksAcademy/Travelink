@@ -3,6 +3,7 @@ from datetime import date
 
 db = SQLAlchemy()
 
+
 class User(db.Model):
     __tablename__ = 'User'
     id = db.Column(db.Integer, primary_key=True)
@@ -30,12 +31,12 @@ class User(db.Model):
         return {
             "id": self.id,
             "email": self.email,
-            "username" : self.username,
-            "rol" : self.rol,
-            "creation_date" : self.creation_date
+            "username": self.username,
+            "rol": self.rol,
+            "creation_date": self.creation_date
             # do not serialize the password, its a security breach
         }
-    
+
 
 class Agencia(db.Model):
     __tablename__ = 'Agencia'
@@ -45,7 +46,8 @@ class Agencia(db.Model):
     phone = db.Column(db.String(15), unique=True, nullable=False)
     creation_date = db.Column(db.DateTime, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("User.id"), nullable=False)
-    paquetes_de_viajes = db.relationship('PaqueteDeViaje', backref="Agencia", lazy=True)
+    paquetes_de_viajes = db.relationship(
+        'PaqueteDeViaje', backref="Agencia", lazy=True)
 
     def __init__(self, name, rif, phone, user_id):
         self.name = name
@@ -65,7 +67,7 @@ class Agencia(db.Model):
             "name": self.name,
             "rif": self.rif,
             "phone": self.phone,
-            "creation_date": self.creation_date,            
+            "creation_date": self.creation_date,
             # do not serialize the password, its a security breach
         }
 
@@ -80,8 +82,9 @@ class Viajero(db.Model):
     dates_of_birth = db.Column(db.DateTime,  nullable=False)
     phone = db.Column(db.String(15), unique=True, nullable=False)
     creation_date = db.Column(db.DateTime, nullable=False)
-    user_id  = db.Column(db.Integer, db.ForeignKey("User.id"), nullable=False)
-    viajes_reservados = db.relationship('ViajeReservado', backref="Viajero", lazy=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("User.id"), nullable=False)
+    viajes_reservados = db.relationship(
+        'ViajeReservado', backref="Viajero", lazy=True)
 
     def __init__(self, type_person, cedula, name, lastname, dates_of_birth, phone, user_id):
         self.type_person = type_person
@@ -109,11 +112,14 @@ class Viajero(db.Model):
             # do not serialize the password, its a security breach
         }
 
+
 class AgenciaFavorito(db.Model):
     __tablename__ = 'AgenciaFavorito'
     id = db.Column(db.Integer, primary_key=True)
-    agencia_id = db.Column(db.Integer, db.ForeignKey("Agencia.id"), nullable=False)
-    viajero_id = db.Column(db.Integer, db.ForeignKey("Viajero.id"), nullable=False)
+    agencia_id = db.Column(db.Integer, db.ForeignKey(
+        "Agencia.id"), nullable=False)
+    viajero_id = db.Column(db.Integer, db.ForeignKey(
+        "Viajero.id"), nullable=False)
     creation_date = db.Column(db.DateTime, nullable=False)
 
     def __init__(self, agencia_id, viajero_id):
@@ -136,6 +142,7 @@ class AgenciaFavorito(db.Model):
 #     creation_date = db.Column(db.DateTime, nullable=False)
 #     paquetes_de_viajes = db.relationship('PaqueteDeViaje', backref="EstatusViaje", lazy=True)
 
+
 class PaqueteDeViaje(db.Model):
     __tablename__ = 'PaqueteDeViaje'
     id = db.Column(db.Integer, primary_key=True)
@@ -150,13 +157,15 @@ class PaqueteDeViaje(db.Model):
     type_of_accommodation = db.Column(db.String(120), nullable=False)
     description = db.Column(db.String(800), nullable=False)
     max_travellers = db.Column(db.Integer, nullable=False)
-    reservation_cost= db.Column(db.Integer, nullable=False)
+    reservation_cost = db.Column(db.Integer, nullable=False)
     total_cost = db.Column(db.Integer, nullable=False)
     img_paquete = db.Column(db.String(450), nullable=True)
     # status_id = db.Column(db.Integer, db.ForeignKey("EstatusViaje.id"), nullable=False)
-    agencia_id = db.Column(db.Integer, db.ForeignKey("Agencia.id"), nullable=False)
+    agencia_id = db.Column(db.Integer, db.ForeignKey(
+        "Agencia.id"), nullable=False)
     creation_date = db.Column(db.DateTime, nullable=False)
-    viaje_reservados = db.relationship('ViajeReservado', backref="PaqueteDeViaje", lazy=True)
+    viaje_reservados = db.relationship(
+        'ViajeReservado', backref="PaqueteDeViaje", lazy=True)
 
     def __init__(self, title, destination, starting_location, start_date, finish_date, includes, type_of_transport, type_of_accommodation, description, max_travellers, reservation_cost, total_cost, img_paquete, agencia_id):
         self.title = title
@@ -199,15 +208,19 @@ class PaqueteDeViaje(db.Model):
             "agencia_name": agencia.name
         }
 
+
 class ViajeReservado(db.Model):
     __tablename__ = 'ViajeReserva'
     id = db.Column(db.Integer, primary_key=True)
-    paquetedeviaje_id = db.Column(db.Integer, db.ForeignKey("PaqueteDeViaje.id"), nullable=False)
-    viajero_id = db.Column(db.Integer, db.ForeignKey("Viajero.id"), nullable=False)
+    paquetedeviaje_id = db.Column(db.Integer, db.ForeignKey(
+        "PaqueteDeViaje.id"), nullable=False)
+    viajero_id = db.Column(db.Integer, db.ForeignKey(
+        "Viajero.id"), nullable=False)
     cant_viajeros_reserva = db.Column(db.Integer, nullable=False)
-    status_id = db.Column(db.Integer, db.ForeignKey("EstatusReservado.id"), nullable=False)
+    status_id = db.Column(db.Integer, db.ForeignKey(
+        "EstatusReservado.id"), nullable=False)
     creation_date = db.Column(db.DateTime, nullable=False)
-    
+
     def __init__(self, paquetedeviaje_id, viajero_id, status_id, cant_viajeros_reserva):
         self.paquetedeviaje_id = paquetedeviaje_id
         self.viajero_id = viajero_id
@@ -227,9 +240,13 @@ class ViajeReservado(db.Model):
             "cant_viajeros_reserva": self.cant_viajeros_reserva,
             "reservation_cost": paquete.reservation_cost,
             "viajero_id": self.viajero_id,
+            "viajero_cedula": viajero.type_person + "-" + str(viajero.cedula),
+            "viajero_fullname": viajero.name + " " + viajero.lastname,
+            "viajero_phone": viajero.phone,
             "cod_status": estatus.cod_status,
             "status": estatus.status,
             "creation_date": self.creation_date,
+            "img_paquete": paquete.img_paquete,
         }
 
 
@@ -239,7 +256,8 @@ class EstatusReservado(db.Model):
     status = db.Column(db.String(120), nullable=False)
     cod_status = db.Column(db.Integer, nullable=False)
     creation_date = db.Column(db.DateTime, nullable=False)
-    viaje_reservados = db.relationship('ViajeReservado', backref="EstatusReservado", lazy=True)
+    viaje_reservados = db.relationship(
+        'ViajeReservado', backref="EstatusReservado", lazy=True)
 
     def __init__(self, status, cod_status):
         self.status = status
@@ -253,4 +271,3 @@ class EstatusReservado(db.Model):
             "cod_status": self.cod_status,
             "creation_date": self.creation_date,
         }
-

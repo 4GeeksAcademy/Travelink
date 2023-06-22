@@ -50,7 +50,7 @@ export const NavMenuAgency = () => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/" className="nav-link">
+                            <Link to="/reservaViajeroList" className="nav-link">
                                 <span aria-current="page">Reservas</span>
                             </Link>
                         </li>

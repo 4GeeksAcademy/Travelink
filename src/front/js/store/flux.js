@@ -265,6 +265,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					const data = await resp.json()
 					setStore({ paqueteId: data })
+					console.log(data);
 					return data;
 				} catch (error) {
 					console.log("Error loading message from backend", error)
@@ -583,12 +584,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						mode: "cors" // no-cors, *cors, same-origin
 					})
 					const dataAllStatus = await respAllStatus.json()
-					console.log(dataAllStatus);
 					if (respAllStatus.status != 200) {
 						return;
 					}
 					if (dataAllStatus != undefined && dataAllStatus.length != 0) return;
-
 					let listStatus = [
 						{
 							"cod_status": 1,
@@ -607,7 +606,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 							"status": "Viaje Realizado"
 						}
 					]
-					console.log(JSON.stringify(listStatus));
 					listStatus.forEach(async status => {
 						let resp = await fetch(process.env.BACKEND_URL + "/api/status", {
 							method: "POST",
@@ -618,12 +616,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 							body: JSON.stringify(status)
 						});
 						let data = await resp.json();
-						console.log(data);
 					});
-					alert("Nuevo paquete agregado!");
 					return true;
 				} catch (err) {
 					console.log(err);
+				}
+			},
+
+			getReservasByAgencia: async (idAgencia) => {
+				const store = getStore()
+				try {
+					console.log(idAgencia);
+					const resp = await fetch(process.env.BACKEND_URL + "/api/reserva-agencia/" + idAgencia, {
+						method: "GET", // *GET, POST, PUT, DELETE, etc.
+						mode: "cors" // no-cors, *cors, same-origin
+					})
+					const data = await resp.json()
+					console.log(data);
+					setStore({ reservas: data })
+					return data;
+				} catch (error) {
+					console.log("Error loading message from backend", error)
 				}
 			},
 		}

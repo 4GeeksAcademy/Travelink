@@ -22,18 +22,6 @@ export const Home = () => {
 					))}
 				</div>
 			</div>
-			{/* <div className="container team-area">
-				<div className="row">
-					<CardHome />
-					<CardHome />
-					<CardHome />
-					<CardHome />
-					<CardHome />
-					<CardHome />
-					<CardHome />
-					<CardHome />
-				</div>
-			</div> */}
 		</div>
 	);
 };

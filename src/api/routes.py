@@ -356,3 +356,12 @@ def addStatus():
         return jsonify(new_status.serialize()), 200
     except Exception as err:
         return jsonify({"message": "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
+
+@api.route('/reserva-agencia/<idAgencia>', methods=['GET'])
+def get_AllReservasByAgencia(idAgencia):
+    # body = request.json #lo que viene del request como un dic de python 🦎
+    try:
+        listViajesReservados = ViajeReservado.query.join(PaqueteDeViaje).filter(PaqueteDeViaje.agencia_id == idAgencia).all()
+        return jsonify([reserva.serialize() for reserva in listViajesReservados]), 200
+    except Exception as err:
+        return jsonify({"message": "Ah ocurrido un error inesperado ‼️" + str(err)}), 500

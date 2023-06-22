@@ -11,9 +11,9 @@ export const PackageList = () => {
     const [paquetes, setPaquetes] = useState([]);
 
     const PaquetesByAgencia = async () => {
-        try { 
-        const data = await actions.getPackagesByAgencia(params.idAgencia);
-        setPaquetes(data);
+        try {
+            const data = await actions.getPackagesByAgencia(params.idAgencia);
+            setPaquetes(data);
         } catch (error) {
             console.log("ha ocurrido un error")
         }
@@ -31,19 +31,19 @@ export const PackageList = () => {
         <div className="container">
             {/* <CardPackageAgency paquete={paquete}/> */}
 
-            {(paquetes === undefined || paquetes.length == 0) ? 
+            {(paquetes === undefined || paquetes.length == 0) ?
                 <div className="container">
                     <h1>No posee paquetes.</h1>
                 </div>
-            :
-            <div className="container">
-                <div className="row col-lg-12 col-md-12 col-sm-12 col-xs-12 justify-content-center">
-                    {paquetes.map(paquete => {
-                    return <CardPackageAgency paquete={paquete} key={paquete.id} />
-                    })
-                    }
+                :
+                <div className="container">
+                    <div className="row col-lg-12 col-md-12 col-sm-12 col-xs-12 justify-content-center">
+                        {paquetes.map(paquete => {
+                            return <CardPackageAgency paquete={paquete} key={paquete.id} />
+                        })
+                        }
+                    </div>
                 </div>
-            </div>
             }
         </div>
     )

@@ -25,12 +25,13 @@ export const EditPackage = () => {
     });
 
     const PaqueteEditado = async () => {
-        try { 
-        const data = await actions.getEditPackages(params.idPackage);
-        setPaquete(data);
-        console.log(data)
+        try {
+            console.log(params.idPackage);
+            const data = await actions.getEditPackages(params.idPackage);
+            console.log(data);
+            setPaquete(data);
         } catch (error) {
-            console.log("ha ocurrido un error")
+            console.log("ha ocurrido un error" + error)
         }
     }
 
