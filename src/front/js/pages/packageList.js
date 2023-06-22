@@ -37,10 +37,12 @@ export const PackageList = () => {
                 </div>
             :
             <div className="container">
-                {paquetes.map(paquete => {
-                   return <CardPackageAgency paquete={paquete} key={paquete.id} />
-                })
-                }
+                <div className="row col-lg-12 col-md-12 col-sm-12 col-xs-12 justify-content-center">
+                    {paquetes.map(paquete => {
+                    return <CardPackageAgency paquete={paquete} key={paquete.id} />
+                    })
+                    }
+                </div>
             </div>
             }
         </div>

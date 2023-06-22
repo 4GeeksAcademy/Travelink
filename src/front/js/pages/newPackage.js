@@ -144,13 +144,13 @@ export const NewPackage = () => {
                             <select className="form-select" id="floatingSelectGrid" aria-label="Floating label select example"
                                 onChange={event => setPaquete({ ...paquete, includes: event.target.value })}
                                 value={paquete.includes || ""} >
-                                <option>Todos los servicios</option>
-                                <option value="Hospedaje">Hospedaje</option>
-                                <option value="Comidas">Comidas</option>
-                                <option value="Transporte">Transporte</option>
-                                <option value="Bebidas Alcoholicas">Bebidas alcoholicas</option>
-                                <option value="Bebidas no alcoholicas">Bebidas no alcoholicas</option>
-                                <option value="Atención Personalizada">Atencion personalizada</option>
+                                <option>Todos los servicios </option>
+                                <option value="Hospedaje ">Hospedaje </option>
+                                <option value="Comidas ">Comidas</option>
+                                <option value="Transporte ">Transporte</option>
+                                <option value="Bebidas Alcoholicas ">Bebidas alcoholicas</option>
+                                <option value="Bebidas no alcoholicas ">Bebidas no alcoholicas</option>
+                                <option value="Atención Personalizada ">Atencion personalizada</option>
                             </select>
                             <label htmlFor="floatingSelectGrid">¿Qué incluye tu paquete?</label>
                         </div>
@@ -163,10 +163,10 @@ export const NewPackage = () => {
                             <select className="form-select" id="floatingSelectGrid" aria-label="Floating label select example"
                                 onChange={event => setPaquete({ ...paquete, typeOfTransport: event.target.value })}
                                 value={paquete.typeOfTransport || ""} >
-                                <option>No incluye</option>
-                                <option value="Transporte Terrestre">Terrestre</option>
-                                <option value="Transporte Maritimo">Maritimo</option>
-                                <option value="Transporte Aereo">Aereo</option>
+                                <option value="No incluye transporte ">No incluye</option>
+                                <option value="Transporte Terrestre ">Terrestre</option>
+                                <option value="Transporte Maritimo ">Maritimo</option>
+                                <option value="Transporte Aereo ">Aereo</option>
                             </select>
                             <label htmlFor="floatingSelectGrid">Tipo de Transporte</label>
                         </div>
@@ -176,10 +176,10 @@ export const NewPackage = () => {
                             <select className="form-select" id="floatingSelectGrid" aria-label="Floating label select example"
                                 onChange={event => setPaquete({ ...paquete, typeOfAccommodation: event.target.value })}
                                 value={paquete.typeOfAccommodation || ""} >
-                                <option>No incluye</option>
-                                <option value="Hotel">Hotel</option>
-                                <option value="Posada">Posada</option>
-                                <option value="Campings">Campings</option>
+                                <option value="No incluye alojamiento ">No incluye</option>
+                                <option value="Hotel ">Hotel</option>
+                                <option value="Posada ">Posada</option>
+                                <option value="Campings ">Campings</option>
                             </select>
                             <label htmlFor="floatingSelectGrid">Tipo de Alojamiento</label>
                         </div>
