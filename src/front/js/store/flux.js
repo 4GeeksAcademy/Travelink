@@ -258,8 +258,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getEditPackage: async (idPackage) => {
-
-<<<<<<< HEAD
 				const store = getStore()
 
 				try {
@@ -307,9 +305,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				getActions().getContacts();
 			},
-
-=======
->>>>>>> 6f94e5b (add status if they don't exist)
 			getInfoUser: async () => {
 				try {
 					const store = getStore();
@@ -491,8 +486,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const resp = await fetch(process.env.BACKEND_URL + "/api/favorite-agencies/" + idViajero, {
 						method: "GET", // *GET, POST, PUT, DELETE, etc.
 						mode: "cors", // no-cors, *cors, same-origin
-<<<<<<< HEAD
-=======
 						//cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
 						//credentials: "same-origin", // include, *same-origin, omit
 						headers: {
@@ -503,7 +496,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						//redirect: "follow", // manual, *follow, error
 						//referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
 						//body: JSON.stringify(credentials) // body data type must match "Content-Type" header
->>>>>>> 6f94e5b (add status if they don't exist)
 					})
 					const data = await resp.json()
 					//console.log(data)
