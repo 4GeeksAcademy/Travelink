@@ -259,6 +259,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getEditPackage: async (idPackage) => {
 
+<<<<<<< HEAD
 				const store = getStore()
 
 				try {
@@ -307,6 +308,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().getContacts();
 			},
 
+=======
+>>>>>>> 6f94e5b (add status if they don't exist)
 			getInfoUser: async () => {
 				try {
 					const store = getStore();
@@ -488,6 +491,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const resp = await fetch(process.env.BACKEND_URL + "/api/favorite-agencies/" + idViajero, {
 						method: "GET", // *GET, POST, PUT, DELETE, etc.
 						mode: "cors", // no-cors, *cors, same-origin
+<<<<<<< HEAD
+=======
+						//cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+						//credentials: "same-origin", // include, *same-origin, omit
+						headers: {
+							//"Content-Type": "application/json",
+							// "Authorization": "Bearer " + store.token
+							// 'Content-Type': 'application/x-www-form-urlencoded',
+						},
+						//redirect: "follow", // manual, *follow, error
+						//referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+						//body: JSON.stringify(credentials) // body data type must match "Content-Type" header
+>>>>>>> 6f94e5b (add status if they don't exist)
 					})
 					const data = await resp.json()
 					//console.log(data)
@@ -568,6 +584,56 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return data;
 				} catch (error) {
 					console.log("Error loading message from backend", error)
+				}
+			},
+			addStatusOnBD: async () => {
+				try {
+					const respAllStatus = await fetch(process.env.BACKEND_URL + "/api/status", {
+						method: "GET", // *GET, POST, PUT, DELETE, etc.
+						mode: "cors" // no-cors, *cors, same-origin
+					})
+					const dataAllStatus = await respAllStatus.json()
+					console.log(dataAllStatus);
+					if (respAllStatus.status != 200) {
+						return;
+					}
+					if (dataAllStatus != undefined && dataAllStatus.length != 0) return;
+
+					let listStatus = [
+						{
+							"cod_status": 1,
+							"status": "Pendiente"
+						},
+						{
+							"cod_status": 2,
+							"status": "Confirmado"
+						},
+						{
+							"cod_status": 3,
+							"status": "Eliminado"
+						},
+						{
+							"cod_status": 4,
+							"status": "Viaje Realizado"
+						}
+					]
+					console.log(JSON.stringify(listStatus));
+					listStatus.forEach(async status => {
+						let resp = await fetch(process.env.BACKEND_URL + "/api/status", {
+							method: "POST",
+							mode: "cors",
+							headers: {
+								"Content-Type": "application/json"
+							},
+							body: JSON.stringify(status)
+						});
+						let data = await resp.json();
+						console.log(data);
+					});
+					alert("Nuevo paquete agregado!");
+					return true;
+				} catch (err) {
+					console.log(err);
 				}
 			},
 		}
