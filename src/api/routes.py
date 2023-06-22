@@ -268,8 +268,8 @@ def get_AllPackageByAgencia(idAgencia):
         return jsonify({"message": "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
 
 
-@api.route('/api/get-package/<idPackage>', methods=['GET'])
-def get_package(idPackage):
+@api.route('/get-package/<idPackage>', methods=['GET'])
+def get_one_package(idPackage):
     try:
         editPackage = PaqueteDeViaje.query.get(idPackage)
         return jsonify(editPackage.serialize()), 200
@@ -277,7 +277,7 @@ def get_package(idPackage):
         return jsonify({'message': 'Paquete no encontrado' + str(err)}), 500
 
 
-@api.route('/api/edit-package/<idPackage>', methods=['PUT'])
+@api.route('/edit-package/<idPackage>', methods=['PUT'])
 def edit_package(idPackage):
     try:
         paquete = PaqueteDeViaje.query.get(idPackage)
@@ -321,7 +321,7 @@ def edit_package(idPackage):
         return jsonify({'message': 'Error al actualizar el paquete: ' + str(err)}), 500
 
 
-@api.route('/api/remove-package/<idPackage>', methods=['DELETE'])
+@api.route('/remove-package/<idPackage>', methods=['DELETE'])
 def remove_package(idPackage):
     try:
         paquete = PaqueteDeViaje.query.get(idPackage)
