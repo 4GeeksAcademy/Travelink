@@ -49,7 +49,7 @@ export const EditPackage = () => {
                         <div className="form-floating">
                             <input type="text" className="form-control" id="floatingInputGrid"
                                 onChange={event => setPaquete({ ...paquete, title: event.target.value })}
-                                value={paquete.title || ""} />
+                                value={paquete.title} />
                             <label htmlFor="floatingInputGrid">Titulo</label>
                         </div>
                     </div>
