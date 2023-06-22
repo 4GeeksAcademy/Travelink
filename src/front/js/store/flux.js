@@ -343,6 +343,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						})
 					});
 					if (resp.status == 200) {
+						alert("Se ha editado el paquete!")
 						getActions().getPackages();
 					} else alert("No se ha podido editar el paquete!");
 				} catch (err) {
@@ -361,7 +362,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (err) {
 					console.log(err);
 				}
-
+				alert("Se ha eliminado el paquete!")
 				getActions().getPackages();
 			},
 			getInfoUser: async () => {
