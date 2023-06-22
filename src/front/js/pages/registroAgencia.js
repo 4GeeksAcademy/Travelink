@@ -171,12 +171,12 @@ export const RegistroAgencia = () => {
                     </div> */}
                 </div>
 
-                <div className="row justify-content-center m-2">
-                    <div className="col-md-5 col-sm-5 col-xs-3 px-0 d-flex">
-                        <button type="submit" onClick={() => InsertNewAgency()} className="btn btn-primary flex-fill">Aceptar</button>
+                <div className="row d-flex justify-content-center  m-2">
+                    <div className=" d-flex justify-content-center col-md-6 col-sm-5 col-xs-3 px-0 d-flex">
+                        <button type="submit" onClick={() => InsertNewAgency()} className="col-10 btn btn-travelink btn-outline-info rounded-pill">Aceptar</button>
                     </div>
-                    <Link to="/login" className="col-md-5 col-sm-5 col-xs-3 px-0 d-flex">
-                        <button type="button" className="btn btn-primary flex-fill">Volver</button>
+                    <Link to="/login" className="d-flex justify-content-center col-md-6 col-sm-5 col-xs-3 px-0 d-flex">
+                        <button type="button" className="col-10 btn btn-travelink btn-outline-info rounded-pill">Volver</button>
                     </Link>
                 </div>
             </div>
