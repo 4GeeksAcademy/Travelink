@@ -3,6 +3,8 @@ import { Context } from "../store/appContext";
 import "../../styles/login.css";
 import travelinkLogo from "../../img/Travelink.png";
 import { Link, useNavigate } from "react-router-dom";
+import AlertModal from '../component/alertModal.js';
+import swal from 'sweetalert';
 
 
 export const Login = () => {
@@ -22,6 +24,23 @@ export const Login = () => {
     if (store.rol == 2)
       navigate('/profileViajero')
   }, [store.token])
+
+  const iniciarSesion = async () => {
+    let respond = await actions.login(credentials);
+    console.log(respond);
+    if (respond) {
+      //alert("Bienvenido ha ingresado con exito!");
+      swal("Bienvenido", "Ha ingresado con exito!", "success");
+    }
+    else {
+      swal("Error", "Intente de nuevo.", "error");
+      setCredentials({
+        ...credentials,
+        username: "",
+        password: ""
+      });
+    }
+  };
 
   return (
     <div className="text-center">
@@ -43,6 +62,7 @@ export const Login = () => {
 
                         <div className="form-outline mb-4">
                           <input type="email" id="form2Example11" className="form-control"
+                            value={credentials.username}
                             placeholder="Username" onChange={event => {
                               setCredentials({
                                 ...credentials,
@@ -53,6 +73,7 @@ export const Login = () => {
 
                         <div className="form-outline mb-4">
                           <input type="password" id="form2Example22" className="form-control" placeholder="Password"
+                            value={credentials.password}
                             onChange={event => {
                               setCredentials({
                                 ...credentials,
@@ -63,7 +84,7 @@ export const Login = () => {
 
                         <div className="text-center pt-1 mb-3 pb-1 d-flex flex-column">
                           <button className="btn btn-primary gradient-custom-2 mb-3" type="button"
-                            onClick={() => actions.login(credentials)}>
+                            onClick={() => iniciarSesion()}>
                             Log in
                           </button>
                           <a className="text-muted" href="#!">Forgot password?</a>
@@ -97,6 +118,8 @@ export const Login = () => {
           </div>
         </div>
       </div>
+      {/* <AlertModal message="¡Mensaje de alerta personalizado!" /> */}
+      {/* <Alert variant="success">¡Alerta personalizada exitosa!</Alert> */}
     </div>
   );
 };

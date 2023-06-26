@@ -75,8 +75,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 							body: JSON.stringify(credentials) // body data type must match "Content-Type" header
 						});
 					const data = await resp.json();
+					console.log(resp.status);
 					if (resp.status != 200) return false;
-					alert("Bienvenido ha ingresado con exito!");
 					console.log(data);
 					sessionStorage.setItem('token', data.token);
 					sessionStorage.setItem('user', data.user);
@@ -296,7 +296,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const formMultimedia = new FormData()
 
 					formMultimedia.append("upload_preset", "sfedcqhp")
-					formMultimedia.append("file", 	nuevoPaqueteEditado.img_paquete)
+					formMultimedia.append("file", nuevoPaqueteEditado.img_paquete)
 
 					const respMediaBucket = await fetch(apiUrl, {
 						method: "POST", // *GET, POST, PUT, DELETE, etc.
