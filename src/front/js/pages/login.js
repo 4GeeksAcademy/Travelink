@@ -3,7 +3,6 @@ import { Context } from "../store/appContext";
 import "../../styles/login.css";
 import travelinkLogo from "../../img/Travelink.png";
 import { Link, useNavigate } from "react-router-dom";
-import AlertModal from '../component/alertModal.js';
 import swal from 'sweetalert';
 
 
@@ -58,7 +57,7 @@ export const Login = () => {
                       </div>
                       <hr className="my-4" />
                       <form>
-                        <p>Please login to your account</p>
+                        <p>Inicia sesion con tu cuenta</p>
 
                         <div className="form-outline mb-4">
                           <input type="email" id="form2Example11" className="form-control"
@@ -83,15 +82,16 @@ export const Login = () => {
                         </div>
 
                         <div className="text-center pt-1 mb-3 pb-1 d-flex flex-column">
-                          <button className="btn btn-primary gradient-custom-2 mb-3" type="button"
+                          {/* <button className="btn btn-primary gradient-custom-2 mb-3" type="button" */}
+                          <button className="btn btn-travelink rounded-pill mb-3" type="button"
                             onClick={() => iniciarSesion()}>
-                            Log in
+                            Iniciar Sesión
                           </button>
-                          <a className="text-muted" href="#!">Forgot password?</a>
+                          <a className="text-muted" href="#!">¿Olvidó su contraseña?</a>
                         </div>
 
                         <div className="d-flex align-items-center justify-content-center pb-2">
-                          <p className="mb-0 me-2">Don't have an account?</p>
+                          <p className="mb-0 me-2">¿No tienes cuenta?</p>
                         </div>
                         <div className="d-flex align-items-center justify-content-around pb-2">
                           <Link to="/registroAgencia">

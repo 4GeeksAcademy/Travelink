@@ -17,21 +17,40 @@ export const CardDetails = props => {
         setIsChecked(props.isCheckFav);
     }, [props.isCheckFav]);
 
-    const handleCheckboxChange = () => {
+    const handleCheckboxChange = async () => {
         setIsChecked(!isChecked);
+        let respond;
         if ((!isChecked) == true) {
-            actions.addFavorite(props.paquete.agencia_id, store.idViajero);
+            respond = await actions.addFavorite(props.paquete.agencia_id, store.idViajero);
+            if (respond) {
+                //alert("Bienvenido ha ingresado con exito!");
+                swal("Agencia Favorita", "Se ha registrado la agencia (" + props.paquete.agencia_name + ") como unas de tus favoritas.", "success");
+            }
+            else {
+                swal("Error", "Intente de nuevo.", "error");
+            }
         } else {
-            actions.deleteFavorite(props.paquete.agencia_id, store.idViajero);
+            respond = await actions.deleteFavorite(props.paquete.agencia_id, store.idViajero);
+            if (!respond) {
+                swal("Error", "Intente de nuevo.", "error");
+            }
         }
         // actions.setFav(!isChecked, props.id);
     };
 
-    const sendReserva = () => {
-        if (viajerosReserva > 0) {
-            actions.addReserva(props.paquete.id, store.idViajero, viajerosReserva);
-        }else{
-            alert("La cantidad de viajeros a reservar debe ser mayor a cero.");
+    const sendReserva = async () => {
+        if (viajerosReserva > 0 && viajerosReserva < props.paquete.max_travellers) {
+            let respond = await actions.addReserva(props.paquete.id, store.idViajero, viajerosReserva);
+            if (respond) {
+                //alert("Bienvenido ha ingresado con exito!");
+                swal("Petición de reserva enviada.", "Ha solicitado " + viajerosReserva + " reservas, será contactado por la agencia para confirmar.", "success");
+            }
+            else {
+                swal("Error", "Intente de nuevo.", "error");
+            }
+        } else {
+            swal("Atención", "La cantidad de viajeros a reservar debe ser mayor a cero y menor al máximo.", "warning");
+            //alert("La cantidad de viajeros a reservar debe ser mayor a cero.");
         }
     }
 
@@ -150,7 +169,7 @@ export const CardDetails = props => {
                                         <div className="form-floating">
                                             <input type="number" className="form-control" id="floatingInputGrid" value={viajerosReserva} onChange={event => {
                                                 setviajerosReserva(event.target.value);
-                                            }}/>
+                                            }} />
                                             <label for="floatingInputGrid">Viajeros a reservar</label>
                                         </div>
                                     </div>

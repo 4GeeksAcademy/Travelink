@@ -112,7 +112,7 @@ export const ProfileViajero = () => {
                             <div className="row">
                                 <div className="col-sm-3"></div>
                                 <div className="col-sm-9 text-secondary">
-                                    <input type="button" className="btn btn-primary px-4" value="Guardar Cambios" />
+                                    <input type="button" className="btn btn-travelink rounded-pill px-4" value="Guardar Cambios" />
                                 </div>
                             </div>
                         </div>

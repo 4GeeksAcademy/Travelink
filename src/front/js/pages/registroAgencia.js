@@ -51,14 +51,18 @@ export const RegistroAgencia = () => {
                 // "is_active" : true
             }
             let resp = await actions.newAgency(itemAgencia, user);
-            if (!resp) {
-                alert("Ocurrió un error al intentar registrar el usuario");
-                return;
+            if (resp) {
+                //alert("Bienvenido ha ingresado con exito!");
+                swal("Agencia registrada", "Se ha registrado con exito!", "success");
+                navigate('/login');
             }
-            navigate('/login');
+            else {
+                swal("Error", "Intente de nuevo.", "error");
+            }
         }
         else
-            alert("Uno de los campos está vacío o no cumple con las condiciones.");
+            swal("Atención", "Uno de los campos está vacío o no cumple con las condiciones.", "warning");
+            //alert("Uno de los campos está vacío o no cumple con las condiciones.");
     };
 
     return (

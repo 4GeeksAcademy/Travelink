@@ -1,27 +1,63 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/newPackage.css"
 import { Context } from "../store/appContext";
+import swal from 'sweetalert';
 
 export const NewPackage = () => {
     const { store, actions } = useContext(Context);
+    const navigate = useNavigate();
 
     const [paquete, setPaquete] = useState({
-        title: " ",
-        destination: " ",
-        startingLocation: " ",
+        title: "",
+        destination: "",
+        startingLocation: "",
         startDate: new Date(),
         finishDate: new Date(),
         includes: "Todos los servicios",
         typeOfTransport: "no incluye",
         typeOfAccommodation: "no incluye ",
-        description: " ",
+        description: "",
         maxTravellers: 1,
         reservationCost: 1,
         totalCost: 1,
         agencia_id: store.idAgencia,
         imgPaquete: ""
     });
+
+    const ValidarCampos = () => {
+        if (paquete.title.trim() == "" || paquete.title == null) return false;
+        if (paquete.startingLocation.trim() == "" || paquete.startingLocation == null) return false;
+        if (paquete.destination.trim() == "" || paquete.destination == null) return false;
+        if (paquete.startDate == "" || paquete.startDate == null) return false;
+        if (paquete.finishDate == "" || paquete.finishDate == null) return false;
+        if (paquete.typeOfTransport == "" || paquete.typeOfTransport == null) return false;
+        if (paquete.maxTravellers == "" || paquete.maxTravellers == null) return false;
+        if (paquete.includes.trim() == "" || paquete.includes == null) return false;
+        if (paquete.typeOfAccommodation == "" || paquete.typeOfAccommodation == null) return false;
+        if (paquete.description.trim() == "" || paquete.description == null) return false;
+        if (paquete.reservationCost == "" || paquete.reservationCost == null) return false;
+        if (paquete.totalCost == "" || paquete.totalCost == null) return false;
+        if (paquete.imgPaquete == "" || paquete.imgPaquete == null) return false
+        return true;
+    };
+
+    const InsertNewPackage = async () => {
+        if (ValidarCampos()) {
+            let resp = await actions.newPackage(paquete);
+            if (resp) {
+                //alert("Bienvenido ha ingresado con exito!");
+                swal("Paquete de viaje registrado", "Se ha guardado con exito!", "success");
+                navigate('/');
+            }
+            else {
+                swal("Error", "Intente de nuevo.", "error");
+            }
+        }
+        else
+            swal("Atención", "Uno de los campos está vacío o no cumple con las condiciones.", "warning");
+        //alert("Uno de los campos está vacío o no cumple con las condiciones.");
+    };
 
     return (
         <div className="cajaprincipal my-4 d-flex flex-column justify-content-center align-items-center">
@@ -191,7 +227,7 @@ export const NewPackage = () => {
                 <div className="row m-2">
                     <div className="col-md-12 col-sm-12 col-xs-6">
                         <div className="form-floating">
-                            <textarea type="text" className="form-control" id="FormControlTextarea1" style={{height: "150px"}}
+                            <textarea type="text" className="form-control" id="FormControlTextarea1" style={{ height: "150px" }}
                                 onChange={event => setPaquete({ ...paquete, description: event.target.value })}
                                 value={paquete.description || ""} ></textarea>
                             <label htmlFor="FormControlTextarea1">Descripción General</label>
@@ -201,11 +237,11 @@ export const NewPackage = () => {
 
                 <div className="row m-2">
                     <div className="col-md-4 col-sm-6 col-xs-3 mb-2">
-                            <div className="form-floating">
-                                <input type="file"  accept="image/*" className="form-control" id="floatingInputGrid"
-                                    onChange={event => setPaquete({ ...paquete, imgPaquete: event.target.files[0] })} />
-                                <label htmlFor="floatingInputGrid">Cargar Imagen</label>
-                            </div>
+                        <div className="form-floating">
+                            <input type="file" accept="image/*" className="form-control" id="floatingInputGrid"
+                                onChange={event => setPaquete({ ...paquete, imgPaquete: event.target.files[0] })} />
+                            <label htmlFor="floatingInputGrid">Cargar Imagen</label>
+                        </div>
                     </div>
                     <div className="col-md-4 col-sm-6 col-xs-3 mb-2">
                         <div className="form-floating">
@@ -227,7 +263,8 @@ export const NewPackage = () => {
 
                 <div className="row d-flex justify-content-center m-2">
                     {/* <button type="file" className="col-md-5 col-sm-5 col-xs-3 mx-1 btn btn-travelink btn btn-outline-info rounded-pill">Cargar Imagen</button> */}
-                    <button type="submit" className="col-md-12 col-sm-12 col-xs-12 mx-1 btn btn-travelink btn btn-outline-info rounded-pill" onClick={() => (paquete.title != " " ? actions.newPackage(paquete) : () => { })}>Agregar paquete</button>
+                    <button type="submit" className="col-md-12 col-sm-12 col-xs-12 mx-1 btn btn-travelink btn btn-outline-info rounded-pill"
+                        onClick={() => InsertNewPackage()}>Agregar paquete</button>
                 </div>
             </div>
         </div >

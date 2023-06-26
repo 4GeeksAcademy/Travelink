@@ -2,9 +2,11 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import "../../styles/newPackage.css"
 import { Context } from "../store/appContext";
+import swal from 'sweetalert';
 
 export const RegistroViajero = () => {
     const { store, actions } = useContext(Context);
+    const navigate = useNavigate();
 
     const [itemViajero, setItemViajero] = useState({
         type_person: "V",
@@ -55,14 +57,18 @@ export const RegistroViajero = () => {
                 // "is_active" : true
             }
             let resp = await actions.newViajero(itemViajero, user);
-            if (!resp) {
-                alert("Ocurrió un error al intentar registrar el usuario");
-                return;
+            if (resp) {
+                //alert("Bienvenido ha ingresado con exito!");
+                swal("Viajero registrado", "Se ha registrado con exito!", "success");
+                navigate('/login');
             }
-            navigate('/login');
+            else {
+                swal("Error", "Intente de nuevo.", "error");
+            }
         }
         else
-            alert("Uno de los campos está vacío o no cumple con las condiciones.");
+            swal("Atención", "Uno de los campos está vacío o no cumple con las condiciones.", "warning");
+        //alert("Uno de los campos está vacío o no cumple con las condiciones.");
     };
 
     return (
@@ -219,7 +225,7 @@ export const RegistroViajero = () => {
 
                 <div className="row d-flex justify-content-center  m-2">
                     <div className="d-flex justify-content-center col-md-6 col-sm-5 col-xs-3 px-0">
-                        <button  type="submit" onClick={() => InsertNewViajero()} className="col-10 btn btn-travelink btn-outline-info rounded-pill">Aceptar</button>
+                        <button type="submit" onClick={() => InsertNewViajero()} className="col-10 btn btn-travelink btn-outline-info rounded-pill">Aceptar</button>
                     </div>
                     <Link to="/login" className="d-flex justify-content-center col-md-6 col-sm-5 col-xs-3 px-0 d-flex">
                         <button type="button" className="col-10 btn btn-travelink btn-outline-info rounded-pill">Volver</button>

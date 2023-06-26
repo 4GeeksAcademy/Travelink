@@ -136,7 +136,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				data = await respAgency.json();
 				console.log(data);
 				if (respAgency.status != 200) return false;
-				alert("Registro realizado satisfactoriamente.");
+				//alert("Registro realizado satisfactoriamente.");
 				return true;
 			},
 
@@ -167,7 +167,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				data = await respViajero.json();
 				console.log(data);
 				if (respViajero.status != 200) return false;
-				alert("Registro realizado satisfactoriamente.");
+				//alert("Registro realizado satisfactoriamente.");
 				return true;
 			},
 
@@ -233,7 +233,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let data = await resp.json();
 					console.log(data)
 					if (resp.status != 200) return false;
-					alert("Nuevo paquete agregado!");
+					//alert("Nuevo paquete agregado!");
 					return true;
 				} catch (err) {
 					console.log(err);
@@ -359,11 +359,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 							"Content-Type": "application/json"
 						}
 					});
+					//alert("Se ha eliminado el paquete!")
+					getActions().getPackages();
+					console.log(resp.status);
+					if (resp.status != 200) {
+						return false;
+					}
+					return true;
 				} catch (err) {
 					console.log(err);
+					return false;
 				}
-				alert("Se ha eliminado el paquete!")
-				getActions().getPackages();
 			},
 			getInfoUser: async () => {
 				try {
@@ -500,7 +506,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let data = await resp.json();
 					console.log(data)
 					if (resp.status != 200) {
-						alert("Ocurrio un error!");
+						//alert("Ocurrio un error!");
 						return false;
 					}
 					//alert("Nuevo paquete agregado!");
@@ -529,7 +535,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let data = await resp.json();
 					console.log(data)
 					if (resp.status != 200) {
-						alert("Ocurrio un error!");
+						//alert("Ocurrio un error!");
 						return false;
 					}
 					//alert("Nuevo paquete agregado!");
@@ -598,7 +604,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let data = await resp.json();
 					console.log(data)
 					if (resp.status != 200) {
-						alert("Ocurrio un error!");
+						//alert("Ocurrio un error!");
 						return false;
 					}
 					//alert("Nuevo paquete agregado!");

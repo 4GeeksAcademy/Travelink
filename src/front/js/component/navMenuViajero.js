@@ -31,12 +31,12 @@ export const NavMenuViajero = () => {
                         </li>
                         <li className="nav-item">
                             <Link to="/ViajesRealizadosList" className="nav-link">
-                                <span aria-current="page">Historial de Viajes</span>
+                                <span aria-current="page">Viajes Realizados</span>
                             </Link>
                         </li>
                         <li className="nav-item">
                             <Link to="/reservaViajeroList" className="nav-link">
-                                <span aria-current="page">Viajes reservados</span>
+                                <span aria-current="page">Reservas Enviadas</span>
                             </Link>
                         </li>
                     </ul>
