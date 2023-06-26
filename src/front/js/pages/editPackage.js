@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "../../styles/newPackage.css"
 import { Context } from "../store/appContext";
+import swal from 'sweetalert';
 
 export const EditPackage = () => {
     const { store, actions } = useContext(Context);
     const params = useParams();
+    const navigate = useNavigate();
 
     const [paquete, setPaquete] = useState({
         title: " ",
@@ -23,6 +25,41 @@ export const EditPackage = () => {
         agencia_id: store.idAgencia,
         imgPaquete: ""
     });
+
+    const ValidarCampos = () => {
+        console.log(paquete);
+        if (paquete.title.trim() == "" || paquete.title == null) return false;
+        if (paquete.startingLocation.trim() == "" || paquete.startingLocation == null) return false;
+        if (paquete.destination.trim() == "" || paquete.destination == null) return false;
+        if (paquete.startDate == "" || paquete.startDate == null) return false;
+        if (paquete.finishDate == "" || paquete.finishDate == null) return false;
+        if (paquete.typeOfTransport == "" || paquete.typeOfTransport == null) return false;
+        if (paquete.maxTravellers == "" || paquete.maxTravellers == null) return false;
+        if (paquete.includes == "" || paquete.includes == null) return false;
+        if (paquete.typeOfAccommodation == "" || paquete.typeOfAccommodation == null) return false;
+        if (paquete.description.trim() == "" || paquete.description == null) return false;
+        if (paquete.reservationCost == "" || paquete.reservationCost == null) return false;
+        if (paquete.totalCost == "" || paquete.totalCost == null) return false;
+        if (paquete.imgPaquete == "" || paquete.imgPaquete == null) return false
+        return true;
+    };
+
+    const EditPackage = async () => {
+        if (ValidarCampos()) {
+            let resp = await actions.editPackage(paquete, params.idPackage);
+            if (resp) {
+                //alert("Bienvenido ha ingresado con exito!");
+                swal("Paquete de viaje actualizado", "Se ha guardado con exito!", "success");
+                navigate('/package-list/' + store.idAgencia);
+            }
+            else {
+                swal("Error", "Intente de nuevo.", "error");
+            }
+        }
+        else
+            swal("Atención", "Uno de los campos está vacío o no cumple con las condiciones.", "warning");
+        //alert("Uno de los campos está vacío o no cumple con las condiciones.");
+    };
 
     const PaqueteEditado = async () => {
         try {
@@ -52,7 +89,7 @@ export const EditPackage = () => {
 
     useEffect(() => {
         PaqueteEditado();
-    }, []); 
+    }, []);
 
 
 
@@ -259,7 +296,8 @@ export const EditPackage = () => {
                 </div>
 
                 <div className="row d-flex justify-content-center m-2">
-                    <button type="" className="col-md-12 col-sm-12 col-xs-12 mx-1 btn btn-travelink btn btn-outline-info rounded-pill" onClick={() => (actions.editPackage(paquete, params.idPackage))}>Editar paquete</button>
+                    <button type="" className="col-md-12 col-sm-12 col-xs-12 mx-1 btn btn-travelink btn btn-outline-info rounded-pill"
+                        onClick={() => EditPackage()}>Editar paquete</button>
                 </div>
             </div>
         </div >

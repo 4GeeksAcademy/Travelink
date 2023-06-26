@@ -51,7 +51,7 @@ export const CardPackageAgency = (props) => {
     };
 
     return (
-        <div className="card col-lg-5 col-md-5 col-sm-12 col-xs-12 my-2 mx-2 p-0" >
+        <div className="card col-lg-5 col-md-12 col-sm-12 col-xs-12 my-2 mx-2 p-0" >
             <div className="row g-0 h-100">
                 <div className="col-md-4">
                     <img src={props.paquete.img_paquete} className="img-fluid rounded-start" style={{ height: "100%", width: "100%" }} alt="..." />

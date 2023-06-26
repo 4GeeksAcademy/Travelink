@@ -12,7 +12,7 @@ export const CardReservaOnAgencia = props => {
         <div className="card mb-3 col-12 p-0" >
             <div className="row g-0">
                 <div className="col-md-4">
-                    <img src={props.paqueteViaje.img_paquete} className="img-fluid rounded-start" alt="..." />
+                    <img src={props.paqueteViaje.img_paquete} className="img-fluid rounded-start h-100 w-100" alt="..." />
                 </div>
                 <div className="col-md-8">
                     <div className="card-body">

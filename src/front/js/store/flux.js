@@ -343,11 +343,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 						})
 					});
 					if (resp.status == 200) {
-						alert("Se ha editado el paquete!")
+						//alert("Se ha editado el paquete!")
 						getActions().getPackages();
-					} else alert("No se ha podido editar el paquete!");
+						return true;
+					} else {
+						//alert("No se ha podido editar el paquete!");
+						return false;
+					}
 				} catch (err) {
 					console.log(err);
+					return false;
 				}
 			},
 

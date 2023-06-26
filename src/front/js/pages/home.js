@@ -16,7 +16,7 @@ export const Home = () => {
 		<div className="text-center mt-5">
 			<Filterbar />
 			<div className="container">
-				<div className="row col-lg-12 col-md-12 col-sm-6 col-xs-12">
+				<div className="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					{store.paquetes.map((item, index) => (
 						<CardHome item={item} key={index} />
 					))}
