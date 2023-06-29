@@ -24,9 +24,14 @@ export const Navbar = () => {
 				<div className="">
 					{
 						!store.token ?
-							<Link to="/login">
-								<button className="btn btn-travelink rounded-pill">Iniciar Sesión</button>
-							</Link>
+							<div>
+								<Link to="/Unete-como-agencia">
+									<button className="mx-1 btn btn-outline-info rounded-pill">¡Unete como agencia!</button>
+								</Link>
+								<Link to="/login">
+									<button className="btn btn-travelink rounded-pill">Iniciar Sesión</button>
+								</Link>
+							</div>
 							:
 							<div className="d-flex justify-content-between align-items-center ">
 								<span className="me-2">{store.user}</span>

@@ -5,6 +5,7 @@ import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 import '../styles/home.css';
 import { Home } from "./pages/home";
+import { HomeAgencias } from "./pages/homeAgencias";
 import { Login } from "./pages/login";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
@@ -55,6 +56,7 @@ const Layout = () => {
                     }
                     <Routes>
                         <Route element={<Home />} path="/" />
+                        <Route element={<HomeAgencias />} path="/Unete-como-agencia" />
                         <Route element={<Login />} path="/login" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<PackageDetails />} path="/packageDetails/:idPackage" />
