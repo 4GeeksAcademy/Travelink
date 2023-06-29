@@ -42,8 +42,8 @@ export const Login = () => {
   };
 
   return (
-    <div className="text-center">
-      <div className="h-100" style={{ backgroundColor: "#eee" }}>
+    <div className="text-center mt-5">
+      <div className="h-100" style={{ backgroundColor: "white" }}>
         <div className="container py-3 h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-xl-10">

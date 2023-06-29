@@ -26,7 +26,7 @@ export const Navbar = () => {
 						!store.token ?
 							<div>
 								<Link to="/Unete-como-agencia">
-									<button className="mx-1 btn btn-outline-info rounded-pill">¡Unete como agencia!</button>
+									<button className="mx-3 btn btn-outline-info rounded-pill">¡Unete como agencia!</button>
 								</Link>
 								<Link to="/login">
 									<button className="btn btn-travelink rounded-pill">Iniciar Sesión</button>

@@ -1,0 +1,19 @@
+body{
+    background-color: white,
+}
+
+.landing-page {
+    background-image: url('https://img.freepik.com/foto-gratis/cerrar-lapiz-explotacion-mano-borrosa_23-2149080811.jpg?size=626&ext=jpg&ga=GA1.1.161741868.1688060637&semt=ais');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 60vh;
+  }
+  
+  .overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+    text-align: center;
+    color: #fff;
+    padding: 20px;
+    height: 60vh;
+  }
