@@ -13,7 +13,7 @@ export const CardPackageAgency = (props) => {
 
     const DeletePackage = async () => {
         swal({
-            title: "Está seguro?",
+            title: "¿Estás seguro?",
             text: "Se eliminará el paquete de viaje.",
             icon: "warning",
             buttons: true,

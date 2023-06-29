@@ -13,7 +13,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			message: null,
 			paquetes: [],
 			agencias_favoritas: [],
-			reservas: []
+			reservas: [],
+			list_status: []
 		},
 
 		actions: {
@@ -651,15 +652,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			addStatusOnBD: async () => {
 				try {
+					const store = getStore()
 					const respAllStatus = await fetch(process.env.BACKEND_URL + "/api/status", {
 						method: "GET", // *GET, POST, PUT, DELETE, etc.
 						mode: "cors" // no-cors, *cors, same-origin
 					})
 					const dataAllStatus = await respAllStatus.json()
 					if (respAllStatus.status != 200) {
+						
 						return;
 					}
-					if (dataAllStatus != undefined && dataAllStatus.length != 0) return;
+					if (dataAllStatus != undefined && dataAllStatus.length != 0){
+						setStore({ list_status: dataAllStatus });
+						return;
+					} 
 					let listStatus = [
 						{
 							"cod_status": 1,
@@ -671,7 +677,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						},
 						{
 							"cod_status": 3,
-							"status": "Eliminado"
+							"status": "Rechazado"
 						},
 						{
 							"cod_status": 4,
@@ -709,6 +715,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return data;
 				} catch (error) {
 					console.log("Error loading message from backend", error)
+				}
+			},
+
+			updateStatusReserva: async (statusId, idReserva) => {
+				const store = getStore();
+				try {
+					let resp = await fetch(process.env.BACKEND_URL + "/api/update-Status-reserva/" + idReserva, {
+						method: "PUT",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify({
+							"status_id": statusId
+						})
+					});
+					if (resp.status == 200) {
+						//alert("Se ha editado el paquete!")
+						getActions().getReservasByAgencia(store.idAgencia);
+						return true;
+					} else {
+						//alert("No se ha podido editar el paquete!");
+						return false;
+					}
+				} catch (err) {
+					console.log(err);
+					return false;
 				}
 			},
 		}
