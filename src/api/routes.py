@@ -356,11 +356,31 @@ def addStatus():
     except Exception as err:
         return jsonify({"message": "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
 
+
 @api.route('/reserva-agencia/<idAgencia>', methods=['GET'])
 def get_AllReservasByAgencia(idAgencia):
     # body = request.json #lo que viene del request como un dic de python 🦎
     try:
-        listViajesReservados = ViajeReservado.query.join(PaqueteDeViaje).filter(PaqueteDeViaje.agencia_id == idAgencia).all()
+        listViajesReservados = ViajeReservado.query.join(
+            PaqueteDeViaje).filter(PaqueteDeViaje.agencia_id == idAgencia).all()
         return jsonify([reserva.serialize() for reserva in listViajesReservados]), 200
     except Exception as err:
         return jsonify({"message": "Ah ocurrido un error inesperado ‼️" + str(err)}), 500
+
+
+@api.route('/update-Status-reserva/<idReserva>', methods=['PUT'])
+def update_status_Reserva(idReserva):
+    try:
+        reserva = ViajeReservado.query.get(idReserva)
+        if not reserva:
+            return jsonify({'message': 'Reserva no encontrada.'}), 404
+
+        if 'status_id' in request.json:
+            reserva.status_id = request.json['status_id']
+
+        db.session.commit()
+        return jsonify(reserva.serialize()), 200
+
+    except Exception as err:
+        db.session.rollback()
+        return jsonify({'message': 'Error al actualizar el paquete: ' + str(err)}), 500
